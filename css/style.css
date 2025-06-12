@@ -35,7 +35,8 @@ section {
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -105,12 +106,6 @@ nav a:hover {
     color: #ccc;
 }
 
-img {
-    max-width: 65%;
-    /* This will make the image scale down if it is too wide for its container */
-    height: auto;
-    /* This will keep the aspect ratio of the image intact */
-}
 #mainImage{
     max-width: 100%;
 }
@@ -166,9 +161,7 @@ nav a {
 }
 
 /* Adjust the size of the image to fit smaller screens */
-img {
-    max-width: 100%;
-}
+/* Images will scale with the container and won't exceed 600px */
 
 /* Adjust the padding on the paragraph containing the Ed Coan program */
 #edCoanPhaseParagraph {
