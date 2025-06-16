@@ -18,14 +18,14 @@ function smolovNumbers(){
     document.querySelector("#week1Day2").innerHTML = Math.floor(smolovJr75) + " 7 sets of 5 reps"
     document.querySelector("#week2Day1").innerHTML = Math.floor(smolovJr80) + " 8 sets of 4 reps"
     document.querySelector("#week2Day2").innerHTML = Math.floor(smolovJr85) + " 10 sets of 3 reps"
-    document.querySelector("#week3Day1").innerHTML = Math.floor(smolovJr70) + 10 + " 6 sets of 6 reps"
-    document.querySelector("#week3Day2").innerHTML = Math.floor(smolovJr75) + 10 + " 7 sets of 5 reps"
-    document.querySelector("#week4Day1").innerHTML = Math.floor(smolovJr80) + 10 + " 8 sets of 4 reps"
-    document.querySelector("#week4Day2").innerHTML = Math.floor(smolovJr85) + 10 + " 10 sets of 3 reps"
-    document.querySelector("#week5Day1").innerHTML = Math.floor(smolovJr70) + 20 + " 6 sets of 6 reps"
-    document.querySelector("#week5Day2").innerHTML = Math.floor(smolovJr75) + 20 + " 7 sets of 5 reps"
-    document.querySelector("#week6Day1").innerHTML = Math.floor(smolovJr80) + 20 + " 8 sets of 4 reps"
-    document.querySelector("#week6Day2").innerHTML = Math.floor(smolovJr85) + 20 + " 10 sets of 3 reps"
+    document.querySelector("#week3Day1").innerHTML = Math.floor(smolovJr70 + 10) + " 6 sets of 6 reps"
+    document.querySelector("#week3Day2").innerHTML = Math.floor(smolovJr75 + 10) + " 7 sets of 5 reps"
+    document.querySelector("#week4Day1").innerHTML = Math.floor(smolovJr80 + 10) + " 8 sets of 4 reps"
+    document.querySelector("#week4Day2").innerHTML = Math.floor(smolovJr85 + 10) + " 10 sets of 3 reps"
+    document.querySelector("#week5Day1").innerHTML = Math.floor(smolovJr70 + 20) + " 6 sets of 6 reps"
+    document.querySelector("#week5Day2").innerHTML = Math.floor(smolovJr75 + 20) + " 7 sets of 5 reps"
+    document.querySelector("#week6Day1").innerHTML = Math.floor(smolovJr80 + 20) + " 8 sets of 4 reps"
+    document.querySelector("#week6Day2").innerHTML = Math.floor(smolovJr85 + 20) + " 10 sets of 3 reps"
 }
 
 document.querySelector("#mattButton").addEventListener('click', mattBenchPress)
