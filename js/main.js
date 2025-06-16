@@ -85,3 +85,37 @@ function edCoanRoutine(){
     document.querySelector('#speedTen').innerHTML = "Speed Deadlift: 2x3 " + Math.floor(edCoan60) + " (3 minutes rest between sets)"
 
 }
+
+document.querySelector('#ffmiButton').addEventListener('click', calculateFFMI)
+
+function calculateFFMI(){
+    let weight = parseFloat(document.querySelector('#ffmiWeight').value)
+    let bodyFat = parseFloat(document.querySelector('#ffmiBodyfat').value)
+    let height = parseFloat(document.querySelector('#ffmiHeight').value)
+
+    if(isNaN(weight) || isNaN(bodyFat) || isNaN(height)){
+        document.querySelector('#ffmiResult').innerHTML = 'Please enter valid numbers'
+        return
+    }
+
+    let weightKg = weight / 2.20462
+    let heightM = height * 0.0254
+    let ffm = weightKg * (1 - bodyFat/100)
+    let ffmi = ffm / (heightM * heightM)
+    ffmi = ffmi.toFixed(1)
+
+    let category = ''
+    if(ffmi < 17){
+        category = 'below average'
+    } else if(ffmi < 19){
+        category = 'average'
+    } else if(ffmi < 21){
+        category = 'above average'
+    } else if(ffmi < 23){
+        category = 'excellent'
+    } else {
+        category = 'elite'
+    }
+
+    document.querySelector('#ffmiResult').innerHTML = 'Your FFMI is ' + ffmi + '. This is considered ' + category + ' relative to the general population.'
+}
