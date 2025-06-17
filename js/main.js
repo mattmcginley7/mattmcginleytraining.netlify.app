@@ -88,6 +88,8 @@ function edCoanRoutine(){
 
 document.querySelector('#ffmiButton').addEventListener('click', calculateFFMI)
 
+document.querySelector('#bmiButton').addEventListener('click', calculateBMI)
+
 function calculateFFMI(){
     let weight = parseFloat(document.querySelector('#ffmiWeight').value)
     let bodyFat = parseFloat(document.querySelector('#ffmiBodyfat').value)
@@ -118,4 +120,30 @@ function calculateFFMI(){
     }
 
     document.querySelector('#ffmiResult').innerHTML = 'Your FFMI is ' + ffmi + '. This is considered ' + category + ' relative to the general population.'
+}
+
+function calculateBMI(){
+    let weight = parseFloat(document.querySelector('#bmiWeight').value)
+    let height = parseFloat(document.querySelector('#bmiHeight').value)
+
+    if(isNaN(weight) || isNaN(height)){
+        document.querySelector('#bmiResult').innerHTML = 'Please enter valid numbers'
+        return
+    }
+
+    let bmi = (weight / (height * height)) * 703
+    bmi = bmi.toFixed(1)
+
+    let category = ''
+    if(bmi < 18.5){
+        category = 'underweight'
+    } else if(bmi < 25){
+        category = 'normal weight'
+    } else if(bmi < 30){
+        category = 'overweight'
+    } else {
+        category = 'obesity'
+    }
+
+    document.querySelector('#bmiResult').innerHTML = 'Your BMI is ' + bmi + '. This is considered ' + category + '.'
 }
