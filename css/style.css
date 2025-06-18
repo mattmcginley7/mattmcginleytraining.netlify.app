@@ -175,6 +175,13 @@ input{
     margin: 0.5em 0;
     margin: 0 18px 0 18px;
 }
+textarea{
+    margin: 0.5em 0;
+    margin: 0 18px 0 18px;
+}
+form{
+    text-align: center;
+}
 
 #edCoanPhaseParagraph {
     padding-top: 20px;
