@@ -58,6 +58,12 @@ section {
     text-align: center;
 }
 
+.subheading {
+    font-size: 0.9em;
+    text-align: center;
+    margin: 0.25em 0;
+}
+
 .pricing-anchor {
     text-align: center;
     font-size: 1.25em;
