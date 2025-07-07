@@ -253,3 +253,23 @@ article ul {
 .article-section article:last-child {
     margin-bottom: 0;
 }
+
+/* Calculator card styling */
+.calculator-section {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.calculator-card {
+    padding: 1rem 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+}
+
+.calculator-card:last-child {
+    margin-bottom: 0;
+}
