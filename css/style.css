@@ -255,10 +255,17 @@ article ul {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
     border: 1px solid #eee;
+    font-family: 'Merriweather', serif;
+    line-height: 1.75;
 }
 
 .article-section article:last-child {
     margin-bottom: 0;
+}
+
+.article-section article p {
+    margin: 0.75em 0;
+    font-size: 1.05em;
 }
 
 /* Calculator card styling */
