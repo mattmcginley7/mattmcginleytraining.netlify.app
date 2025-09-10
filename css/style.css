@@ -241,6 +241,26 @@ article ul {
     margin: 0 18px 0.6em 36px;
 }
 
+/* Table of contents for articles page */
+.article-nav {
+    padding: 1rem 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+}
+
+.article-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.article-nav li {
+    margin: 0.5em 0;
+}
+
 /* Improved article styling on the articles page */
 .article-section {
     padding: 0;
