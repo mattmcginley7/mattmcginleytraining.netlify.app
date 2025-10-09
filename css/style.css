@@ -261,6 +261,22 @@ article ul {
     padding: 0;
 }
 
+.article-nav a {
+    display: block;
+    color: #111;
+    font-weight: 600;
+    padding: 0.4em 0.75em;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.article-nav a:hover,
+.article-nav a:focus {
+    background-color: rgba(0, 136, 204, 0.12);
+    color: #000;
+    transform: translateX(4px);
+}
+
 .article-nav li {
     margin: 0.5em 0;
 }
