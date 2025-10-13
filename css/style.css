@@ -207,17 +207,29 @@ form{
 
 @media (max-width: 600px) {
     nav {
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: visible;
+        padding: 0.5rem 0;
+        gap: 0.25rem;
     }
     nav ul {
-        flex-wrap: nowrap;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 0.25rem;
     }
     nav li {
-        margin: 0.5em;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
     nav a {
         font-size: 14px;
+        width: 100%;
+        text-align: center;
+        padding: 0.5em 1em;
     }
     #edCoanPhaseParagraph {
         padding-top: 10px;
