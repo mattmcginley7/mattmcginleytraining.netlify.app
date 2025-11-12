@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nutrition & Macro Calculator | Matt McGinley Training</title>
+    <meta name="description"
+        content="Calculate calories, macros, hydration, and performance guidance. Science-based defaults for lifters, athletes, and anyone improving body composition." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f8fafc;
+            /* neutral canvas */
+            --panel: #ffffff;
+            /* cards */
+            --muted: #4b5563;
+            /* secondary text */
+            --fg: #0f172a;
+            /* primary text */
+            --brand: #2563eb;
+            /* blue accent */
+            --brand-2: #60a5fa;
+            /* lighter accent */
+            --ok: #16a34a;
+            /* success */
+            --warn: #f59e0b;
+            /* warning */
+            --err: #dc2626;
+            /* error */
+            --ring: 0 0 0 3px rgba(37, 99, 235, .35);
+            --radius: 16px;
+            --shadow: 0 10px 28px rgba(2, 8, 23, .06);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--fg)
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 0 20px
+        }
+
+        header.hero {
+            display: grid;
+            gap: 10px;
+            margin: 8px 0 22px;
+            text-align: center
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1.1
+        }
+
+        header p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px
+        }
+
+        @media (min-width:960px) {
+            .grid {
+                grid-template-columns: 520px 1fr;
+                align-items: start
+            }
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px
+        }
+
+        .card h2 {
+            margin: 4px 0 10px;
+            font-size: 18px
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 10px 0 6px
+        }
+
+        .row {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr 1fr
+        }
+
+        .row-3 {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr 1fr 1fr
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: var(--fg);
+            padding: 12px;
+            font-size: 15px;
+            outline: none
+        }
+
+        input[type=number]:focus,
+        select:focus {
+            box-shadow: var(--ring);
+            border-color: transparent
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .switch {
+            display: inline-flex;
+            background: #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden
+        }
+
+        .switch button {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            padding: 10px 12px;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .switch button.active {
+            background: var(--brand);
+            color: #fff
+        }
+
+        .btn {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            border: 0;
+            border-radius: 12px;
+            background: var(--brand);
+            color: #fff;
+            font-weight: 700;
+            padding: 12px 16px;
+            cursor: pointer
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: var(--fg);
+            border: 1px solid #d1d5db
+        }
+
+        .kpis {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))
+        }
+
+        .kpi {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center
+        }
+
+        .kpi h3 {
+            margin: 0 0 6px;
+            font-size: 12px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .kpi p {
+            margin: 0;
+            font-size: 22px;
+            font-variant-numeric: tabular-nums
+        }
+
+        .bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .bar>span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand), var(--brand-2))
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        .chart {
+            width: 100%;
+            height: 200px;
+            display: grid;
+            place-items: center
+        }
+
+        .donut {
+            transform: rotate(-90deg)
+        }
+
+        details {
+            border: 1px dashed #e5e7eb;
+            border-radius: 12px;
+            padding: 10px 12px
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        footer {
+            margin: 30px 0 10px;
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            border: 1px solid #d1d5db;
+            color: var(--muted);
+            padding: 4px 8px;
+            border-radius: 999px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="hero" aria-labelledby="title">
+            <h1 id="title">Nutrition & Macro Calculator</h1>
+            <p>Fast, science-based targets for calories, macros, hydration, and performance — for anyone training or
+                recomposing. <span class="badge">BETA</span></p>
+        </header>
+
+        <div class="grid">
+            <!-- LEFT: INPUTS -->
+            <section class="card" aria-labelledby="calc-title">
+                <h2 id="calc-title">Your Details</h2>
+
+                <div class="muted" style="margin-bottom:8px">Units</div>
+                <div class="switch" id="unitSwitch" role="tablist" aria-label="Unit toggle">
+                    <button type="button" data-unit="metric" class="active" aria-selected="true"
+                        role="tab">Metric</button>
+                    <button type="button" data-unit="imperial" aria-selected="false" role="tab">Imperial</button>
+                </div>
+
+                <div class="row" style="margin-top:12px">
+                    <div>
+                        <label for="sex">Sex</label>
+                        <select id="sex" autocomplete="sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="age">Age</< /label>
+                            <input id="age" type="number" inputmode="numeric" min="13" max="90" value="28" />
+                    </div>
+                </div>
+
+                <div class="row" id="metricFields">
+                    <div>
+                        <label for="heightCm">Height (cm)</label>
+                        <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="180" />
+                        <p class="muted">5'11" ≈ 180 cm</p>
+                    </div>
+                    <div>
+                        <label for="weightKg">Weight (kg)</label>
+                        <input id="weightKg" type="number" inputmode="decimal" min="40" max="200" value="87" />
+                    </div>
+                </div>
+
+                <div class="row" id="imperialFields" style="display:none;">
+                    <div>
+                        <label for="heightFt">Height (ft + in)</label>
+                        <div class="row">
+                            <input id="heightFt" type="number" min="4" max="7" value="5" aria-label="Feet" />
+                            <input id="heightIn" type="number" min="0" max="11" value="11" aria-label="Inches" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="weightLb">Weight (lb)</label>
+                        <input id="weightLb" type="number" inputmode="decimal" min="90" max="440" value="192" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <label for="activity">Activity</label>
+                        <select id="activity">
+                            <option value="1.2">Sedentary (little/no exercise)</option>
+                            <option value="1.375">Light (1–3 days/wk)</option>
+                            <option value="1.55" selected>Moderate (3–5 days/wk)</option>
+                            <option value="1.725">High (6–7 days/wk)</option>
+                            <option value="1.9">Athlete/2-a-days</option>
+                        </select>
+                        <p class="muted">Scales BMR → TDEE.</p>
+                    </div>
+                    <div>
+                        <label for="goal">Goal</label>
+                        <select id="goal">
+                            <option value="-0.2">Cut (up to −20%)</option>
+                            <option value="-0.1">Recomp / Small Cut (−10%)</option>
+                            <option value="0">Maintenance</option>
+                            <option value="0.1" selected>Lean Bulk (+10%)</option>
+                            <option value="0.15">Aggressive Bulk (+15%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <details style="margin-top:6px">
+                    <summary>Advanced options (macro ranges, equation, hydration, caffeine)</summary>
+                    <div class="row" style="margin-top:10px">
+                        <div>
+                            <label for="protein">Protein (g/kg)</label>
+                            <input id="protein" type="number" min="1.6" max="2.6" step="0.1" value="2.1" />
+                            <p class="muted">General: 1.6–2.2 g/kg. Cutting or lean: 2.0–2.6 g/kg.</p>
+                        </div>
+                        <div>
+                            <label for="fat">Fat (g/kg)</label>
+                            <input id="fat" type="number" min="0.6" max="1.2" step="0.1" value="0.8" />
+                            <p class="muted">Avoid < ~0.6 g/kg long term.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <label for="equation">BMR Equation</label>
+                            <select id="equation">
+                                <option value="msj" selected>Mifflin–St Jeor (default)</option>
+                                <option value="katch">Katch–McArdle (needs body fat%)</option>
+                                <option value="revisedhb">Revised Harris–Benedict</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="bodyFat">Body Fat % (optional)</label>
+                            <input id="bodyFat" type="number" min="3" max="60" step="0.1" placeholder="e.g., 12" />
+                            <p class="muted">Used only for Katch–McArdle.</p>
+                        </div>
+                    </div>
+                    <div class="row-3">
+                        <div>
+                            <label for="hydration">Hydration (mL/kg)</label>
+                            <input id="hydration" type="number" min="25" max="50" step="1" value="35" />
+                        </div>
+                        <div>
+                            <label for="caffeineMg">Caffeine (mg/kg)</label>
+                            <input id="caffeineMg" type="number" min="0" max="6" step="0.5" value="3" />
+                        </div>
+                        <div>
+                            <label for="creatine">Creatine</label>
+                            <select id="creatine">
+                                <option value="5" selected>5 g/day</option>
+                                <option value="3">3 g/day</option>
+                                <option value="0">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="cta-row" style="margin-top:14px">
+                    <button class="btn" id="calc">⚡ Calculate</button>
+                    <button class="btn secondary" id="save">Save</button>
+                    <button class="btn secondary" id="share">Copy Share Link</button>
+                    <span class="muted" id="status" aria-live="polite"></span>
+                </div>
+            </section>
+
+            <!-- RIGHT: RESULTS -->
+            <section class="card" aria-labelledby="res-title">
+                <h2 id="res-title">Your Targets</h2>
+
+                <div class="kpis" aria-live="polite">
+                    <div class="kpi">
+                        <h3>Daily Calories</h3>
+                        <p id="kcal">—</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>Protein</h3>
+                        <p id="pOut">— g</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>Fat</h3>
+                        <p id="fOut">— g</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>Carbs</h3>
+                        <p id="cOut">— g</p>
+                    </div>
+                </div>
+
+                <div class="chart" aria-hidden="true">
+                    <!-- SVG donut shows macro split visually -->
+                    <svg id="donut" class="donut" viewBox="0 0 42 42" width="180" height="180" role="img">
+                        <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e5e7eb" stroke-width="8">
+                        </circle>
+                        <circle id="segP" cx="21" cy="21" r="15.915" fill="transparent" stroke="#2563eb"
+                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
+                        <circle id="segF" cx="21" cy="21" r="15.915" fill="transparent" stroke="#60a5fa"
+                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
+                        <circle id="segC" cx="21" cy="21" r="15.915" fill="transparent" stroke="#16a34a"
+                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
+                    </svg>
+                </div>
+
+                <div style="display:grid;gap:10px;margin-top:-4px">
+                    <div>
+                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Protein</span><span
+                                class="muted" id="pPct">—%</span></div>
+                        <div class="bar"><span id="barP" style="width:0%"></span></div>
+                    </div>
+                    <div>
+                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Fat</span><span
+                                class="muted" id="fPct">—%</span></div>
+                        <div class="bar"><span id="barF" style="width:0%"></span></div>
+                    </div>
+                    <div>
+                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Carbs</span><span
+                                class="muted" id="cPct">—%</span></div>
+                        <div class="bar"><span id="barC" style="width:0%"></span></div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:12px">
+                    <h2 style="font-size:16px;margin:0 0 6px">Performance Add‑Ons</h2>
+                    <ul style="margin:6px 0 0 18px;line-height:1.7">
+                        <li>Hydration target: <strong id="water"></strong> water/day (baseline). Add 350–700 mL per 30
+                            min intense training.</li>
+                        <li>Caffeine guideline: <strong id="caff"></strong> 45–60 min pre‑training (avoid within ~8 h of
+                            bedtime).</li>
+                        <li>Creatine: <strong id="crea"></strong> daily, any time. Consistency > timing.</li>
+                    </ul>
+                </div>
+
+                <div class="cta-row" style="margin-top:14px">
+                    <a class="btn" href="/services">📞 Book a free consult</a>
+                    <button class="btn secondary" id="exportJson">💾 Export targets (JSON)</button>
+                </div>
+            </section>
+        </div>
+
+        <section class="card" style="margin-top:18px">
+            <h2 style="margin:4px 0 10px">FAQ</h2>
+            <details>
+                <summary>How accurate is this calculator?</summary>
+                <p class="muted">All calculators estimate energy needs using population equations. Start here, then
+                    adjust calories ±5–10% based on weekly trends in weight, performance, and recovery.</p>
+            </details>
+            <details>
+                <summary>What macro ranges do you recommend?</summary>
+                <p class="muted">Protein 1.6–2.2 g/kg (up to 2.6 g/kg when cutting or very lean), fat 0.6–1.0 g/kg,
+                    carbs fill remaining calories. Ensure adequate dietary variety and micronutrients.</p>
+            </details>
+            <details>
+                <summary>Why cap cutting and bulking adjustments?</summary>
+                <p class="muted">Defaults cap deficits at −20% and surpluses at +15% to protect training quality and
+                    recovery. Advanced lifters may use different strategies short‑term.</p>
+            </details>
+        </section>
+
+        <footer>
+            Educational use only. Not medical advice. © <span id="year"></span> Matt McGinley Training.
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            const $ = s => document.querySelector(s);
+            const clamp = (n, a, b) => Math.min(Math.max(n, a), b);
+            const state = { unit: 'metric' };
+
+            // Unit toggle
+            const unitButtons = Array.from(document.querySelectorAll('#unitSwitch button'));
+            unitButtons.forEach(btn => btn.addEventListener('click', () => {
+                state.unit = btn.dataset.unit;
+                unitButtons.forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn); });
+                $('#metricFields').style.display = state.unit === 'metric' ? '' : 'none';
+                $('#imperialFields').style.display = state.unit === 'imperial' ? '' : 'none';
+            }));
+
+            function calc() {
+                const sex = $('#sex').value;
+                const age = +$('#age').value;
+                let heightCm, weightKg;
+                if (state.unit === 'metric') {
+                    heightCm = +$('#heightCm').value; weightKg = +$('#weightKg').value;
+                } else {
+                    const ft = +$('#heightFt').value; const inch = +$('#heightIn').value; const lb = +$('#weightLb').value;
+                    heightCm = ft * 30.48 + inch * 2.54; weightKg = lb * 0.45359237;
+                }
+                const activity = +$('#activity').value;
+                const goal = +$('#goal').value;
+                const pPerKg = +$('#protein').value;
+                const fPerKg = +$('#fat').value;
+                const equation = $('#equation').value;
+                const bf = parseFloat($('#bodyFat').value);
+                const hydrationMlPerKg = +$('#hydration').value;
+                const caffeineMgPerKg = +$('#caffeineMg').value;
+                const creatineG = +$('#creatine').value;
+
+                if (!heightCm || !weightKg) { setStatus('Enter valid height and weight', 'warn'); return; }
+
+                // BMR calculations
+                let BMR = 0;
+                if (equation === 'msj') {
+                    BMR = (sex === 'male' ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+                        : 10 * weightKg + 6.25 * heightCm - 5 * age - 161);
+                } else if (equation === 'revisedhb') {
+                    if (sex === 'male') BMR = 13.397 * weightKg + 4.799 * heightCm - 5.677 * age + 88.362;
+                    else BMR = 9.247 * weightKg + 3.098 * heightCm - 4.330 * age + 447.593;
+                } else if (equation === 'katch') {
+                    if (!bf || bf <= 3 || bf >= 60) { setStatus('Enter Body Fat% (3–60) to use Katch–McArdle', 'warn'); return; }
+                    const LBM = weightKg * (1 - bf / 100);
+                    BMR = 370 + 21.6 * LBM;
+                }
+
+                let TDEE = BMR * activity;
+                const adj = clamp(goal, -0.20, 0.15);
+                const targetKcal = Math.round(TDEE * (1 + adj));
+
+                let proteinG = Math.round(weightKg * clamp(pPerKg, 1.6, 2.6));
+                let fatG = Math.round(weightKg * clamp(fPerKg, 0.6, 1.5));
+                let kcalP = proteinG * 4, kcalF = fatG * 9;
+
+                let remaining = targetKcal - (kcalP + kcalF);
+                if (remaining < 0) {
+                    const fatMin = Math.round(weightKg * 0.6);
+                    const proteinMin = Math.round(weightKg * 1.8);
+                    fatG = Math.max(fatMin, fatG + Math.floor(remaining / 9));
+                    kcalF = fatG * 9; remaining = targetKcal - (kcalP + kcalF);
+                    if (remaining < 0) {
+                        proteinG = Math.max(proteinMin, proteinG + Math.floor(remaining / 4));
+                        kcalP = proteinG * 4; remaining = targetKcal - (kcalP + kcalF);
+                    }
+                }
+
+                const carbsG = Math.max(0, Math.round(remaining / 4));
+
+                // Outputs
+                $('#kcal').textContent = targetKcal.toLocaleString() + " kcal";
+                $('#pOut').textContent = proteinG + " g";
+                $('#fOut').textContent = fatG + " g";
+                $('#cOut').textContent = carbsG + " g";
+
+                // Percentages, bars, donut
+                const kcalC = carbsG * 4; const totalK = Math.max(1, kcalP + kcalF + kcalC);
+                const pctP = Math.round((kcalP / totalK) * 100), pctF = Math.round((kcalF / totalK) * 100), pctC = 100 - pctP - pctF;
+                $('#pPct').textContent = pctP + '%'; $('#fPct').textContent = pctF + '%'; $('#cPct').textContent = pctC + '%';
+                $('#barP').style.width = pctP + '%'; $('#barF').style.width = pctF + '%'; $('#barC').style.width = pctC + '%';
+
+                const segP = $('#segP'), segF = $('#segF'), segC = $('#segC');
+                segP.setAttribute('stroke-dasharray', pctP + ' ' + (100 - pctP));
+                segF.setAttribute('stroke-dasharray', pctF + ' ' + (100 - pctF)); segF.setAttribute('stroke-dashoffset', -pctP);
+                segC.setAttribute('stroke-dasharray', pctC + ' ' + (100 - pctC)); segC.setAttribute('stroke-dashoffset', -(pctP + pctF));
+
+                // Performance extras
+                const waterMl = Math.round(hydrationMlPerKg * weightKg);
+                $('#water').textContent = (waterMl / 1000).toFixed(1) + ' L';
+                const cafMg = Math.round(caffeineMgPerKg * weightKg);
+                $('#caff').textContent = cafMg + ' mg';
+                $('#crea').textContent = creatineG + ' g';
+
+                // Save/share payload
+                const payload = { sex, age, heightCm, weightKg, activity, goal, pPerKg, fPerKg, equation, bf: isNaN(bf) ? undefined : bf, hydrationMlPerKg, caffeineMgPerKg, creatineG, unit: state.unit, out: { kcal: targetKcal, p: proteinG, f: fatG, c: carbsG, pct: { p: pctP, f: pctF, c: pctC } } };
+                localStorage.setItem('matt-nutrition-calc', JSON.stringify(payload));
+
+                const qp = new URLSearchParams({ u: state.unit, s: sex[0], a: age, h: Math.round(heightCm), w: Math.round(weightKg), act: activity, g: goal, pp: pPerKg, ff: fPerKg, eq: equation, bf: isNaN(bf) ? '' : bf, hy: hydrationMlPerKg, cf: caffeineMgPerKg, cr: creatineG });
+                history.replaceState(null, '', '?' + qp.toString());
+
+                setStatus('Updated', 'ok');
+                return payload;
+            }
+
+            function setStatus(msg, tone) { const el = $('#status'); el.textContent = msg; el.style.color = tone === 'ok' ? 'var(--ok)' : tone === 'warn' ? 'var(--warn)' : tone === 'err' ? 'var(--err)' : 'var(--muted)'; }
+
+            function restore() {
+                const saved = localStorage.getItem('matt-nutrition-calc');
+                const params = new URLSearchParams(location.search);
+                let data = saved ? JSON.parse(saved) : null;
+                if (params.has('u')) {
+                    data = data || {}; data.unit = params.get('u'); data.sex = (params.get('s') === 'm') ? 'male' : 'female'; data.age = +params.get('a'); data.heightCm = +params.get('h'); data.weightKg = +params.get('w'); data.activity = +params.get('act'); data.goal = +params.get('g'); data.pPerKg = +params.get('pp'); data.fPerKg = +params.get('ff'); data.equation = params.get('eq'); data.bf = params.get('bf') ? +params.get('bf') : undefined; data.hydrationMlPerKg = +params.get('hy'); data.caffeineMgPerKg = +params.get('cf'); data.creatineG = +params.get('cr');
+                }
+                if (!data) return;
+
+                const unit = data.unit === 'imperial' ? 'imperial' : 'metric';
+                state.unit = unit;
+                $('#metricFields').style.display = unit === 'metric' ? '' : 'none';
+                $('#imperialFields').style.display = unit === 'imperial' ? '' : 'none';
+                Array.from(document.querySelectorAll('#unitSwitch button')).forEach(b => { const active = b.dataset.unit === unit; b.classList.toggle('active', active); b.setAttribute('aria-selected', active) });
+
+                $('#sex').value = data.sex || 'male';
+                $('#age').value = data.age || 28;
+                if (unit === 'metric') {
+                    $('#heightCm').value = Math.round(data.heightCm || 180);
+                    $('#weightKg').value = Math.round(data.weightKg || 87);
+                } else {
+                    const cm = data.heightCm || 180; const totalIn = cm / 2.54; const ft = Math.floor(totalIn / 12); const inch = Math.round(totalIn - ft * 12);
+                    $('#heightFt').value = ft; $('#heightIn').value = inch; $('#weightLb').value = Math.round((data.weightKg || 87) / 0.45359237);
+                }
+                $('#activity').value = data.activity || 1.55;
+                $('#goal').value = data.goal || 0.1;
+                $('#protein').value = data.pPerKg || 2.1;
+                $('#fat').value = data.fPerKg || 0.8;
+                $('#equation').value = data.equation || 'msj';
+                $('#bodyFat').value = data.bf || '';
+                $('#hydration').value = data.hydrationMlPerKg || 35;
+                $('#caffeineMg').value = data.caffeineMgPerKg || 3;
+                $('#creatine').value = data.creatineG || 5;
+
+                calc();
+            }
+
+            $('#calc').addEventListener('click', calc);
+            $('#save').addEventListener('click', () => { calc(); setStatus('Saved', 'ok'); });
+            $('#share').addEventListener('click', () => { calc(); navigator.clipboard.writeText(location.href).then(() => setStatus('Share link copied', 'ok')).catch(() => setStatus('Copy failed', 'err')); });
+            $('#exportJson').addEventListener('click', () => { const payload = calc(); const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'nutrition-targets.json'; a.click(); URL.revokeObjectURL(url); });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+            restore();
+        })();
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How accurate is this calculator?","acceptedAnswer":{"@type":"Answer","text":"All calculators estimate energy needs using population equations. Start here, then adjust calories based on trends in body weight, performance, and recovery."}},
+    {"@type":"Question","name":"What macro ranges do you recommend?","acceptedAnswer":{"@type":"Answer","text":"Protein 1.6–2.2 g/kg (up to 2.6 g/kg when cutting or very lean), fat 0.6–1.0 g/kg, carbs fill the rest."}},
+    {"@type":"Question","name":"Why cap cutting and bulking adjustments?","acceptedAnswer":{"@type":"Answer","text":"Defaults cap deficits at −20% and surpluses at +15% to protect training quality and recovery."}}
+  ]
+}
+</script>
+</body>
+
+</html>
