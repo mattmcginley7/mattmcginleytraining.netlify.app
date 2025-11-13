@@ -295,9 +295,9 @@
 
                 <div class="muted" style="margin-bottom:8px">Units</div>
                 <div class="switch" id="unitSwitch" role="tablist" aria-label="Unit toggle">
-                    <button type="button" data-unit="metric" class="active" aria-selected="true"
-                        role="tab">Metric</button>
-                    <button type="button" data-unit="imperial" aria-selected="false" role="tab">Imperial</button>
+                    <button type="button" data-unit="metric" aria-selected="false" role="tab">Metric</button>
+                    <button type="button" data-unit="imperial" class="active" aria-selected="true"
+                        role="tab">Imperial</button>
                 </div>
 
                 <div class="row" style="margin-top:12px">
@@ -314,7 +314,7 @@
                     </div>
                 </div>
 
-                <div class="row" id="metricFields">
+                <div class="row" id="metricFields" style="display:none;">
                     <div>
                         <label for="heightCm">Height (cm)</label>
                         <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="180" />
@@ -326,7 +326,7 @@
                     </div>
                 </div>
 
-                <div class="row" id="imperialFields" style="display:none;">
+                <div class="row" id="imperialFields">
                     <div>
                         <label for="heightFt">Height (ft + in)</label>
                         <div class="row">
@@ -522,7 +522,7 @@
         (function () {
             const $ = s => document.querySelector(s);
             const clamp = (n, a, b) => Math.min(Math.max(n, a), b);
-            const state = { unit: 'metric' };
+            const state = { unit: 'imperial' };
 
             // Unit toggle
             const unitButtons = Array.from(document.querySelectorAll('#unitSwitch button'));
