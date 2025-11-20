@@ -33,20 +33,21 @@
             <a class="emailIG" href="https://www.instagram.com/mattmcginley7"> Instagram</a></aside>
     </header>
     <section class="article-section">
-        <nav class="article-nav" aria-label="Jump to an Article">
-            <div class="article-nav__header">
-                <div>
-                    <h2>Jump to an Article</h2>
-                    <p class="article-nav__hint">Browse everything in one place or start typing to filter.</p>
+        <nav class="article-nav article-nav--closed" aria-label="Jump to an Article">
+            <button class="article-nav__toggle" aria-expanded="false" aria-controls="articleNavPanel">
+                Jump to an Article
+            </button>
+            <div class="article-nav__panel" id="articleNavPanel" hidden>
+                <div class="article-nav__header">
+                    <div>
+                        <h2>Jump to an Article</h2>
+                        <p class="article-nav__hint">Tap a title below to move straight to it.</p>
+                    </div>
                 </div>
-                <div class="article-nav__filter">
-                    <label class="sr-only" for="articleFilter">Filter articles</label>
-                    <input id="articleFilter" type="search" placeholder="Filter by title" autocomplete="off">
-                </div>
+                <ul class="article-nav__list" aria-live="polite">
+                    <li class="article-nav__empty">Loading article list…</li>
+                </ul>
             </div>
-            <ul class="article-nav__list" aria-live="polite">
-                <li class="article-nav__empty">Loading article list…</li>
-            </ul>
         </nav>
         <article id="coffee-caffeine-performance">
             <h2>Coffee, Caffeine, and Performance: What Actually Helps Your Workout</h2>

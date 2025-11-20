@@ -169,7 +169,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var articleNav = document.querySelector('.article-nav');
     var articleList = document.querySelector('.article-nav__list');
-    var articleFilter = document.querySelector('#articleFilter');
+    var articleToggle = document.querySelector('.article-nav__toggle');
+    var articlePanel = document.querySelector('.article-nav__panel');
     var articles = document.querySelectorAll('.article-section article');
 
     if (articleNav && articleList && articles.length) {
@@ -207,36 +208,28 @@ document.addEventListener('DOMContentLoaded', function () {
             articleList.innerHTML = '<li class="article-nav__empty">No articles found.</li>';
         }
 
-        if (articleFilter) {
-            articleFilter.addEventListener('input', function () {
-                var query = this.value.toLowerCase();
-                var visibleCount = 0;
+        var setPanelState = function (isOpen) {
+            articleNav.classList.toggle('article-nav--open', isOpen);
+            articleNav.classList.toggle('article-nav--closed', !isOpen);
+            if (articlePanel) {
+                articlePanel.hidden = !isOpen;
+            }
+            if (articleToggle) {
+                articleToggle.setAttribute('aria-expanded', isOpen);
+            }
+        };
 
-                Array.prototype.forEach.call(articleList.children, function (item) {
-                    var link = item.querySelector('a');
-                    if (!link) {
-                        return;
-                    }
-                    var text = link.textContent.toLowerCase();
-                    var match = text.indexOf(query) !== -1;
-                    item.style.display = match ? '' : 'none';
-                    if (match) {
-                        visibleCount++;
-                    }
-                });
-
-                var emptyMessage = articleList.querySelector('.article-nav__empty');
-                if (!visibleCount) {
-                    if (!emptyMessage) {
-                        emptyMessage = document.createElement('li');
-                        emptyMessage.className = 'article-nav__empty';
-                        emptyMessage.textContent = 'No matches found. Try another title.';
-                        articleList.appendChild(emptyMessage);
-                    }
-                } else if (emptyMessage) {
-                    emptyMessage.remove();
-                }
+        if (articleToggle && articlePanel) {
+            articleToggle.addEventListener('click', function () {
+                var isOpen = articlePanel.hidden;
+                setPanelState(isOpen);
             });
         }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && articleNav.classList.contains('article-nav--open')) {
+                setPanelState(false);
+            }
+        });
     }
 });
