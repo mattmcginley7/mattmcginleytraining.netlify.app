@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Cartoon lifter holding coffee and pre-workout</title>
+  <desc id="desc">Illustration of a smiling lifter in a red hoodie holding a Rise and Grind coffee mug and a Nitro Pump pre-workout tub inside a gym.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d9f4ff" />
+      <stop offset="100%" stop-color="#b8e3f5" />
+    </linearGradient>
+    <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff3c3c" />
+      <stop offset="100%" stop-color="#d62828" />
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e5e9ec" />
+      <stop offset="100%" stop-color="#cfd7de" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#sky)" />
+  <rect y="520" width="800" height="280" fill="url(#floor)" />
+  <g opacity="0.7" stroke="#4e6373" stroke-width="10" stroke-linecap="round">
+    <line x1="120" y1="230" x2="120" y2="520" />
+    <line x1="680" y1="230" x2="680" y2="520" />
+    <line x1="120" y1="230" x2="680" y2="230" />
+    <line x1="120" y1="280" x2="680" y2="280" />
+    <line x1="120" y1="520" x2="680" y2="520" />
+    <line x1="230" y1="270" x2="230" y2="520" />
+    <line x1="570" y1="270" x2="570" y2="520" />
+  </g>
+  <g fill="#2f3c4a" stroke="#1f2933" stroke-width="6" stroke-linecap="round">
+    <rect x="80" y="250" width="40" height="100" rx="6" />
+    <rect x="80" y="360" width="40" height="100" rx="6" />
+    <rect x="680" y="250" width="40" height="100" rx="6" />
+    <rect x="680" y="360" width="40" height="100" rx="6" />
+    <rect x="170" y="360" width="60" height="60" rx="12" />
+    <rect x="570" y="360" width="60" height="60" rx="12" />
+  </g>
+  <rect x="300" y="320" width="200" height="330" rx="90" fill="#f4c7a4" stroke="#d99a6a" stroke-width="8" />
+  <ellipse cx="400" cy="640" rx="120" ry="40" fill="#1f2a35" />
+  <rect x="330" y="510" width="50" height="150" rx="25" fill="#1f2a35" />
+  <rect x="420" y="510" width="50" height="150" rx="25" fill="#1f2a35" />
+  <path d="M360 365 C340 360 330 340 330 320 C330 300 340 285 360 280" fill="#f4c7a4" />
+  <path d="M440 365 C460 360 470 340 470 320 C470 300 460 285 440 280" fill="#f4c7a4" />
+  <circle cx="400" cy="310" r="80" fill="#f4c7a4" stroke="#d99a6a" stroke-width="8" />
+  <path d="M350 280 Q360 260 370 250 Q400 245 430 250 Q440 265 450 280" fill="#000" />
+  <path d="M345 300 C350 280 360 260 380 260 L420 260 C440 260 450 280 455 300" fill="#000" />
+  <path d="M360 310 Q370 325 380 330" stroke="#b56b44" stroke-width="6" fill="none" stroke-linecap="round" />
+  <path d="M440 310 Q430 325 420 330" stroke="#b56b44" stroke-width="6" fill="none" stroke-linecap="round" />
+  <path d="M380 350 Q400 360 420 350" stroke="#a45c3b" stroke-width="8" fill="none" stroke-linecap="round" />
+  <rect x="315" y="360" width="170" height="180" rx="40" fill="url(#hoodie)" stroke="#bf1f1f" stroke-width="10" />
+  <path d="M330 390 C350 370 375 365 400 365 C425 365 450 370 470 390" fill="#f4f7fa" stroke="#bf1f1f" stroke-width="8" />
+  <line x1="400" y1="365" x2="400" y2="430" stroke="#bf1f1f" stroke-width="10" />
+  <line x1="335" y1="390" x2="330" y2="450" stroke="#bf1f1f" stroke-width="10" stroke-linecap="round" />
+  <line x1="465" y1="390" x2="470" y2="450" stroke="#bf1f1f" stroke-width="10" stroke-linecap="round" />
+  <rect x="330" y="405" width="40" height="95" rx="18" fill="#f4c7a4" stroke="#d99a6a" stroke-width="6" />
+  <rect x="430" y="405" width="40" height="95" rx="18" fill="#f4c7a4" stroke="#d99a6a" stroke-width="6" />
+  <g transform="translate(260,440)">
+    <rect x="0" y="0" width="80" height="70" rx="16" fill="#131a24" stroke="#0b0f15" stroke-width="6" />
+    <rect x="15" y="10" width="50" height="35" rx="8" fill="#f2c94c" />
+    <text x="40" y="32" font-family="'Verdana', 'Arial', sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">RISE</text>
+    <text x="40" y="49" font-family="'Verdana', 'Arial', sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">&amp; GRIND</text>
+    <path d="M80 20 q14 8 14 24 q0 14 -12 20" fill="none" stroke="#0b0f15" stroke-width="6" stroke-linecap="round" />
+  </g>
+  <g transform="translate(470,410)">
+    <rect x="0" y="0" width="120" height="170" rx="18" fill="#2b2f3a" stroke="#0f131b" stroke-width="8" />
+    <rect x="10" y="12" width="100" height="146" rx="12" fill="#f5f7fa" />
+    <rect x="12" y="14" width="96" height="80" rx="10" fill="#f9d341" stroke="#cc9c00" stroke-width="4" />
+    <text x="60" y="55" font-family="'Verdana', 'Arial', sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">NITRO</text>
+    <text x="60" y="80" font-family="'Verdana', 'Arial', sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">PUMP</text>
+    <rect x="12" y="102" width="96" height="45" rx="10" fill="#f44336" stroke="#d32f2f" stroke-width="3" />
+    <text x="60" y="131" font-family="'Verdana', 'Arial', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">PRE</text>
+    <text x="60" y="150" font-family="'Verdana', 'Arial', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">WORKOUT</text>
+  </g>
+  <path d="M245 475 C225 470 220 450 230 430 L250 390 C260 370 280 365 300 375 L320 386 C340 398 342 425 325 440 L285 473 C274 482 258 483 245 475 Z" fill="#f4c7a4" stroke="#d99a6a" stroke-width="6" />
+  <path d="M535 470 C555 468 565 450 560 430 L540 380 C532 360 515 354 500 360 L470 374 C448 383 443 410 460 426 L505 465 C514 474 525 476 535 470 Z" fill="#f4c7a4" stroke="#d99a6a" stroke-width="6" />
+  <rect x="240" y="360" width="80" height="40" rx="12" fill="#ff3c3c" stroke="#bf1f1f" stroke-width="8" />
+  <rect x="480" y="360" width="80" height="40" rx="12" fill="#ff3c3c" stroke="#bf1f1f" stroke-width="8" />
+  <rect x="200" y="200" width="150" height="70" rx="12" fill="#ffe082" stroke="#f4b41a" stroke-width="8" />
+  <text x="275" y="243" font-family="'Verdana', 'Arial', sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#e65100">GO HARD!</text>
+</svg>

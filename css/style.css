@@ -88,6 +88,17 @@ img:hover {
     transform: scale(1.02);
 }
 
+.article-figure {
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+.article-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.95em;
+    color: #4a5568;
+}
+
 p {
     font-size: 1em;
     margin: 0.5em 0;
