@@ -343,6 +343,7 @@ article ul {
     border: 1px solid #eee;
     max-height: calc(80vh - 4rem);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .article-nav__header {
@@ -366,6 +367,8 @@ article ul {
 
 .article-nav__list {
     padding-right: 0.25rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .article-nav__empty {
