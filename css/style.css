@@ -460,6 +460,10 @@ article ul {
     .article-nav__panel {
         max-height: 60vh;
     }
+
+    .article-section {
+        padding-bottom: 7rem;
+    }
 }
 
 /* Improved article styling on the articles page */
@@ -467,6 +471,7 @@ article ul {
     padding: 0;
     background: transparent;
     box-shadow: none;
+    padding-bottom: 6rem;
 }
 
 .article-section article {
