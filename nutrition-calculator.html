@@ -488,8 +488,7 @@
                 </div>
 
                 <div class="cta-row" style="margin-top:14px">
-                    <a class="btn" href="/services">📞 Book a free consult</a>
-                    <button class="btn secondary" id="exportJson">💾 Export targets (JSON)</button>
+                    <a class="btn" href="mailto:matthewmcginley@live.com">📞 Book a free consult</a>
                 </div>
             </section>
         </div>
@@ -668,7 +667,6 @@
             $('#calc').addEventListener('click', calc);
             $('#save').addEventListener('click', () => { calc(); setStatus('Saved', 'ok'); });
             $('#share').addEventListener('click', () => { calc(); navigator.clipboard.writeText(location.href).then(() => setStatus('Share link copied', 'ok')).catch(() => setStatus('Copy failed', 'err')); });
-            $('#exportJson').addEventListener('click', () => { const payload = calc(); const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'nutrition-targets.json'; a.click(); URL.revokeObjectURL(url); });
 
             document.getElementById('year').textContent = new Date().getFullYear();
             restore();
