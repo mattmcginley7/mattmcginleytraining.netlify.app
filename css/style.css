@@ -3,11 +3,13 @@
 }
 
 :root {
-    --primary-color: #2c3e50;
-    --cta-color: #ff6600;
+    --primary-color: #0f172a;
+    --cta-color: #f97316;
+    --accent-color: #14b8a6;
     --surface-color: #ffffff;
-    --surface-muted: #f8fafc;
-    --border-color: #e2e8f0;
+    --surface-muted: #eef2f7;
+    --border-color: #d7e0ea;
+    --text-color: #0f172a;
 }
 
 body {
@@ -16,8 +18,8 @@ body {
     padding: 0;
     line-height: 1.6;
     font-size: 18px;
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-    color: #222;
+    background: linear-gradient(180deg, #eef2f7 0%, #e2e8f0 100%);
+    color: var(--text-color);
 }
 
 html {
@@ -28,7 +30,7 @@ h1 {
     font-size: 2em;
     margin: 0.5em 0 0 0;
     text-align: center;
-    color: #2c3e50;
+    color: var(--primary-color);
 }
 
 aside{
@@ -38,7 +40,7 @@ h2 {
     font-size: 1.5em;
     margin: 1em 0 0.5em 0;
     text-align: center;
-    color: #2c3e50;
+    color: var(--primary-color);
 }
 h3, h4, div{
     text-align: center;
@@ -58,7 +60,7 @@ section {
 .hero {
     text-align: center;
     padding: 3rem 1.5rem 2rem;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f5ff 45%, #fff1e6 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #e0f2f1 45%, #fff3e0 100%);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -66,7 +68,7 @@ section {
     font-size: 1.25em;
     margin: 0.5em 0;
     text-align: center;
-    color: #334155;
+    color: #1f2937;
     font-weight: 500;
 }
 
@@ -118,14 +120,14 @@ iframe{
 }
 
 a {
-    color: #0088cc;
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 a:hover,
 a:focus {
-    color: #005f99;
+    color: #0f766e;
     text-decoration: underline;
     text-decoration-thickness: 2px;
 }
@@ -151,7 +153,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: linear-gradient(90deg, var(--primary-color), #1a252f);
+    background: linear-gradient(90deg, var(--primary-color), #111827);
     color: #fff;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -214,19 +216,19 @@ button {
     border: none;
     border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 8px 16px rgba(255, 102, 0, 0.25);
+    box-shadow: 0 8px 16px rgba(249, 115, 22, 0.25);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover,
 button:focus {
     transform: translateY(-1px);
-    box-shadow: 0 12px 20px rgba(255, 102, 0, 0.3);
+    box-shadow: 0 12px 20px rgba(249, 115, 22, 0.3);
 }
 
 .emailIG {
     font-weight: 600;
-    color: #0f172a;
+    color: var(--primary-color);
 }
 .programButtons{
     height: 30px;
@@ -299,7 +301,7 @@ form{
     }
 
     nav a:hover {
-        background-color: rgba(255, 102, 0, 0.8);
+        background-color: rgba(249, 115, 22, 0.85);
     }
 
     #edCoanPhaseParagraph {
@@ -346,7 +348,7 @@ article ul {
 }
 
 .article-nav__toggle {
-    background: #ff6600;
+    background: var(--cta-color);
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -361,7 +363,7 @@ article ul {
 
 .article-nav__toggle:hover,
 .article-nav__toggle:focus {
-    background: #e65c00;
+    background: #ea580c;
     transform: translateY(-1px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     outline: none;
@@ -370,10 +372,10 @@ article ul {
 .article-nav__panel {
     margin-top: 0.75rem;
     padding: 1rem 1.25rem;
-    background: #fff;
+    background: var(--surface-color);
     border-radius: 12px;
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     max-height: calc(80vh - 4rem);
     overflow-y: auto;
     overflow-x: hidden;
@@ -423,7 +425,7 @@ article ul {
 
 .article-nav a {
     display: block;
-    color: #111;
+    color: var(--primary-color);
     font-weight: 600;
     padding: 0.4em 0.75em;
     border-radius: 6px;
@@ -432,8 +434,8 @@ article ul {
 
 .article-nav a:hover,
 .article-nav a:focus {
-    background-color: rgba(0, 136, 204, 0.12);
-    color: #000;
+    background-color: rgba(20, 184, 166, 0.12);
+    color: #0f172a;
     transform: translateX(4px);
 }
 
@@ -476,11 +478,11 @@ article ul {
 
 .article-section article {
     padding: 1rem 1.5rem;
-    background: #fff;
+    background: var(--surface-color);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     font-family: 'Merriweather', serif;
     line-height: 1.75;
 }
@@ -503,11 +505,11 @@ article ul {
 
 .calculator-card {
     padding: 1rem 1.5rem;
-    background: #fff;
+    background: var(--surface-color);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
 }
 
 .calculator-card:last-child {
@@ -523,11 +525,11 @@ article ul {
 
 .resource-card {
     padding: 1rem 1.5rem;
-    background: #fff;
+    background: var(--surface-color);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
 }
 
 .resource-card:last-child {
