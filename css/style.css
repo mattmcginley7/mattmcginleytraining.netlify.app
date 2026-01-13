@@ -62,6 +62,105 @@ section {
     box-shadow: var(--shadow-soft);
 }
 
+.intro-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    text-align: center;
+    margin: 0 0 0.5rem;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.checklist li {
+    position: relative;
+    padding-left: 2rem;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--accent-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.metrics {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.metric {
+    background: var(--surface-muted);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.metric__value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.metric__label {
+    display: block;
+    font-size: 0.95rem;
+    color: #475569;
+    margin-top: 0.35rem;
+}
+
+.info-grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.info-card {
+    background: var(--surface-muted);
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+}
+
+.info-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+}
+
+.cta-section {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(249, 115, 22, 0.12));
+    border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
 .hero {
     text-align: center;
     padding: 3.5rem 1.5rem 2.5rem;
@@ -81,6 +180,55 @@ section {
     font-size: 0.9em;
     text-align: center;
     margin: 0.25em 0;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+}
+
+.cta-button,
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.cta-button {
+    background-color: var(--cta-color);
+    color: #fff;
+    box-shadow: 0 12px 22px rgba(249, 115, 22, 0.35);
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(249, 115, 22, 0.45);
+    color: #fff;
+}
+
+.secondary-button {
+    background: #fff;
+    color: var(--primary-color);
+    border: 2px solid rgba(15, 23, 42, 0.15);
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+}
+
+.secondary-button:hover,
+.secondary-button:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(15, 23, 42, 0.2);
+    color: var(--primary-color);
 }
 
 .pricing-anchor {
@@ -348,6 +496,15 @@ form{
     #edCoanPhaseParagraph {
         padding-top: 10px;
     }
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-button,
+    .secondary-button {
+        width: 100%;
+    }
     input {
         max-width: 100%;
         margin: 10px 0;
@@ -355,6 +512,16 @@ form{
 
     textarea {
         max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 article {
