@@ -87,6 +87,44 @@
             </article>
         </div>
     </section>
+    <section class="habit-section">
+        <p class="section-label">Weekly habit tracker</p>
+        <h2>Stay consistent between check-ins</h2>
+        <p>Use this quick checklist to reinforce the habits that drive progress. Your selections are saved on this device so you can pick up right where you left off.</p>
+        <div class="habit-card">
+            <div class="habit-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="habit-progress__bar"></div>
+            </div>
+            <p class="habit-progress__label">0 of 5 complete</p>
+            <ul class="habit-list">
+                <li>
+                    <label>
+                        <input type="checkbox" data-habit="workouts">
+                        Completed all scheduled workouts
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" data-habit="protein">
+                        Met protein goal every day
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" data-habit="sleep">
+                        Averaged 7+ hours of sleep
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" data-habit="hydration">
+                        Drank at least 2 liters of water daily
+                    </label>
+                </li>
+            </ul>
+            <button type="button" class="habit-reset">Reset week</button>
+        </div>
+    </section>
     <section class="results-section">
         <p class="section-label">Client results</p>
         <h2>What happens when training finally fits your life</h2>
