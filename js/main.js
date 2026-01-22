@@ -232,4 +232,72 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    var habitTracker = document.querySelector('.habit-card');
+    if (habitTracker) {
+        var habitCheckboxes = habitTracker.querySelectorAll('input[type="checkbox"][data-habit]');
+        var habitBar = habitTracker.querySelector('.habit-progress__bar');
+        var habitLabel = habitTracker.querySelector('.habit-progress__label');
+        var habitProgress = habitTracker.querySelector('.habit-progress');
+        var habitReset = habitTracker.querySelector('.habit-reset');
+        var habitStorageKey = 'habitTrackerState';
+        var habitState = {};
+
+        try {
+            habitState = JSON.parse(localStorage.getItem(habitStorageKey)) || {};
+        } catch (error) {
+            habitState = {};
+        }
+
+        var updateHabitProgress = function () {
+            var total = habitCheckboxes.length;
+            var completed = 0;
+
+            habitCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    completed += 1;
+                }
+            });
+
+            var percent = total ? Math.round((completed / total) * 100) : 0;
+            if (habitBar) {
+                habitBar.style.width = percent + '%';
+            }
+            if (habitLabel) {
+                habitLabel.textContent = completed + ' of ' + total + ' complete';
+            }
+            if (habitProgress) {
+                habitProgress.setAttribute('aria-valuenow', String(percent));
+            }
+        };
+
+        habitCheckboxes.forEach(function (checkbox) {
+            var habitKey = checkbox.getAttribute('data-habit');
+            if (habitKey && habitState[habitKey]) {
+                checkbox.checked = true;
+            }
+
+            checkbox.addEventListener('change', function () {
+                var key = checkbox.getAttribute('data-habit');
+                if (key) {
+                    habitState[key] = checkbox.checked;
+                    localStorage.setItem(habitStorageKey, JSON.stringify(habitState));
+                }
+                updateHabitProgress();
+            });
+        });
+
+        if (habitReset) {
+            habitReset.addEventListener('click', function () {
+                habitState = {};
+                habitCheckboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+                localStorage.setItem(habitStorageKey, JSON.stringify(habitState));
+                updateHabitProgress();
+            });
+        }
+
+        updateHabitProgress();
+    }
 });
