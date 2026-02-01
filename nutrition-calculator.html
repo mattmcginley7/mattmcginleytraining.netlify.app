@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nutrition & Macro Calculator | Matt McGinley Training</title>
+    <title>Katch‑McArdle Nutrition Calculator | Matt McGinley Training</title>
     <meta name="description"
-        content="Calculate calories, macros, hydration, and performance guidance. Science-based defaults for lifters, athletes, and anyone improving body composition." />
+        content="Calculate calories, macros, hydration, and performance guidance with the Katch‑McArdle BMR equation. Science-based defaults for lifters, athletes, and anyone improving body composition." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -283,9 +283,9 @@
     </nav>
     <div class="wrap">
         <header class="hero" aria-labelledby="title">
-            <h1 id="title">Nutrition & Macro Calculator</h1>
-            <p>Fast, science-based targets for calories, macros, hydration, and performance — for anyone training or
-                recomposing. <span class="badge">BETA</span></p>
+            <h1 id="title">Katch‑McArdle Nutrition Calculator</h1>
+            <p>Centered on the Katch‑McArdle BMR equation for lean-mass accuracy, plus clear macro and hydration
+                targets. <span class="badge">BETA</span></p>
         </header>
 
         <div class="grid">
@@ -309,20 +309,20 @@
                         </select>
                     </div>
                     <div>
-                        <label for="age">Age</< /label>
-                            <input id="age" type="number" inputmode="numeric" min="13" max="90" value="28" />
+                        <label for="age">Age</label>
+                        <input id="age" type="number" inputmode="numeric" min="13" max="90" value="32" />
                     </div>
                 </div>
 
                 <div class="row" id="metricFields" style="display:none;">
                     <div>
                         <label for="heightCm">Height (cm)</label>
-                        <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="180" />
+                        <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="175" />
                         <p class="muted">5'11" ≈ 180 cm</p>
                     </div>
                     <div>
                         <label for="weightKg">Weight (kg)</label>
-                        <input id="weightKg" type="number" inputmode="decimal" min="40" max="200" value="87" />
+                        <input id="weightKg" type="number" inputmode="decimal" min="40" max="200" value="80" />
                     </div>
                 </div>
 
@@ -331,12 +331,12 @@
                         <label for="heightFt">Height (ft + in)</label>
                         <div class="row">
                             <input id="heightFt" type="number" min="4" max="7" value="5" aria-label="Feet" />
-                            <input id="heightIn" type="number" min="0" max="11" value="11" aria-label="Inches" />
+                            <input id="heightIn" type="number" min="0" max="11" value="9" aria-label="Inches" />
                         </div>
                     </div>
                     <div>
                         <label for="weightLb">Weight (lb)</label>
-                        <input id="weightLb" type="number" inputmode="decimal" min="90" max="440" value="192" />
+                        <input id="weightLb" type="number" inputmode="decimal" min="90" max="440" value="176" />
                     </div>
                 </div>
 
@@ -357,61 +357,49 @@
                         <select id="goal">
                             <option value="-0.2">Cut (up to −20%)</option>
                             <option value="-0.1">Recomp / Small Cut (−10%)</option>
-                            <option value="0">Maintenance</option>
-                            <option value="0.1" selected>Lean Bulk (+10%)</option>
+                            <option value="0" selected>Maintenance</option>
+                            <option value="0.1">Lean Bulk (+10%)</option>
                             <option value="0.15">Aggressive Bulk (+15%)</option>
                         </select>
                     </div>
                 </div>
-
-                <details style="margin-top:6px">
-                    <summary>Advanced options (macro ranges, equation, hydration, caffeine)</summary>
-                    <div class="row" style="margin-top:10px">
-                        <div>
-                            <label for="protein">Protein (g/kg)</label>
-                            <input id="protein" type="number" min="1.6" max="2.6" step="0.1" value="2.1" />
-                            <p class="muted">General: 1.6–2.2 g/kg. Cutting or lean: 2.0–2.6 g/kg.</p>
-                        </div>
-                        <div>
-                            <label for="fat">Fat (g/kg)</label>
-                            <input id="fat" type="number" min="0.6" max="1.2" step="0.1" value="0.8" />
-                            <p class="muted">Avoid < ~0.6 g/kg long term.</p>
-                        </div>
+                <div class="row" style="margin-top:10px">
+                    <div>
+                        <label for="bodyFat">Body Fat %</label>
+                        <input id="bodyFat" type="number" min="3" max="60" step="0.1" value="18" />
+                        <p class="muted">Katch‑McArdle uses lean body mass for accuracy.</p>
                     </div>
-                    <div class="row">
-                        <div>
-                            <label for="equation">BMR Equation</label>
-                            <select id="equation">
-                                <option value="msj" selected>Mifflin–St Jeor (default)</option>
-                                <option value="katch">Katch–McArdle (needs body fat%)</option>
-                                <option value="revisedhb">Revised Harris–Benedict</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="bodyFat">Body Fat % (optional)</label>
-                            <input id="bodyFat" type="number" min="3" max="60" step="0.1" placeholder="e.g., 12" />
-                            <p class="muted">Used only for Katch–McArdle.</p>
-                        </div>
+                    <div>
+                        <label for="protein">Protein (g/kg)</label>
+                        <input id="protein" type="number" min="1.6" max="2.6" step="0.1" value="2.0" />
+                        <p class="muted">General: 1.6–2.2 g/kg. Cutting or lean: 2.0–2.6 g/kg.</p>
                     </div>
-                    <div class="row-3">
-                        <div>
-                            <label for="hydration">Hydration (mL/kg)</label>
-                            <input id="hydration" type="number" min="25" max="50" step="1" value="35" />
-                        </div>
-                        <div>
-                            <label for="caffeineMg">Caffeine (mg/kg)</label>
-                            <input id="caffeineMg" type="number" min="0" max="6" step="0.5" value="3" />
-                        </div>
-                        <div>
-                            <label for="creatine">Creatine</label>
-                            <select id="creatine">
-                                <option value="5" selected>5 g/day</option>
-                                <option value="3">3 g/day</option>
-                                <option value="0">None</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="fat">Fat (g/kg)</label>
+                        <input id="fat" type="number" min="0.6" max="1.2" step="0.1" value="0.8" />
+                        <p class="muted">Avoid &lt; ~0.6 g/kg long term.</p>
                     </div>
-                </details>
+                    <div>
+                        <label for="hydration">Hydration (mL/kg)</label>
+                        <input id="hydration" type="number" min="25" max="50" step="1" value="35" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="caffeineMg">Caffeine (mg/kg)</label>
+                        <input id="caffeineMg" type="number" min="0" max="6" step="0.5" value="2" />
+                    </div>
+                    <div>
+                        <label for="creatine">Creatine</label>
+                        <select id="creatine">
+                            <option value="5" selected>5 g/day</option>
+                            <option value="3">3 g/day</option>
+                            <option value="0">None</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="cta-row" style="margin-top:14px">
                     <button class="btn" id="calc">⚡ Calculate</button>
@@ -546,7 +534,7 @@
                 const goal = +$('#goal').value;
                 const pPerKg = +$('#protein').value;
                 const fPerKg = +$('#fat').value;
-                const equation = $('#equation').value;
+                const equation = 'katch';
                 const bf = parseFloat($('#bodyFat').value);
                 const hydrationMlPerKg = +$('#hydration').value;
                 const caffeineMgPerKg = +$('#caffeineMg').value;
@@ -556,17 +544,9 @@
 
                 // BMR calculations
                 let BMR = 0;
-                if (equation === 'msj') {
-                    BMR = (sex === 'male' ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
-                        : 10 * weightKg + 6.25 * heightCm - 5 * age - 161);
-                } else if (equation === 'revisedhb') {
-                    if (sex === 'male') BMR = 13.397 * weightKg + 4.799 * heightCm - 5.677 * age + 88.362;
-                    else BMR = 9.247 * weightKg + 3.098 * heightCm - 4.330 * age + 447.593;
-                } else if (equation === 'katch') {
-                    if (!bf || bf <= 3 || bf >= 60) { setStatus('Enter Body Fat% (3–60) to use Katch–McArdle', 'warn'); return; }
-                    const LBM = weightKg * (1 - bf / 100);
-                    BMR = 370 + 21.6 * LBM;
-                }
+                if (!bf || bf <= 3 || bf >= 60) { setStatus('Enter Body Fat% (3–60) to use Katch–McArdle', 'warn'); return; }
+                const LBM = weightKg * (1 - bf / 100);
+                BMR = 370 + 21.6 * LBM;
 
                 let TDEE = BMR * activity;
                 const adj = clamp(goal, -0.20, 0.15);
@@ -618,7 +598,7 @@
                 const payload = { sex, age, heightCm, weightKg, activity, goal, pPerKg, fPerKg, equation, bf: isNaN(bf) ? undefined : bf, hydrationMlPerKg, caffeineMgPerKg, creatineG, unit: state.unit, out: { kcal: targetKcal, p: proteinG, f: fatG, c: carbsG, pct: { p: pctP, f: pctF, c: pctC } } };
                 localStorage.setItem('matt-nutrition-calc', JSON.stringify(payload));
 
-                const qp = new URLSearchParams({ u: state.unit, s: sex[0], a: age, h: Math.round(heightCm), w: Math.round(weightKg), act: activity, g: goal, pp: pPerKg, ff: fPerKg, eq: equation, bf: isNaN(bf) ? '' : bf, hy: hydrationMlPerKg, cf: caffeineMgPerKg, cr: creatineG });
+                const qp = new URLSearchParams({ u: state.unit, s: sex[0], a: age, h: Math.round(heightCm), w: Math.round(weightKg), act: activity, g: goal, pp: pPerKg, ff: fPerKg, bf: isNaN(bf) ? '' : bf, hy: hydrationMlPerKg, cf: caffeineMgPerKg, cr: creatineG });
                 history.replaceState(null, '', '?' + qp.toString());
 
                 setStatus('Updated', 'ok');
@@ -632,7 +612,7 @@
                 const params = new URLSearchParams(location.search);
                 let data = saved ? JSON.parse(saved) : null;
                 if (params.has('u')) {
-                    data = data || {}; data.unit = params.get('u'); data.sex = (params.get('s') === 'm') ? 'male' : 'female'; data.age = +params.get('a'); data.heightCm = +params.get('h'); data.weightKg = +params.get('w'); data.activity = +params.get('act'); data.goal = +params.get('g'); data.pPerKg = +params.get('pp'); data.fPerKg = +params.get('ff'); data.equation = params.get('eq'); data.bf = params.get('bf') ? +params.get('bf') : undefined; data.hydrationMlPerKg = +params.get('hy'); data.caffeineMgPerKg = +params.get('cf'); data.creatineG = +params.get('cr');
+                    data = data || {}; data.unit = params.get('u'); data.sex = (params.get('s') === 'm') ? 'male' : 'female'; data.age = +params.get('a'); data.heightCm = +params.get('h'); data.weightKg = +params.get('w'); data.activity = +params.get('act'); data.goal = +params.get('g'); data.pPerKg = +params.get('pp'); data.fPerKg = +params.get('ff'); data.bf = params.get('bf') ? +params.get('bf') : undefined; data.hydrationMlPerKg = +params.get('hy'); data.caffeineMgPerKg = +params.get('cf'); data.creatineG = +params.get('cr');
                 }
                 if (!data) return;
 
@@ -643,22 +623,21 @@
                 Array.from(document.querySelectorAll('#unitSwitch button')).forEach(b => { const active = b.dataset.unit === unit; b.classList.toggle('active', active); b.setAttribute('aria-selected', active) });
 
                 $('#sex').value = data.sex || 'male';
-                $('#age').value = data.age || 28;
+                $('#age').value = data.age || 32;
                 if (unit === 'metric') {
-                    $('#heightCm').value = Math.round(data.heightCm || 180);
-                    $('#weightKg').value = Math.round(data.weightKg || 87);
+                    $('#heightCm').value = Math.round(data.heightCm || 175);
+                    $('#weightKg').value = Math.round(data.weightKg || 80);
                 } else {
-                    const cm = data.heightCm || 180; const totalIn = cm / 2.54; const ft = Math.floor(totalIn / 12); const inch = Math.round(totalIn - ft * 12);
-                    $('#heightFt').value = ft; $('#heightIn').value = inch; $('#weightLb').value = Math.round((data.weightKg || 87) / 0.45359237);
+                    const cm = data.heightCm || 175; const totalIn = cm / 2.54; const ft = Math.floor(totalIn / 12); const inch = Math.round(totalIn - ft * 12);
+                    $('#heightFt').value = ft; $('#heightIn').value = inch; $('#weightLb').value = Math.round((data.weightKg || 80) / 0.45359237);
                 }
                 $('#activity').value = data.activity || 1.55;
-                $('#goal').value = data.goal || 0.1;
-                $('#protein').value = data.pPerKg || 2.1;
+                $('#goal').value = data.goal || 0;
+                $('#protein').value = data.pPerKg || 2.0;
                 $('#fat').value = data.fPerKg || 0.8;
-                $('#equation').value = data.equation || 'msj';
-                $('#bodyFat').value = data.bf || '';
+                $('#bodyFat').value = data.bf || 18;
                 $('#hydration').value = data.hydrationMlPerKg || 35;
-                $('#caffeineMg').value = data.caffeineMgPerKg || 3;
+                $('#caffeineMg').value = data.caffeineMgPerKg || 2;
                 $('#creatine').value = data.creatineG || 5;
 
                 calc();
