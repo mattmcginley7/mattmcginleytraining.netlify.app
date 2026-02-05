@@ -512,6 +512,13 @@ nav a:hover {
     box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4);
 }
 
+nav a[aria-current="page"] {
+    background-color: #fff;
+    color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(15, 23, 42, 0.2);
+}
+
 #mainImage{
     max-width: 400px;
 }
