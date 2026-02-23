@@ -1,13 +1,12 @@
 (function () {
     var LB_TO_KG = 0.45359237;
     var LEVELS = ['Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
-    var PERCENTILES = {
-        belowNovice: 20,
-        novice: 40,
-        intermediate: 60,
-        advanced: 80,
-        elite: 95,
-        aboveElite: 99
+    var PERCENTILE_BANDS = {
+        belowNovice: { min: 5, max: 35 },
+        novice: { min: 35, max: 70 },
+        intermediate: { min: 70, max: 85 },
+        advanced: { min: 85, max: 97 },
+        elite: { min: 97, max: 99.7 }
     };
 
     function toLb(weight, unit) {
@@ -61,41 +60,71 @@
         };
     }
 
-    function classifyLevel(valueLb, thresholds) {
+    function percentileForLift(valueLb, thresholds) {
+        var bands = PERCENTILE_BANDS;
+        var progress;
+
         if (valueLb < thresholds.novice) {
-            return { level: LEVELS[0], percentile: PERCENTILES.belowNovice };
+            progress = Math.max(valueLb / Math.max(thresholds.novice, 1), 0);
+            return bands.belowNovice.min + (bands.belowNovice.max - bands.belowNovice.min) * progress;
+        }
+
+        if (valueLb < thresholds.intermediate) {
+            progress = (valueLb - thresholds.novice) / Math.max(thresholds.intermediate - thresholds.novice, 1);
+            return bands.novice.min + (bands.novice.max - bands.novice.min) * progress;
+        }
+
+        if (valueLb < thresholds.advanced) {
+            progress = (valueLb - thresholds.intermediate) / Math.max(thresholds.advanced - thresholds.intermediate, 1);
+            return bands.intermediate.min + (bands.intermediate.max - bands.intermediate.min) * progress;
+        }
+
+        if (valueLb < thresholds.elite) {
+            progress = (valueLb - thresholds.advanced) / Math.max(thresholds.elite - thresholds.advanced, 1);
+            return bands.advanced.min + (bands.advanced.max - bands.advanced.min) * progress;
+        }
+
+        progress = (valueLb - thresholds.elite) / Math.max(thresholds.elite, 1);
+        return bands.elite.min + (100 - bands.elite.min) * (1 - Math.exp(-progress * 3));
+    }
+
+    function classifyLevel(valueLb, thresholds) {
+        var percentile = percentileForLift(valueLb, thresholds);
+
+        if (valueLb < thresholds.novice) {
+            return { level: LEVELS[0], percentile: percentile };
         }
         if (valueLb < thresholds.intermediate) {
-            return { level: LEVELS[1], percentile: PERCENTILES.novice };
+            return { level: LEVELS[1], percentile: percentile };
         }
         if (valueLb < thresholds.advanced) {
-            return { level: LEVELS[2], percentile: PERCENTILES.intermediate };
+            return { level: LEVELS[2], percentile: percentile };
         }
         if (valueLb < thresholds.elite) {
-            return { level: LEVELS[3], percentile: PERCENTILES.advanced };
+            return { level: LEVELS[3], percentile: percentile };
         }
-        if (valueLb === thresholds.elite) {
-            return { level: LEVELS[4], percentile: PERCENTILES.elite };
-        }
-        return { level: LEVELS[4], percentile: PERCENTILES.aboveElite };
+        return { level: LEVELS[4], percentile: percentile };
     }
 
     function percentileText(percentile) {
-        if (percentile >= 99) {
+        var boundedPercentile = Math.max(1, Math.min(percentile, 99.99));
+        var roundedPercentile = boundedPercentile >= 99 ? boundedPercentile.toFixed(1) : Math.round(boundedPercentile);
+
+        if (boundedPercentile >= 99) {
             return {
-                percentileText: '99th percentile',
-                topText: 'Top 1%',
-                oneInText: 'about 1 in 100'
+                percentileText: roundedPercentile + 'th percentile',
+                topText: 'Top ' + (100 - boundedPercentile).toFixed(1) + '%',
+                oneInText: 'about 1 in ' + Math.round(100 / Math.max(100 - boundedPercentile, 0.01))
             };
         }
 
-        var topPercent = 100 - percentile;
+        var topPercent = 100 - boundedPercentile;
         var oneIn = Math.round(100 / Math.max(topPercent, 0.01));
         oneIn = Math.min(oneIn, 10000);
 
         return {
-            percentileText: percentile + 'th percentile',
-            topText: 'Top ' + topPercent + '%',
+            percentileText: Math.round(boundedPercentile) + 'th percentile',
+            topText: 'Top ' + Math.round(topPercent) + '%',
             oneInText: 'about 1 in ' + oneIn
         };
     }
@@ -111,7 +140,12 @@
 
         var markerHtml = markerPoints.map(function (marker) {
             var pos = Math.min((marker.value / maxValue) * 100, 100);
-            return '<div class="strength-marker" style="left:' + pos + '%"><span>' + marker.label + '</span></div>';
+            return '<div class="strength-marker" style="left:' + pos + '%"></div>';
+        }).join('');
+
+        var labelHtml = markerPoints.map(function (marker) {
+            var pos = Math.min((marker.value / maxValue) * 100, 100);
+            return '<span class="strength-label" style="left:' + pos + '%">' + marker.label + '</span>';
         }).join('');
 
         var userPos = Math.min((userValue / maxValue) * 100, 100);
@@ -119,6 +153,7 @@
             '<div class="strength-bar-fill" style="width:' + userPos + '%"></div>' +
             markerHtml +
             '<div class="strength-user-marker" style="left:' + userPos + '%"><strong>You</strong></div>' +
+            '<div class="strength-bar-labels">' + labelHtml + '</div>' +
             '</div>';
     }
 
