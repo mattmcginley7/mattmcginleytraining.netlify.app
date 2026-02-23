@@ -1,13 +1,54 @@
 (function () {
     var LB_TO_KG = 0.45359237;
     var LEVELS = ['Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
-    var PERCENTILE_BANDS = {
-        belowNovice: { min: 5, max: 35 },
-        novice: { min: 35, max: 70 },
-        intermediate: { min: 70, max: 85 },
-        advanced: { min: 85, max: 97 },
-        elite: { min: 97, max: 99.7 }
+    var PERCENTILE_ANCHORS = {
+        novice: 60,
+        elite: 99.9
     };
+
+    function normalCdf(z) {
+        var sign = z < 0 ? -1 : 1;
+        var absZ = Math.abs(z) / Math.sqrt(2);
+        var t = 1 / (1 + 0.3275911 * absZ);
+        var a1 = 0.254829592;
+        var a2 = -0.284496736;
+        var a3 = 1.421413741;
+        var a4 = -1.453152027;
+        var a5 = 1.061405429;
+        var erf = 1 - (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-absZ * absZ));
+
+        return 0.5 * (1 + sign * erf);
+    }
+
+    function inverseNormalCdf(probability) {
+        var p = Math.max(0.000001, Math.min(0.999999, probability));
+        var a = [-39.69683028665376, 220.9460984245205, -275.9285104469687, 138.357751867269, -30.66479806614716, 2.506628277459239];
+        var b = [-54.47609879822406, 161.5858368580409, -155.6989798598866, 66.80131188771972, -13.28068155288572];
+        var c = [-0.007784894002430293, -0.3223964580411365, -2.400758277161838, -2.549732539343734, 4.374664141464968, 2.938163982698783];
+        var d = [0.007784695709041462, 0.3224671290700398, 2.445134137142996, 3.754408661907416];
+        var plow = 0.02425;
+        var phigh = 1 - plow;
+        var q;
+        var r;
+
+        if (p < plow) {
+            q = Math.sqrt(-2 * Math.log(p));
+            return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+                ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+        }
+
+        if (p > phigh) {
+            q = Math.sqrt(-2 * Math.log(1 - p));
+            return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+                ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+        }
+
+        q = p - 0.5;
+        r = q * q;
+
+        return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
+            (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
+    }
 
     function toLb(weight, unit) {
         return unit === 'kg' ? weight / LB_TO_KG : weight;
@@ -61,31 +102,15 @@
     }
 
     function percentileForLift(valueLb, thresholds) {
-        var bands = PERCENTILE_BANDS;
-        var progress;
+        var safeValue = Math.max(valueLb, 1);
+        var noviceZ = inverseNormalCdf(PERCENTILE_ANCHORS.novice / 100);
+        var eliteZ = inverseNormalCdf(PERCENTILE_ANCHORS.elite / 100);
+        var sigma = (Math.log(Math.max(thresholds.elite, thresholds.novice + 1)) - Math.log(Math.max(thresholds.novice, 1))) /
+            Math.max(eliteZ - noviceZ, 0.001);
+        var mu = Math.log(Math.max(thresholds.novice, 1)) - sigma * noviceZ;
+        var zScore = (Math.log(safeValue) - mu) / Math.max(sigma, 0.001);
 
-        if (valueLb < thresholds.novice) {
-            progress = Math.max(valueLb / Math.max(thresholds.novice, 1), 0);
-            return bands.belowNovice.min + (bands.belowNovice.max - bands.belowNovice.min) * progress;
-        }
-
-        if (valueLb < thresholds.intermediate) {
-            progress = (valueLb - thresholds.novice) / Math.max(thresholds.intermediate - thresholds.novice, 1);
-            return bands.novice.min + (bands.novice.max - bands.novice.min) * progress;
-        }
-
-        if (valueLb < thresholds.advanced) {
-            progress = (valueLb - thresholds.intermediate) / Math.max(thresholds.advanced - thresholds.intermediate, 1);
-            return bands.intermediate.min + (bands.intermediate.max - bands.intermediate.min) * progress;
-        }
-
-        if (valueLb < thresholds.elite) {
-            progress = (valueLb - thresholds.advanced) / Math.max(thresholds.elite - thresholds.advanced, 1);
-            return bands.advanced.min + (bands.advanced.max - bands.advanced.min) * progress;
-        }
-
-        progress = (valueLb - thresholds.elite) / Math.max(thresholds.elite, 1);
-        return bands.elite.min + (100 - bands.elite.min) * (1 - Math.exp(-progress * 3));
+        return Math.max(1, Math.min(normalCdf(zScore) * 100, 99.99));
     }
 
     function classifyLevel(valueLb, thresholds) {
@@ -143,9 +168,11 @@
             return '<div class="strength-marker" style="left:' + pos + '%"></div>';
         }).join('');
 
-        var labelHtml = markerPoints.map(function (marker) {
+        var labelHtml = markerPoints.map(function (marker, index) {
             var pos = Math.min((marker.value / maxValue) * 100, 100);
-            return '<span class="strength-label" style="left:' + pos + '%">' + marker.label + '</span>';
+            var positionClass = index % 2 === 0 ? 'strength-label--upper' : 'strength-label--lower';
+
+            return '<span class="strength-label ' + positionClass + '" style="left:' + pos + '%">' + marker.label + '</span>';
         }).join('');
 
         var userPos = Math.min((userValue / maxValue) * 100, 100);
