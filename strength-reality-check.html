@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strength Reality Check calculator to estimate your strength percentile and level.">
+    <meta property="og:title" content="Strength Reality Check | Matt McGinley Personal Training">
+    <meta property="og:description" content="Estimate your strength level, percentile, and where you rank for your bodyweight.">
+    <meta property="og:image" content="PersonalTrainingAILogo.jpeg">
+    <title>Strength Reality Check - Matt McGinley Personal Training</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="articles.html">Articles</a></li>
+            <li><a href="calculators.html">Calculators</a></li>
+            <li><a href="nutrition-calculator.html">Nutrition Calculator</a></li>
+            <li><a href="strength-reality-check.html" aria-current="page">Strength Reality Check</a></li>
+            <li><a href="begin.html">Begin</a></li>
+        </ul>
+    </nav>
+    <header class="hero">
+        <h1>Strength Reality Check</h1>
+        <p class="tagline">See how your strength stacks up</p>
+        <p class="subheading">Use this calculator to estimate your 1RM, level, and approximate percentile for your bodyweight.</p>
+        <aside><a class="emailIG" href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a> |
+            <a class="emailIG" href="https://www.instagram.com/mattmcginley7"> Instagram</a></aside>
+    </header>
+
+    <section>
+        <p class="section-label">Strength standards tool</p>
+        <h2>Find your level in under a minute</h2>
+        <p>This tool compares your lift against bodyweight-adjusted standards. Enter your data directly or use the reps option to estimate your 1RM first.</p>
+
+        <div class="strength-layout">
+            <form id="strengthCalculatorForm" class="strength-card">
+                <div class="field-row">
+                    <label for="sex">Sex</label>
+                    <select id="sex" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label for="bodyweight">Bodyweight</label>
+                    <div class="inline-inputs">
+                        <input id="bodyweight" type="number" min="1" step="0.1" required>
+                        <select id="bodyweightUnit">
+                            <option value="lb">lb</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <p id="bodyweightWarning" class="field-warning"></p>
+                    <p class="input-error"></p>
+                </div>
+
+                <div class="field-row">
+                    <label for="lift">Lift</label>
+                    <select id="lift" required>
+                        <option value="benchPress">Bench Press</option>
+                        <option value="squat">Squat</option>
+                        <option value="deadlift">Deadlift</option>
+                        <option value="weightedChinUp">Weighted Chin-Up</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label for="inputMode">Input Mode</label>
+                    <select id="inputMode">
+                        <option value="direct">Enter 1RM directly</option>
+                        <option value="reps">Enter weight + reps</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label for="liftWeight">Lift weight (or added weight for chin-ups)</label>
+                    <div class="inline-inputs">
+                        <input id="liftWeight" type="number" min="1" step="0.1" required>
+                        <select id="liftWeightUnit">
+                            <option value="lb">lb</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <p class="input-error"></p>
+                </div>
+
+                <div id="repsFields" class="field-row" hidden>
+                    <label for="reps">Reps</label>
+                    <input id="reps" type="number" min="1" max="20" step="1">
+                    <p class="input-error"></p>
+                </div>
+
+                <div id="formulaRow" class="field-row" hidden>
+                    <label for="formula">1RM Formula</label>
+                    <select id="formula">
+                        <option value="epley">Epley</option>
+                        <option value="brzycki">Brzycki</option>
+                    </select>
+                </div>
+
+                <button type="submit">Calculate</button>
+            </form>
+
+            <div class="strength-card strength-results" aria-live="polite">
+                <p id="estimatedLine" class="field-warning" hidden>Estimated 1RM using Epley formula.</p>
+                <h3>Your Strength Snapshot</h3>
+                <p><strong>Level:</strong> <span id="resultLevel">—</span></p>
+                <p><strong>Percentile:</strong> <span id="resultPercentile">—</span></p>
+                <p><strong>Ranking:</strong> <span id="resultOneIn">—</span></p>
+                <p><strong>Bodyweight:</strong> <span id="resultBodyweight">—</span></p>
+                <p><strong>1RM / Added Weight:</strong> <span id="resultMainLift">—</span></p>
+                <p id="resultChinUpLine" hidden></p>
+                <div id="strengthBar" class="strength-bar" role="img" aria-label="Strength level progress bar"></div>
+                <p class="disclaimer">Estimates are based on strength standards and are approximate.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div>
+                <h2>Ready to train smarter?</h2>
+                <p>Get a personalized plan, weekly accountability, and guidance built around your schedule.</p>
+                <p>Email: <a href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a></p>
+            </div>
+            <div class="site-footer__actions">
+                <a class="cta-button" href="begin.html">Get Started</a>
+                <a class="secondary-button" href="mailto:matthewmcginley@live.com">Email Matt</a>
+            </div>
+        </div>
+        <p class="site-footer__meta">© 2024 Matt McGinley Personal Training. Remote coaching available worldwide.</p>
+    </footer>
+
+    <script src="js/strength-standards.js"></script>
+    <script src="js/strength-reality-check.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

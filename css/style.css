@@ -1064,3 +1064,130 @@ article ul {
         justify-content: flex-end;
     }
 }
+
+/* Strength Reality Check */
+.strength-layout {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.strength-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.strength-card label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.strength-card select {
+    margin: 0.75em 0;
+    padding: 0.65rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    color: var(--primary-color);
+}
+
+.field-row {
+    margin-bottom: 0.5rem;
+}
+
+.inline-inputs {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.inline-inputs select {
+    margin: 0;
+    width: auto;
+}
+
+.input-error {
+    margin: 0;
+    color: #b91c1c;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+}
+
+.field-warning {
+    margin: 0;
+    color: #9a3412;
+    font-size: 0.92rem;
+    min-height: 1.2rem;
+}
+
+.strength-results h3 {
+    margin-top: 0;
+}
+
+.strength-results p {
+    margin: 0.45rem 0;
+}
+
+.strength-bar {
+    margin-top: 1rem;
+}
+
+.strength-bar-track {
+    position: relative;
+    height: 18px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.strength-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #14b8a6, #f97316);
+}
+
+.strength-marker,
+.strength-user-marker {
+    position: absolute;
+    top: -1.8rem;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.strength-marker::after,
+.strength-user-marker::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 1.15rem;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 1.5rem;
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.strength-user-marker {
+    color: var(--cta-color);
+    top: -2.9rem;
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+    .strength-layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
