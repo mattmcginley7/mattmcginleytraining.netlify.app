@@ -1131,6 +1131,40 @@ article ul {
     margin-top: 0;
 }
 
+
+.strength-results-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0 0.8rem;
+    flex-wrap: wrap;
+}
+
+.strength-tab-button {
+    border: 1px solid var(--border-color);
+    background: #fff;
+    color: var(--primary-color);
+    border-radius: 999px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.strength-tab-button.is-active {
+    background: #0f766e;
+    border-color: #0f766e;
+    color: #fff;
+}
+
+.strength-tab-panel details {
+    margin-top: 0.8rem;
+}
+
+.strength-tab-panel summary {
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
 .strength-results p {
     margin: 0.45rem 0;
 }
