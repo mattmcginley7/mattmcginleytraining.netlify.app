@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Strength Reality Check calculator to estimate your strength percentile and level.">
+    <meta name="description" content="Strength Reality Check calculator to estimate your 1RM, standards tier, and modeled rarity among exercising adults.">
     <meta property="og:title" content="Strength Reality Check | Matt McGinley Personal Training">
-    <meta property="og:description" content="Estimate your strength level, percentile, and where you rank for your bodyweight.">
+    <meta property="og:description" content="Estimate your 1RM, powerlifting standards tier, and modeled rarity among exercising adults.">
     <meta property="og:image" content="PersonalTrainingAILogo.jpeg">
     <title>Strength Reality Check - Matt McGinley Personal Training</title>
     <link rel="stylesheet" href="css/style.css">
@@ -30,7 +30,7 @@
     <header class="hero">
         <h1>Strength Reality Check</h1>
         <p class="tagline">See how your strength stacks up</p>
-        <p class="subheading">Use this calculator to estimate your 1RM, level, and approximate percentile for your bodyweight.</p>
+        <p class="subheading">Use this calculator to estimate your 1RM, standards tier, and modeled rarity among exercising adults.</p>
         <aside><a class="emailIG" href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a> |
             <a class="emailIG" href="https://www.instagram.com/mattmcginley7"> Instagram</a></aside>
     </header>
@@ -38,7 +38,7 @@
     <section>
         <p class="section-label">Strength standards tool</p>
         <h2>Find your level in under a minute</h2>
-        <p>This tool compares your lift against bodyweight-adjusted standards. Enter your data directly or use the reps option to estimate your 1RM first.</p>
+        <p>This tool compares your lift against bodyweight-adjusted standards, then provides a separate modeled rarity estimate among exercising adults.</p>
 
         <div class="strength-layout">
             <form id="strengthCalculatorForm" class="strength-card">
@@ -113,14 +113,37 @@
             <div class="strength-card strength-results" aria-live="polite">
                 <p id="estimatedLine" class="field-warning" hidden>Estimated 1RM using Epley formula.</p>
                 <h3>Your Strength Snapshot</h3>
-                <p><strong>Level:</strong> <span id="resultLevel">—</span></p>
-                <p><strong>Percentile:</strong> <span id="resultPercentile">—</span></p>
-                <p><strong>Ranking:</strong> <span id="resultOneIn">—</span></p>
                 <p><strong>Bodyweight:</strong> <span id="resultBodyweight">—</span></p>
                 <p><strong>1RM / Added Weight:</strong> <span id="resultMainLift">—</span></p>
                 <p id="resultChinUpLine" hidden></p>
-                <div id="strengthBar" class="strength-bar" role="img" aria-label="Strength level progress bar"></div>
-                <p class="disclaimer">Estimates are based on strength standards and are approximate.</p>
+
+                <div class="strength-results-tabs" role="tablist" aria-label="Strength results view">
+                    <button id="tabTier" class="strength-tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="panelTier">Powerlifting Standards (Tier)</button>
+                    <button id="tabRarity" class="strength-tab-button" type="button" role="tab" aria-selected="false" aria-controls="panelRarity">Exercising Adults (Rarity)</button>
+                </div>
+
+                <div id="panelTier" class="strength-tab-panel" role="tabpanel" aria-labelledby="tabTier">
+                    <p><strong>Standards tier:</strong> <span id="resultLevel">—</span></p>
+                    <div id="strengthBar" class="strength-bar" role="img" aria-label="Powerlifting standards tier bar"></div>
+                    <p class="disclaimer">Powerlifting standards show tier cutoffs (Novice, Intermediate, Advanced, Elite), not true population percentiles.</p>
+                </div>
+
+                <div id="panelRarity" class="strength-tab-panel" role="tabpanel" aria-labelledby="tabRarity" hidden>
+                    <p><strong>Modeled rarity estimate:</strong> <span id="resultRarity">—</span></p>
+                    <p><strong>Top rate (modeled):</strong> <span id="resultTopPercent">—</span></p>
+                    <div id="rarityPresetRow" class="field-row">
+                        <label for="rarityPrevalence">Assumption for exercisers who train this lift seriously</label>
+                        <select id="rarityPrevalence">
+                            <option value="conservative">Conservative (10%)</option>
+                            <option value="default" selected>Default (25%)</option>
+                            <option value="liberal">Liberal (40%)</option>
+                        </select>
+                    </div>
+                    <details>
+                        <summary>Assumptions</summary>
+                        <p id="rarityAssumptionsText" class="disclaimer">—</p>
+                    </details>
+                </div>
             </div>
         </div>
     </section>
@@ -141,6 +164,7 @@
     </footer>
 
     <script src="js/strength-standards.js"></script>
+    <script src="js/exerciser-rarity-config.js"></script>
     <script src="js/strength-reality-check.js"></script>
     <script src="js/main.js"></script>
 </body>

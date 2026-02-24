@@ -1,54 +1,5 @@
 (function () {
     var LB_TO_KG = 0.45359237;
-    var LEVELS = ['Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
-    var PERCENTILE_ANCHORS = {
-        novice: 60,
-        elite: 99.9
-    };
-
-    function normalCdf(z) {
-        var sign = z < 0 ? -1 : 1;
-        var absZ = Math.abs(z) / Math.sqrt(2);
-        var t = 1 / (1 + 0.3275911 * absZ);
-        var a1 = 0.254829592;
-        var a2 = -0.284496736;
-        var a3 = 1.421413741;
-        var a4 = -1.453152027;
-        var a5 = 1.061405429;
-        var erf = 1 - (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-absZ * absZ));
-
-        return 0.5 * (1 + sign * erf);
-    }
-
-    function inverseNormalCdf(probability) {
-        var p = Math.max(0.000001, Math.min(0.999999, probability));
-        var a = [-39.69683028665376, 220.9460984245205, -275.9285104469687, 138.357751867269, -30.66479806614716, 2.506628277459239];
-        var b = [-54.47609879822406, 161.5858368580409, -155.6989798598866, 66.80131188771972, -13.28068155288572];
-        var c = [-0.007784894002430293, -0.3223964580411365, -2.400758277161838, -2.549732539343734, 4.374664141464968, 2.938163982698783];
-        var d = [0.007784695709041462, 0.3224671290700398, 2.445134137142996, 3.754408661907416];
-        var plow = 0.02425;
-        var phigh = 1 - plow;
-        var q;
-        var r;
-
-        if (p < plow) {
-            q = Math.sqrt(-2 * Math.log(p));
-            return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
-                ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
-        }
-
-        if (p > phigh) {
-            q = Math.sqrt(-2 * Math.log(1 - p));
-            return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
-                ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
-        }
-
-        q = p - 0.5;
-        r = q * q;
-
-        return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
-            (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
-    }
 
     function toLb(weight, unit) {
         return unit === 'kg' ? weight / LB_TO_KG : weight;
@@ -101,61 +52,93 @@
         };
     }
 
-    function percentileForLift(valueLb, thresholds) {
-        var safeValue = Math.max(valueLb, 1);
-        var noviceZ = inverseNormalCdf(PERCENTILE_ANCHORS.novice / 100);
-        var eliteZ = inverseNormalCdf(PERCENTILE_ANCHORS.elite / 100);
-        var sigma = (Math.log(Math.max(thresholds.elite, thresholds.novice + 1)) - Math.log(Math.max(thresholds.novice, 1))) /
-            Math.max(eliteZ - noviceZ, 0.001);
-        var mu = Math.log(Math.max(thresholds.novice, 1)) - sigma * noviceZ;
-        var zScore = (Math.log(safeValue) - mu) / Math.max(sigma, 0.001);
-
-        return Math.max(1, Math.min(normalCdf(zScore) * 100, 99.99));
-    }
-
-    function classifyLevel(valueLb, thresholds) {
-        var percentile = percentileForLift(valueLb, thresholds);
+    function getTierAndBarPosition(valueLb, thresholds) {
+        var tier = 'Novice';
 
         if (valueLb < thresholds.novice) {
-            return { level: LEVELS[0], percentile: percentile };
-        }
-        if (valueLb < thresholds.intermediate) {
-            return { level: LEVELS[1], percentile: percentile };
-        }
-        if (valueLb < thresholds.advanced) {
-            return { level: LEVELS[2], percentile: percentile };
-        }
-        if (valueLb < thresholds.elite) {
-            return { level: LEVELS[3], percentile: percentile };
-        }
-        return { level: LEVELS[4], percentile: percentile };
-    }
-
-    function percentileText(percentile) {
-        var boundedPercentile = Math.max(1, Math.min(percentile, 99.99));
-        var roundedPercentile = boundedPercentile >= 99 ? boundedPercentile.toFixed(1) : Math.round(boundedPercentile);
-
-        if (boundedPercentile >= 99) {
-            return {
-                percentileText: roundedPercentile + 'th percentile',
-                topText: 'Top ' + (100 - boundedPercentile).toFixed(1) + '%',
-                oneInText: 'about 1 in ' + Math.round(100 / Math.max(100 - boundedPercentile, 0.01))
-            };
+            tier = 'Novice';
+        } else if (valueLb < thresholds.intermediate) {
+            tier = 'Intermediate';
+        } else if (valueLb < thresholds.advanced) {
+            tier = 'Advanced';
+        } else {
+            tier = 'Elite';
         }
 
-        var topPercent = 100 - boundedPercentile;
-        var oneIn = Math.round(100 / Math.max(topPercent, 0.01));
-        oneIn = Math.min(oneIn, 10000);
+        var maxValue = Math.max(valueLb * 1.15, thresholds.elite * 1.15);
+        var userPosition = Math.min((valueLb / maxValue) * 100, 100);
 
         return {
-            percentileText: Math.round(boundedPercentile) + 'th percentile',
-            topText: 'Top ' + Math.round(topPercent) + '%',
-            oneInText: 'about 1 in ' + oneIn
+            tier: tier,
+            userPosition: userPosition,
+            maxValue: maxValue
         };
     }
 
-    function renderBar(container, userValue, thresholds) {
-        var maxValue = Math.max(userValue * 1.15, thresholds.elite * 1.15);
+    function getTraineePercentileFromThresholdAnchors(valueLb, thresholds, config) {
+        var anchors = config.percentileAnchorsWithinTrainees;
+        var safeValue = Math.max(1, valueLb);
+
+        if (safeValue <= thresholds.novice) {
+            return Math.max(0.01, Math.min(anchors.novice * (safeValue / Math.max(1, thresholds.novice)), anchors.novice));
+        }
+
+        if (safeValue <= thresholds.intermediate) {
+            return anchors.novice + (anchors.intermediate - anchors.novice) *
+                ((safeValue - thresholds.novice) / Math.max(1, thresholds.intermediate - thresholds.novice));
+        }
+
+        if (safeValue <= thresholds.advanced) {
+            return anchors.intermediate + (anchors.advanced - anchors.intermediate) *
+                ((safeValue - thresholds.intermediate) / Math.max(1, thresholds.advanced - thresholds.intermediate));
+        }
+
+        if (safeValue <= thresholds.elite) {
+            return anchors.advanced + (anchors.elite - anchors.advanced) *
+                ((safeValue - thresholds.advanced) / Math.max(1, thresholds.elite - thresholds.advanced));
+        }
+
+        var ratioOverElite = safeValue / Math.max(1, thresholds.elite);
+        var tailGain = 1 - Math.exp(-1.35 * Math.log(ratioOverElite));
+        return Math.min(anchors.eliteCeiling, anchors.elite + (anchors.eliteCeiling - anchors.elite) * tailGain);
+    }
+
+    function getExerciserRarity(options) {
+        var config = window.EXERCISER_RARITY_CONFIG;
+        if (!config) {
+            return null;
+        }
+
+        var sexLiftConfig = config.perSexLift[options.sex] && config.perSexLift[options.sex][options.lift];
+        if (!sexLiftConfig) {
+            return {
+                supported: false,
+                message: 'Modeled rarity is currently available for bench press only.',
+                assumptionsText: 'This modeled view is currently configured only for bench press. Standards tier remains available for all lifts.'
+            };
+        }
+
+        var basePrevalence = sexLiftConfig.p_exercisers_who_train_lift;
+        var selectedPrevalence = config.prevalencePresets[options.prevalencePreset] || basePrevalence;
+        var traineePercentile = getTraineePercentileFromThresholdAnchors(options.comparisonLoadLb, options.thresholds, config);
+        var topRateTrainees = Math.max(0.00001, 1 - traineePercentile);
+        var topRateExercisers = Math.max(0.0000001, selectedPrevalence * topRateTrainees);
+        var oneInN = Math.min(config.oneInCap, Math.round(1 / topRateExercisers));
+
+        return {
+            supported: true,
+            oneInN: oneInN,
+            topPercentExercisers: topRateExercisers * 100,
+            topPercentTrainees: topRateTrainees * 100,
+            traineePercentile: traineePercentile * 100,
+            belowNovice: options.comparisonLoadLb < options.thresholds.novice,
+            assumptionsText: sexLiftConfig.label + ' Modeled trainee anchors: novice≈50th, intermediate≈75th, advanced≈90th, elite≈97th, above elite tapers toward≈99.5th (modeled, not measured).',
+            prevalenceUsed: selectedPrevalence
+        };
+    }
+
+    function renderBar(container, userValue, thresholds, tierData) {
+        var maxValue = tierData.maxValue;
         var markerPoints = [
             { label: 'Novice', value: thresholds.novice },
             { label: 'Intermediate', value: thresholds.intermediate },
@@ -171,17 +154,30 @@
         var labelHtml = markerPoints.map(function (marker, index) {
             var pos = Math.min((marker.value / maxValue) * 100, 100);
             var positionClass = index % 2 === 0 ? 'strength-label--upper' : 'strength-label--lower';
-
             return '<span class="strength-label ' + positionClass + '" style="left:' + pos + '%">' + marker.label + '</span>';
         }).join('');
 
-        var userPos = Math.min((userValue / maxValue) * 100, 100);
         container.innerHTML = '<div class="strength-bar-track">' +
-            '<div class="strength-bar-fill" style="width:' + userPos + '%"></div>' +
+            '<div class="strength-bar-fill" style="width:' + tierData.userPosition + '%"></div>' +
             markerHtml +
-            '<div class="strength-user-marker" style="left:' + userPos + '%"><strong>You</strong></div>' +
+            '<div class="strength-user-marker" style="left:' + tierData.userPosition + '%"><strong>You</strong></div>' +
             '<div class="strength-bar-labels">' + labelHtml + '</div>' +
             '</div>';
+    }
+
+    function renderResultsTabs(activeTab) {
+        var tabTier = document.querySelector('#tabTier');
+        var tabRarity = document.querySelector('#tabRarity');
+        var panelTier = document.querySelector('#panelTier');
+        var panelRarity = document.querySelector('#panelRarity');
+
+        var tierActive = activeTab === 'tier';
+        tabTier.classList.toggle('is-active', tierActive);
+        tabRarity.classList.toggle('is-active', !tierActive);
+        tabTier.setAttribute('aria-selected', tierActive ? 'true' : 'false');
+        tabRarity.setAttribute('aria-selected', tierActive ? 'false' : 'true');
+        panelTier.hidden = !tierActive;
+        panelRarity.hidden = tierActive;
     }
 
     function showInlineError(field, message) {
@@ -208,6 +204,41 @@
         var repsFields = document.querySelector('#repsFields');
         var formulaRow = document.querySelector('#formulaRow');
         var estimateLine = document.querySelector('#estimatedLine');
+        var rarityPrevalence = document.querySelector('#rarityPrevalence');
+        var latestState = null;
+
+        function renderRarityFromState() {
+            if (!latestState) {
+                return;
+            }
+
+            var rarity = getExerciserRarity({
+                sex: latestState.sex,
+                lift: latestState.lift,
+                comparisonLoadLb: latestState.comparisonLoadLb,
+                thresholds: latestState.thresholds,
+                prevalencePreset: rarityPrevalence.value
+            });
+
+            var rarityLine = document.querySelector('#resultRarity');
+            var topLine = document.querySelector('#resultTopPercent');
+            var assumptionsText = document.querySelector('#rarityAssumptionsText');
+            var presetRow = document.querySelector('#rarityPresetRow');
+
+            if (!rarity || !rarity.supported) {
+                rarityLine.textContent = rarity ? rarity.message : 'Rarity model unavailable.';
+                topLine.textContent = '—';
+                assumptionsText.textContent = rarity ? rarity.assumptionsText : 'Rarity assumptions are not configured.';
+                presetRow.hidden = true;
+                return;
+            }
+
+            presetRow.hidden = false;
+            rarityLine.textContent = 'about 1 in ' + rarity.oneInN;
+            topLine.textContent = 'Top ' + (rarity.topPercentExercisers < 0.1 ? rarity.topPercentExercisers.toFixed(2) : rarity.topPercentExercisers.toFixed(1)) + '% of exercising adults' +
+                (rarity.belowNovice ? ' · Common among trainees below novice threshold.' : '');
+            assumptionsText.textContent = rarity.assumptionsText + ' Selected prevalence: ' + Math.round(rarity.prevalenceUsed * 100) + '%.';
+        }
 
         modeSelect.addEventListener('change', function () {
             var repsMode = modeSelect.value === 'reps';
@@ -215,6 +246,15 @@
             formulaRow.hidden = !repsMode;
             estimateLine.hidden = !repsMode;
         });
+
+        document.querySelector('#tabTier').addEventListener('click', function () {
+            renderResultsTabs('tier');
+        });
+        document.querySelector('#tabRarity').addEventListener('click', function () {
+            renderResultsTabs('rarity');
+        });
+
+        rarityPrevalence.addEventListener('change', renderRarityFromState);
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -260,21 +300,13 @@
 
             var enteredWeightLb = toLb(liftWeight, liftWeightUnit);
             var oneRepMaxLb = inputMode === 'reps' ? estimateOneRepMax(enteredWeightLb, reps, formula) : enteredWeightLb;
-            var comparisonLoadLb = oneRepMaxLb;
-
-            if (lift === 'weightedChinUp') {
-                comparisonLoadLb = bodyweightLb + oneRepMaxLb;
-            }
+            var comparisonLoadLb = lift === 'weightedChinUp' ? bodyweightLb + oneRepMaxLb : oneRepMaxLb;
 
             var thresholds = interpolateThresholds(sex, lift, bodyweightLb);
-            var classification = classifyLevel(comparisonLoadLb, thresholds);
-            var percentile = percentileText(classification.percentile);
+            var tierData = getTierAndBarPosition(comparisonLoadLb, thresholds);
 
-            document.querySelector('#resultLevel').textContent = classification.level;
-            document.querySelector('#resultPercentile').textContent = percentile.percentileText + ' · ' + percentile.topText;
-            document.querySelector('#resultOneIn').textContent = percentile.oneInText;
+            document.querySelector('#resultLevel').textContent = tierData.tier;
             document.querySelector('#resultBodyweight').textContent = bodyweightLb.toFixed(1) + ' lb (' + toKg(bodyweightLb).toFixed(1) + ' kg)';
-
             document.querySelector('#resultMainLift').textContent = oneRepMaxLb.toFixed(1) + ' lb (' + toKg(oneRepMaxLb).toFixed(1) + ' kg)';
 
             var chinupLine = document.querySelector('#resultChinUpLine');
@@ -288,10 +320,23 @@
             if (inputMode === 'reps') {
                 estimateLine.hidden = false;
                 estimateLine.textContent = 'Estimated 1RM using ' + (formula === 'brzycki' ? 'Brzycki' : 'Epley') + ' formula.';
+            } else {
+                estimateLine.hidden = true;
             }
 
-            renderBar(document.querySelector('#strengthBar'), comparisonLoadLb, thresholds);
+            renderBar(document.querySelector('#strengthBar'), comparisonLoadLb, thresholds, tierData);
+
+            latestState = {
+                sex: sex,
+                lift: lift,
+                comparisonLoadLb: comparisonLoadLb,
+                thresholds: thresholds
+            };
+            renderRarityFromState();
+            renderResultsTabs('tier');
         });
+
+        renderResultsTabs('tier');
     }
 
     document.addEventListener('DOMContentLoaded', init);
