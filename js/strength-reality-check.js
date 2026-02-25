@@ -113,13 +113,14 @@
         if (!sexLiftConfig) {
             return {
                 supported: false,
-                message: 'Modeled rarity is currently available for bench press only.',
-                assumptionsText: 'This modeled view is currently configured only for bench press. Standards tier remains available for all lifts.'
+                message: 'Modeled rarity is currently unavailable for this lift.',
+                assumptionsText: 'This modeled view needs a configured lift prevalence profile. Standards tier remains available for all lifts.'
             };
         }
 
         var basePrevalence = sexLiftConfig.p_exercisers_who_train_lift;
-        var selectedPrevalence = config.prevalencePresets[options.prevalencePreset] || basePrevalence;
+        var presetMap = sexLiftConfig.prevalencePresets || {};
+        var selectedPrevalence = presetMap[options.prevalencePreset] || basePrevalence;
         var traineePercentile = getTraineePercentileFromThresholdAnchors(options.comparisonLoadLb, options.thresholds, config);
         var topRateTrainees = Math.max(0.00001, 1 - traineePercentile);
         var topRateExercisers = Math.max(0.0000001, selectedPrevalence * topRateTrainees);
@@ -135,6 +136,77 @@
             assumptionsText: sexLiftConfig.label + ' Modeled trainee anchors: novice≈50th, intermediate≈75th, advanced≈90th, elite≈97th, above elite tapers toward≈99.5th (modeled, not measured).',
             prevalenceUsed: selectedPrevalence
         };
+    }
+
+
+    function updatePrevalencePresetOptions(selectEl, state) {
+        var config = window.EXERCISER_RARITY_CONFIG;
+        if (!config || !selectEl || !state) {
+            return;
+        }
+
+        var sexLiftConfig = config.perSexLift[state.sex] && config.perSexLift[state.sex][state.lift];
+        if (!sexLiftConfig) {
+            return;
+        }
+
+        var presetOrder = config.prevalencePresetOrder || ['conservative', 'default', 'liberal'];
+        var presetMap = sexLiftConfig.prevalencePresets || {};
+
+        presetOrder.forEach(function (presetName) {
+            var option = selectEl.querySelector('option[value="' + presetName + '"]');
+            if (!option) {
+                return;
+            }
+
+            var pct = Math.round((presetMap[presetName] || sexLiftConfig.p_exercisers_who_train_lift) * 100);
+            var labelPrefix = presetName.charAt(0).toUpperCase() + presetName.slice(1);
+            option.textContent = labelPrefix + ' (' + pct + '%)';
+        });
+
+        if (!presetMap[selectEl.value]) {
+            selectEl.value = 'default';
+        }
+    }
+
+    function runRarityDebugTests() {
+        var config = window.EXERCISER_RARITY_CONFIG;
+        if (!config) {
+            console.warn('Rarity config missing.');
+            return;
+        }
+
+        var sex = 'male';
+        var bodyweightLb = 180;
+        var lifts = ['benchPress', 'squat', 'deadlift'];
+
+        console.group('Strength rarity debug checks (modeled estimates)');
+        lifts.forEach(function (lift) {
+            var thresholds = interpolateThresholds(sex, lift, bodyweightLb);
+            var testLoads = [
+                { label: 'just below novice', value: thresholds.novice - 5 },
+                { label: 'around advanced', value: thresholds.advanced },
+                { label: 'well above elite', value: thresholds.elite * 1.2 }
+            ];
+
+            console.group(lift + ' @ ' + bodyweightLb + ' lb BW');
+            testLoads.forEach(function (testCase) {
+                var rarity = getExerciserRarity({
+                    sex: sex,
+                    lift: lift,
+                    comparisonLoadLb: testCase.value,
+                    thresholds: thresholds,
+                    prevalencePreset: 'default'
+                });
+                console.log(testCase.label + ':', {
+                    loadLb: Math.round(testCase.value),
+                    oneInN: rarity && rarity.oneInN,
+                    topPercentExercisers: rarity && rarity.topPercentExercisers && rarity.topPercentExercisers.toFixed(3)
+                });
+            });
+            console.groupEnd();
+        });
+        console.groupEnd();
     }
 
     function renderBar(container, userValue, thresholds, tierData) {
@@ -211,6 +283,8 @@
             if (!latestState) {
                 return;
             }
+
+            updatePrevalencePresetOptions(rarityPrevalence, latestState);
 
             var rarity = getExerciserRarity({
                 sex: latestState.sex,
@@ -338,6 +412,8 @@
 
         renderResultsTabs('tier');
     }
+
+    window.runStrengthRarityDebugTests = runRarityDebugTests;
 
     document.addEventListener('DOMContentLoaded', init);
 })();
