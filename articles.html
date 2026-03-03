@@ -27,54 +27,13 @@
         </ul>
     </nav>
 
-    <header class="hero">
-        <h1>Articles</h1>
-        <p class="tagline">Training, nutrition, and performance—written for real people who want real progress.</p>
-        <aside>
-            <a class="emailIG" href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a> |
-            <a class="emailIG" href="https://www.instagram.com/mattmcginley7">Instagram</a>
-        </aside>
-    </header>
-
     <main class="articles-page" id="main-content">
-        <section class="articles-controls" aria-label="Filter articles">
-            <h2 class="section-title">Find an article</h2>
-            <label for="articleSearch" class="sr-only">Search by title, excerpt, or category</label>
-            <input
-                type="search"
-                id="articleSearch"
-                class="article-search"
-                placeholder="Search articles..."
-                autocomplete="off"
-            >
-            <nav class="category-filters" aria-label="Article categories">
-                <h3 class="chips-title">Categories</h3>
-                <div class="chip-list" id="categoryChips"></div>
-            </nav>
-        </section>
+        <header class="articles-header">
+            <h1>Articles</h1>
+        </header>
 
-        <section class="most-popular" aria-labelledby="popular-heading">
-            <h2 id="popular-heading" class="section-title">Most Popular</h2>
-            <div class="articles-grid" id="popularArticles" aria-live="polite"></div>
-        </section>
-
-        <section class="all-articles" aria-labelledby="all-articles-heading">
-            <h2 id="all-articles-heading" class="section-title">All Articles</h2>
-            <p class="results-count" id="resultsCount" aria-live="polite"></p>
-            <div class="articles-grid" id="articlesGrid" aria-live="polite"></div>
-            <p class="empty-state" id="emptyState" hidden>No matching articles found. Try a different keyword or category.</p>
-        </section>
-
-        <section class="articles-note" aria-labelledby="implementation-note-heading">
-            <h2 id="implementation-note-heading" class="section-title">Implementation Notes</h2>
-            <ul>
-                <li>Add or edit articles in the <code>articlesData</code> array inside <code>/js/articles.js</code>.</li>
-                <li>Set <code>image</code> to a file in <code>/images/</code> (or any local path). If left blank, the built-in fallback style appears.</li>
-                <li>Set <code>popular: true</code> on any article you want to appear in the <strong>Most Popular</strong> section.</li>
-                <li>For article pages, include <code>/js/toc.js</code> and add:
-                    <code>&lt;aside class="article-toc" data-toc data-toc-container=".article-content"&gt;&lt;/aside&gt;</code>
-                </li>
-            </ul>
+        <section aria-label="Article list">
+            <div class="articles-grid" id="articlesList"></div>
         </section>
     </main>
 
