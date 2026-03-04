@@ -1,5 +1,13 @@
 const articles = [
     {
+        title: "The #1 Weight Loss Cheat Code: Eat the Same Foods, Just Less of Them",
+        slug: "weight-loss-cheat-code",
+        category: "Nutrition",
+        date: "2025-09-02",
+        readTime: "6 min",
+        excerpt: "The simplest fat-loss strategy: keep your favorite foods and reduce portion sizes slightly."
+    },
+    {
         title: "How Many People Can Really Bench 225 Pounds in the World?",
         slug: "bench-225-world",
         category: "Strength",
