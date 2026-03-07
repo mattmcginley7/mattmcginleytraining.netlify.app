@@ -786,18 +786,36 @@ article ul {
 
 @media (max-width: 640px) {
     .article-nav {
-        position: static;
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 1.5rem;
+        position: fixed;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.75rem;
+        width: auto;
+        max-width: none;
+        margin: 0;
+        z-index: 1100;
     }
 
     .article-nav__panel {
-        max-height: 60vh;
+        margin-top: 0.5rem;
+        max-height: min(65vh, 480px);
+        padding: 1rem;
+    }
+
+    .article-nav__toggle {
+        padding: 0.8rem 1rem;
+    }
+
+    .article-nav a {
+        padding: 0.7em 0.8em;
+    }
+
+    .article-nav li {
+        margin: 0.35em 0;
     }
 
     .article-section {
-        padding-bottom: 2rem;
+        padding-bottom: 8.5rem;
     }
 }
 
@@ -818,6 +836,7 @@ article ul {
     border: 1px solid var(--border-color);
     font-family: 'Merriweather', serif;
     line-height: 1.75;
+    scroll-margin-top: 1rem;
 }
 
 .article-section article:last-child {
