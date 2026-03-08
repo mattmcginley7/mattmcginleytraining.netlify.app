@@ -440,6 +440,17 @@ nav a {
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+nav a:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+}
+
+nav a[aria-current="page"] {
+    background: rgba(249, 115, 22, 0.95);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(249, 115, 22, 0.35);
+}
+
 nav a:hover {
     background-color: var(--cta-color);
     color: #fff;
@@ -584,6 +595,11 @@ form{
         border-radius: 999px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    nav a[aria-current="page"] {
+        background-color: rgba(249, 115, 22, 0.95);
+        border-color: rgba(249, 115, 22, 0.95);
     }
 
     nav a:active {
