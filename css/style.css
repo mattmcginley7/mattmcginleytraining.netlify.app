@@ -912,3 +912,38 @@ article ul {
 .resource-card:last-child {
     margin-bottom: 0;
 }
+
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.25rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.article-table th,
+.article-table td {
+    border: 1px solid var(--border-color);
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+}
+
+.article-table th {
+    background: rgba(20, 184, 166, 0.12);
+    color: #0f172a;
+}
+
+.lean-bulk-tool {
+    margin-top: 1.25rem;
+}
+
+.lean-bulk-tool label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: 700;
+}
+
+#leanBulkResult {
+    margin-top: 0.75rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+}

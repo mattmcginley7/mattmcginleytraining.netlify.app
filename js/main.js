@@ -115,6 +115,31 @@ function calculateFFMI() {
     document.querySelector('#ffmiResult').innerHTML = 'Your FFMI is ' + ffmi + '. This is considered ' + category + ' relative to the general population.';
 }
 
+
+function calculateLeanBulk() {
+    var bodyweight = parseFloat(document.querySelector('#leanBulkBodyweight').value);
+    var maintenance = parseFloat(document.querySelector('#leanBulkMaintenance').value);
+    var result = document.querySelector('#leanBulkResult');
+
+    if (!result) {
+        return;
+    }
+
+    if (isNaN(bodyweight) || isNaN(maintenance) || bodyweight <= 0 || maintenance <= 0) {
+        result.innerHTML = 'Please enter valid body weight and maintenance calories.';
+        return;
+    }
+
+    var lowCalories = Math.round(maintenance * 1.05);
+    var highCalories = Math.round(maintenance * 1.10);
+    var lowMonthlyGain = (bodyweight * 0.005).toFixed(2);
+    var highMonthlyGain = (bodyweight * 0.01).toFixed(2);
+
+    result.innerHTML = 'Lean bulk calories: <strong>' + lowCalories + '-' + highCalories + '</strong> per day. '
+        + 'Target monthly gain: <strong>' + lowMonthlyGain + '-' + highMonthlyGain + ' lbs</strong>. '
+        + 'If your 2-3 week trend is flat, add 100-150 calories per day.';
+}
+
 function calculateBMI() {
     var weight = parseFloat(document.querySelector('#bmiWeight').value);
     var height = parseFloat(document.querySelector('#bmiHeight').value);
@@ -165,6 +190,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var bmiButton = document.querySelector('#bmiButton');
     if (bmiButton) {
         bmiButton.addEventListener('click', calculateBMI);
+    }
+
+    var leanBulkButton = document.querySelector('#leanBulkButton');
+    if (leanBulkButton) {
+        leanBulkButton.addEventListener('click', calculateLeanBulk);
     }
 
     var articleNav = document.querySelector('.article-nav');
