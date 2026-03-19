@@ -66,6 +66,30 @@
             </div>
         </div>
     </section>
+    <section class="goal-quiz" aria-labelledby="goal-quiz-heading">
+        <p class="section-label">Start here</p>
+        <h2 id="goal-quiz-heading">Not sure what your first step should be?</h2>
+        <p class="goal-quiz__intro">Choose the goal that sounds most like you and get a practical starting recommendation in seconds.</p>
+        <div class="goal-quiz__options" role="tablist" aria-label="Primary training goal selector">
+            <button class="goal-pill is-active" type="button" role="tab" aria-selected="true" aria-controls="goal-panel" data-goal="fat-loss">Lose fat</button>
+            <button class="goal-pill" type="button" role="tab" aria-selected="false" aria-controls="goal-panel" data-goal="muscle">Build muscle</button>
+            <button class="goal-pill" type="button" role="tab" aria-selected="false" aria-controls="goal-panel" data-goal="pain-free">Move pain-free</button>
+        </div>
+        <article class="goal-recommendation" id="goal-panel" role="tabpanel" aria-live="polite">
+            <span class="goal-recommendation__eyebrow">Recommended focus</span>
+            <h3 class="goal-recommendation__title">Start with consistent training + a manageable calorie deficit</h3>
+            <p class="goal-recommendation__summary">We’ll build 3-4 training sessions around your week, tighten up nutrition without crash dieting, and track the habits that make fat loss stick.</p>
+            <ul class="goal-recommendation__list">
+                <li>Strength train 3-4 days per week</li>
+                <li>Use simple calorie and protein targets</li>
+                <li>Check progress weekly and adjust fast</li>
+            </ul>
+            <div class="goal-recommendation__actions">
+                <a class="cta-button" id="goalPrimaryLink" href="begin.html">Book your consult</a>
+                <a class="secondary-button" id="goalSecondaryLink" href="nutrition-calculator.html">Estimate your nutrition targets</a>
+            </div>
+        </article>
+    </section>
     <section class="info-section">
         <p class="section-label">How online coaching works</p>
         <h2>A simple, proven roadmap</h2>
