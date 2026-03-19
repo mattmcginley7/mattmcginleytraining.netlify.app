@@ -197,6 +197,94 @@ document.addEventListener('DOMContentLoaded', function () {
         leanBulkButton.addEventListener('click', calculateLeanBulk);
     }
 
+
+    var goalConfig = {
+        'fat-loss': {
+            title: 'Start with consistent training + a manageable calorie deficit',
+            summary: 'We’ll build 3-4 training sessions around your week, tighten up nutrition without crash dieting, and track the habits that make fat loss stick.',
+            bullets: [
+                'Strength train 3-4 days per week',
+                'Use simple calorie and protein targets',
+                'Check progress weekly and adjust fast'
+            ],
+            primaryHref: 'begin.html',
+            primaryLabel: 'Book your consult',
+            secondaryHref: 'nutrition-calculator.html',
+            secondaryLabel: 'Estimate your nutrition targets'
+        },
+        muscle: {
+            title: 'Prioritize progressive overload + enough food to recover',
+            summary: 'Your plan should focus on key lifts, recovery, and a small calorie surplus so you can add muscle without spinning your wheels.',
+            bullets: [
+                'Train hard around big compound lifts',
+                'Aim for a lean-bulk calorie range',
+                'Track performance so weights keep climbing'
+            ],
+            primaryHref: 'services.html#pricing',
+            primaryLabel: 'See coaching packages',
+            secondaryHref: 'calculators.html',
+            secondaryLabel: 'Use the training calculators'
+        },
+        'pain-free': {
+            title: 'Rebuild confidence with smart exercise selection and recovery',
+            summary: 'We’ll organize training around movements your body tolerates well, strengthen weak links, and progress in a way that protects your joints.',
+            bullets: [
+                'Identify pain-free movement patterns first',
+                'Build strength with controlled progressions',
+                'Use weekly feedback to prevent flare-ups'
+            ],
+            primaryHref: 'begin.html',
+            primaryLabel: 'Share your goals with Matt',
+            secondaryHref: 'about.html',
+            secondaryLabel: 'Read Matt’s story'
+        }
+    };
+
+    var goalButtons = document.querySelectorAll('.goal-pill');
+    var goalPanel = document.querySelector('.goal-recommendation');
+    var goalTitle = document.querySelector('.goal-recommendation__title');
+    var goalSummary = document.querySelector('.goal-recommendation__summary');
+    var goalList = document.querySelector('.goal-recommendation__list');
+    var goalPrimaryLink = document.querySelector('#goalPrimaryLink');
+    var goalSecondaryLink = document.querySelector('#goalSecondaryLink');
+
+    var renderGoalRecommendation = function (goalKey) {
+        var config = goalConfig[goalKey];
+        if (!config || !goalPanel || !goalTitle || !goalSummary || !goalList || !goalPrimaryLink || !goalSecondaryLink) {
+            return;
+        }
+
+        goalButtons.forEach(function (button) {
+            var isActive = button.getAttribute('data-goal') === goalKey;
+            button.classList.toggle('is-active', isActive);
+            button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        goalTitle.textContent = config.title;
+        goalSummary.textContent = config.summary;
+        goalList.innerHTML = '';
+        config.bullets.forEach(function (bullet) {
+            var item = document.createElement('li');
+            item.textContent = bullet;
+            goalList.appendChild(item);
+        });
+        goalPrimaryLink.href = config.primaryHref;
+        goalPrimaryLink.textContent = config.primaryLabel;
+        goalSecondaryLink.href = config.secondaryHref;
+        goalSecondaryLink.textContent = config.secondaryLabel;
+        goalPanel.setAttribute('data-active-goal', goalKey);
+    };
+
+    if (goalButtons.length && goalPanel) {
+        goalButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                renderGoalRecommendation(button.getAttribute('data-goal'));
+            });
+        });
+
+        renderGoalRecommendation('fat-loss');
+    }
+
     var articleNav = document.querySelector('.article-nav');
     var articleList = document.querySelector('.article-nav__list');
     var articleToggle = document.querySelector('.article-nav__toggle');
