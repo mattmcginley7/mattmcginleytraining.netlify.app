@@ -1134,6 +1134,87 @@ article ul {
     padding-bottom: 6rem;
 }
 
+.blog-discovery {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.blog-discovery__intro h2 {
+    margin: 0;
+}
+
+.start-here-grid,
+.article-discovery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.85rem;
+}
+
+.start-here-card,
+.article-card {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.85rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.article-card__meta {
+    margin: 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.84rem;
+    color: #475569;
+    font-weight: 700;
+}
+
+.start-here-card h3,
+.article-card h3 {
+    margin: 0.45rem 0;
+    line-height: 1.35;
+    font-size: 1rem;
+}
+
+.start-here-card p,
+.article-card p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+}
+
+.blog-filters {
+    margin-top: 1rem;
+}
+
+.blog-filters h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.blog-filters__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.65rem;
+}
+
+.blog-filter {
+    border: 1px solid var(--border-color);
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.blog-filter.is-active {
+    background: rgba(20, 184, 166, 0.15);
+    border-color: var(--primary-color);
+    color: #0f172a;
+}
+
 .article-section article {
     padding: 1rem 1.5rem;
     background: var(--surface-color);
@@ -1153,6 +1234,19 @@ article ul {
 .article-section article p {
     margin: 0.75em 0;
     font-size: 1.05em;
+}
+
+.article-meta {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0.25rem 0 0.6rem;
+}
+
+.article-excerpt {
+    font-size: 1.05rem;
+    color: #334155;
 }
 
 /* Calculator card styling */
