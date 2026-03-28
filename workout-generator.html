@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Answer a few questions and get a personalized 6-week weightlifting program.">
+    <title>Workout Generator | Matt McGinley Personal Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="articles.html">Articles</a></li>
+            <li><a href="calculators.html">Calculators</a></li>
+            <li><a href="workout-generator.html" aria-current="page">Workout Generator</a></li>
+            <li><a href="nutrition-calculator.html">Nutrition Calculator</a></li>
+            <li><a href="begin.html">Begin</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero workout-generator-hero">
+        <div class="hero__content">
+            <div class="hero__copy">
+                <p class="hero__eyebrow">Workout Generator</p>
+                <h1>Answer a few questions and get a personalized workout program</h1>
+                <p class="tagline">Built for real lifting: barbell, dumbbell, machine, and cable work designed around your goals, schedule, strength levels, and equipment.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="workout-generator-page">
+        <div class="workout-generator-layout">
+            <form id="workoutGeneratorForm" class="workout-form" novalidate>
+                <h2>Build Your 6-Week Plan</h2>
+                <p class="workout-form__lead">Keep it simple. Fill this out in under 3 minutes.</p>
+
+                <fieldset class="workout-fieldset">
+                    <legend>1) Training goal</legend>
+                    <label>Main goal
+                        <select name="goal" required>
+                            <option value="">Choose one</option>
+                            <option value="Build muscle">Build muscle</option>
+                            <option value="Get stronger">Get stronger</option>
+                            <option value="Powerbuilding">Powerbuilding (strength + muscle)</option>
+                            <option value="Lose fat while keeping muscle">Lose fat while keeping muscle</option>
+                        </select>
+                    </label>
+                </fieldset>
+
+                <fieldset class="workout-fieldset two-col">
+                    <legend>2) Experience + frequency</legend>
+                    <label>Training experience
+                        <select name="experience" required>
+                            <option value="">Choose one</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                        </select>
+                    </label>
+                    <label>Days per week
+                        <select name="frequency" required>
+                            <option value="">Choose one</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                </fieldset>
+
+                <fieldset class="workout-fieldset two-col">
+                    <legend>3) Session setup</legend>
+                    <label>Workout length
+                        <select name="workoutLength" required>
+                            <option value="">Choose one</option>
+                            <option value="30 minutes">30 minutes</option>
+                            <option value="45 minutes">45 minutes</option>
+                            <option value="60 minutes">60 minutes</option>
+                            <option value="75+ minutes">75+ minutes</option>
+                        </select>
+                    </label>
+                    <label>Equipment access
+                        <select name="equipment" required>
+                            <option value="">Choose one</option>
+                            <option value="Full gym">Full gym</option>
+                            <option value="Basic gym">Basic gym</option>
+                            <option value="Home gym">Home gym</option>
+                        </select>
+                    </label>
+                </fieldset>
+
+                <fieldset class="workout-fieldset two-col">
+                    <legend>4) Priorities + limitations</legend>
+                    <label>Priority area
+                        <select name="priority" required>
+                            <option value="">Choose one</option>
+                            <option value="Chest">Chest</option>
+                            <option value="Shoulders">Shoulders</option>
+                            <option value="Back">Back</option>
+                            <option value="Arms">Arms</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Overall balanced development">Overall balanced development</option>
+                        </select>
+                    </label>
+                    <label>Lifts to avoid/replace
+                        <select name="avoidLift" required>
+                            <option value="None">None</option>
+                            <option value="Back squat">Back squat</option>
+                            <option value="Barbell bench press">Barbell bench press</option>
+                            <option value="Conventional deadlift">Conventional deadlift</option>
+                            <option value="Overhead press">Overhead press</option>
+                        </select>
+                    </label>
+                    <label>Joint limitation (optional)
+                        <select name="jointLimitation">
+                            <option value="None">None</option>
+                            <option value="Shoulder discomfort">Shoulder discomfort</option>
+                            <option value="Knee discomfort">Knee discomfort</option>
+                            <option value="Low back discomfort">Low back discomfort</option>
+                            <option value="Wrist or elbow discomfort">Wrist or elbow discomfort</option>
+                        </select>
+                    </label>
+                </fieldset>
+
+                <fieldset class="workout-fieldset">
+                    <legend>5) Strength inputs (lbs)</legend>
+                    <p class="field-note">Enter your true 1RM. If you don't know it, leave it blank and use the estimate fields.</p>
+                    <div class="strength-grid">
+                        <div class="strength-card">
+                            <h3>Bench press</h3>
+                            <label>Known 1RM <input type="number" name="bench1rm" min="45" step="5" placeholder="ex: 225"></label>
+                            <div class="inline-inputs">
+                                <label>Weight <input type="number" name="benchWeight" min="5" step="5" placeholder="185"></label>
+                                <label>Reps <input type="number" name="benchReps" min="1" max="15" step="1" placeholder="6"></label>
+                            </div>
+                        </div>
+                        <div class="strength-card">
+                            <h3>Squat</h3>
+                            <label>Known 1RM <input type="number" name="squat1rm" min="65" step="5" placeholder="ex: 315"></label>
+                            <div class="inline-inputs">
+                                <label>Weight <input type="number" name="squatWeight" min="5" step="5" placeholder="245"></label>
+                                <label>Reps <input type="number" name="squatReps" min="1" max="15" step="1" placeholder="5"></label>
+                            </div>
+                        </div>
+                        <div class="strength-card">
+                            <h3>Deadlift</h3>
+                            <label>Known 1RM <input type="number" name="deadlift1rm" min="95" step="5" placeholder="ex: 365"></label>
+                            <div class="inline-inputs">
+                                <label>Weight <input type="number" name="deadliftWeight" min="5" step="5" placeholder="315"></label>
+                                <label>Reps <input type="number" name="deadliftReps" min="1" max="15" step="1" placeholder="5"></label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <p id="workoutFormError" class="form-error" role="alert" aria-live="polite"></p>
+                <button type="submit" class="cta-button workout-submit">Generate my 6-week program</button>
+            </form>
+
+            <aside class="workout-preview" aria-label="Example output preview">
+                <h2>What you'll get</h2>
+                <p>A complete 6-week lifting program with a clear split, weekly progression targets, main lift percentages, and accessory work matched to your available time.</p>
+                <ul>
+                    <li>Program summary card</li>
+                    <li>Daily sessions for each training day</li>
+                    <li>Main-lift progression table (Weeks 1-6)</li>
+                    <li>Exercise substitutions based on limitations</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <section id="workoutResults" class="workout-results" hidden>
+        <h2>Your Personalized 6-Week Program</h2>
+        <div id="programSummary"></div>
+        <div id="progressionTableWrap"></div>
+        <div id="programWeeks"></div>
+        <div id="substitutionNotes"></div>
+        <div class="workout-cta-card">
+            <h3>Want coaching built around your exact needs?</h3>
+            <p>Work with me for direct feedback, weekly adjustments, and accountability that keeps your progress moving.</p>
+            <a class="cta-button" href="begin.html">Work with me</a>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="js/workout-generator.js"></script>
+</body>
+</html>
