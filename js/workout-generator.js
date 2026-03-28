@@ -5,6 +5,7 @@
     }
 
     var resultsSection = document.getElementById('workoutResults');
+    var heroTarget = document.getElementById('programHero');
     var summaryTarget = document.getElementById('programSummary');
     var progressionTarget = document.getElementById('progressionTableWrap');
     var weeksTarget = document.getElementById('programWeeks');
@@ -187,6 +188,42 @@
             + '</article>';
     }
 
+    function renderProgramHero(data, profile, split, notes) {
+        var generatedOn = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        var commitmentLine = data.frequency + ' days/week • ' + data.workoutLength + ' sessions';
+        var noteItems = notes.length
+            ? notes.map(function (note) { return '<li>' + note + '</li>'; }).join('')
+            : '<li>No forced substitutions selected. Train the base templates as written.</li>';
+
+        heroTarget.innerHTML = '<article class="program-hero-card">'
+            + '<p class="program-hero-card__eyebrow">Coach deliverable · Generated ' + generatedOn + '</p>'
+            + '<h3>' + data.goal + ' blueprint</h3>'
+            + '<p class="program-hero-card__intro">' + profile.blurb + '</p>'
+            + '<div class="program-hero-card__chips">'
+            + '<span>' + data.experience + ' lifter</span>'
+            + '<span>' + commitmentLine + '</span>'
+            + '<span>' + data.equipment + '</span>'
+            + '<span>Split: ' + split.join(' · ') + '</span>'
+            + '</div>'
+            + '<div class="program-hero-card__standards">'
+            + '<h4>Execution standards</h4>'
+            + '<ul>'
+            + '<li>Leave 1-2 reps in reserve on most accessory sets and push close to technical failure only on final sets.</li>'
+            + '<li>Add load only when all prescribed reps are completed with clean tempo and stable form.</li>'
+            + '<li>Track sleep, stress, and joint feedback so recovery drives progression week to week.</li>'
+            + '</ul>'
+            + '</div>'
+            + '<div class="program-hero-card__notes">'
+            + '<h4>Customization notes</h4>'
+            + '<ul>' + noteItems + '</ul>'
+            + '</div>'
+            + '</article>';
+    }
+
     function renderProgression(maxes, profile) {
         var weeks = weekPresets[profile.type];
         var lifts = [
@@ -214,6 +251,26 @@
         var weeks = weekPresets[profile.type];
         var accessoryCount = getAccessoryCount(data.workoutLength);
         var html = '';
+        var sessionFocusMap = {
+            'Full Body A': 'Primary lower-body squat focus + upper push volume',
+            'Full Body B': 'Posterior-chain hinge focus + vertical pressing',
+            'Full Body C': 'Balanced volume with quad and upper-back emphasis',
+            'Upper 1': 'Main upper strength work and controlled pressing',
+            'Lower 1': 'Quad and hamstring base strength development',
+            'Upper 2': 'Overhead + pulling volume with arm finishers',
+            'Lower 2': 'Heavy hinge pattern with unilateral lower-body support',
+            Push: 'Pressing strength and chest/shoulder hypertrophy',
+            Pull: 'Back density, hinge work, and arm pulling volume',
+            Legs: 'Lower-body hypertrophy with controlled hinge loading',
+            Upper: 'Balanced upper-body volume and shoulder stability',
+            Lower: 'Posterior chain + quad support with core bracing'
+        };
+        var durationMap = {
+            '30 minutes': '25-35 min',
+            '45 minutes': '40-50 min',
+            '60 minutes': '50-65 min',
+            '75+ minutes': '65-85 min'
+        };
 
         weeks.forEach(function (week, weekIndex) {
             html += '<article class="program-card"><h3>Week ' + (weekIndex + 1) + ' <span>' + week.note + '</span></h3><div class="week-grid">';
@@ -225,6 +282,8 @@
                 var mainExercise = pool[0] || 'Main compound lift';
                 var accessory = pool.slice(1, accessoryCount);
                 var restText = profile.type === 'strength' ? '2-3 min on compounds, 60-90 sec on accessories' : '90-120 sec on compounds, 45-75 sec on accessories';
+                var sessionFocus = sessionFocusMap[dayName] || 'Balanced full-body emphasis';
+                var estimatedDuration = durationMap[data.workoutLength] || data.workoutLength;
 
                 var accessoryList = accessory.map(function (exercise) {
                     return '<li><span class="label">Accessory</span><strong>' + exercise + '</strong><span>3 sets x ' + profile.accessoryRepRange + '</span></li>';
@@ -232,6 +291,7 @@
 
                 html += '<div class="day-card">'
                     + '<h4>Day ' + (dayIndex + 1) + ': ' + dayName + '</h4>'
+                    + '<p class="day-card__meta"><span>' + sessionFocus + '</span><span>Estimated duration: ' + estimatedDuration + '</span></p>'
                     + '<ul>'
                     + '<li><span class="label label-main">Main lift</span><strong>' + mainExercise + '</strong><span>' + week.sets + ' sets x ' + week.reps + ' reps @ ' + Math.round(week.pct * 100) + '%</span></li>'
                     + accessoryList
@@ -296,6 +356,7 @@
         renderProgression(maxes, profile);
         renderWeeks(payload, split, profile);
         renderSubstitutions(substitutions);
+        renderProgramHero(payload, profile, split, substitutions);
 
         resultsSection.hidden = false;
         resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -1459,7 +1459,8 @@ article ul {
 .workout-generator-layout {
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
-    gap: 1.25rem;
+    gap: 1.4rem;
+    align-items: start;
 }
 
 .workout-form,
@@ -1469,8 +1470,9 @@ article ul {
 .workout-cta-card {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(241, 245, 249, 0.9));
     border: 1px solid var(--border-color);
-    border-radius: 18px;
-    padding: 1rem;
+    border-radius: 22px;
+    padding: 1.2rem;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
 }
 
 .workout-form h2,
@@ -1483,17 +1485,41 @@ article ul {
 }
 
 .workout-form__lead {
-    margin-top: -0.25rem;
+    margin-top: -0.2rem;
+    margin-bottom: 0.6rem;
     color: #475569;
 }
 
+.workout-form__header {
+    margin-bottom: 1rem;
+}
+
+.workout-form__highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.workout-form__highlights li {
+    font-size: 0.92rem;
+    color: #0f172a;
+    background: rgba(15, 118, 110, 0.08);
+    border: 1px solid rgba(15, 118, 110, 0.18);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    width: fit-content;
+}
+
 .workout-fieldset {
-    border: 1px solid #cbd5e1;
-    border-radius: 14px;
-    margin: 0 0 1rem;
-    padding: 0.85rem;
+    border: 1px solid #cfdae6;
+    border-radius: 16px;
+    margin: 0 0 1.1rem;
+    padding: 1rem;
     display: grid;
     gap: 0.85rem;
+    background: rgba(248, 250, 252, 0.72);
 }
 
 .workout-fieldset legend {
@@ -1518,7 +1544,7 @@ article ul {
     width: 100%;
     border: 1px solid #94a3b8;
     border-radius: 10px;
-    padding: 0.55rem 0.65rem;
+    padding: 0.62rem 0.7rem;
     font-size: 1rem;
     font-family: inherit;
 }
@@ -1553,11 +1579,28 @@ article ul {
     padding-left: 1.1rem;
 }
 
+.workout-preview {
+    position: sticky;
+    top: 1rem;
+}
+
 .workout-submit {
     width: 100%;
     border: none;
     cursor: pointer;
     font-size: 1.03rem;
+}
+
+.workout-submit-wrap {
+    border-top: 1px solid #d6e1ed;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+}
+
+.workout-submit-note {
+    margin: 0.5rem 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
 }
 
 .form-error {
@@ -1571,10 +1614,84 @@ article ul {
     max-width: 1200px;
 }
 
+.program-hero-card {
+    margin-bottom: 1rem;
+    border-radius: 22px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.17), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.14), transparent 45%),
+        linear-gradient(145deg, #ffffff, #f8fafc);
+    padding: 1.1rem;
+    box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12);
+}
+
+.program-hero-card__eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.74rem;
+    color: #0f766e;
+    font-weight: 700;
+}
+
+.program-hero-card h3 {
+    margin: 0.35rem 0 0.55rem;
+    text-align: left;
+}
+
+.program-hero-card__intro {
+    margin-top: 0;
+    color: #334155;
+}
+
+.program-hero-card__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 0.95rem;
+}
+
+.program-hero-card__chips span {
+    background: rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    padding: 0.3rem 0.72rem;
+    font-size: 0.86rem;
+    color: #0f172a;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+.program-hero-card__standards,
+.program-hero-card__notes {
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 14px;
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.program-hero-card__notes {
+    margin-bottom: 0;
+}
+
+.program-hero-card h4 {
+    margin: 0 0 0.45rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.program-hero-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+    color: #334155;
+}
+
 .program-summary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0.4rem 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 0.55rem 0.9rem;
 }
 
 .program-summary-note {
@@ -1609,8 +1726,8 @@ article ul {
 
 .day-card {
     border: 1px solid #d5dee8;
-    border-radius: 12px;
-    padding: 0.8rem;
+    border-radius: 14px;
+    padding: 0.9rem;
     background: rgba(255, 255, 255, 0.95);
 }
 
@@ -1625,6 +1742,14 @@ article ul {
     padding: 0;
     display: grid;
     gap: 0.55rem;
+}
+
+.day-card__meta {
+    margin: 0 0 0.55rem;
+    font-size: 0.83rem;
+    color: #475569;
+    display: grid;
+    gap: 0.2rem;
 }
 
 .day-card li {
@@ -1672,6 +1797,7 @@ article ul {
 
     .workout-preview {
         order: -1;
+        position: static;
     }
 }
 
@@ -1690,5 +1816,18 @@ article ul {
     .program-summary-card,
     .workout-cta-card {
         padding: 0.85rem;
+    }
+
+    .workout-submit-wrap {
+        position: sticky;
+        bottom: 0.35rem;
+        background: linear-gradient(180deg, rgba(248, 250, 252, 0.3), rgba(248, 250, 252, 0.95));
+        padding: 0.8rem 0 0.2rem;
+        backdrop-filter: blur(5px);
+    }
+
+    .workout-form__highlights li {
+        width: 100%;
+        border-radius: 12px;
     }
 }

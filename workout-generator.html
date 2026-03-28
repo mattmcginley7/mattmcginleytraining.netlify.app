@@ -38,8 +38,15 @@
     <section class="workout-generator-page">
         <div class="workout-generator-layout">
             <form id="workoutGeneratorForm" class="workout-form" novalidate>
-                <h2>Build Your 6-Week Plan</h2>
-                <p class="workout-form__lead">Keep it simple. Fill this out in under 3 minutes.</p>
+                <div class="workout-form__header">
+                    <h2>Build Your 6-Week Plan</h2>
+                    <p class="workout-form__lead">Fill this out in under 3 minutes and get a polished, coach-style program you can run immediately.</p>
+                    <ul class="workout-form__highlights">
+                        <li>Personalized split + progression</li>
+                        <li>Exercise swaps for your limitations</li>
+                        <li>Clear weekly execution notes</li>
+                    </ul>
+                </div>
 
                 <fieldset class="workout-fieldset">
                     <legend>1) Training goal</legend>
@@ -160,17 +167,20 @@
                 </fieldset>
 
                 <p id="workoutFormError" class="form-error" role="alert" aria-live="polite"></p>
-                <button type="submit" class="cta-button workout-submit">Generate my 6-week program</button>
+                <div class="workout-submit-wrap">
+                    <button type="submit" class="cta-button workout-submit">Generate my 6-week program</button>
+                    <p class="workout-submit-note">You’ll get a complete program summary, progression table, and day-by-day sessions.</p>
+                </div>
             </form>
 
             <aside class="workout-preview" aria-label="Example output preview">
-                <h2>What you'll get</h2>
-                <p>A complete 6-week lifting program with a clear split, weekly progression targets, main lift percentages, and accessory work matched to your available time.</p>
+                <h2>Your custom deliverable includes</h2>
+                <p>A complete 6-week training blueprint with structure, progression, and execution details formatted like a premium coaching handoff.</p>
                 <ul>
-                    <li>Program summary card</li>
-                    <li>Daily sessions for each training day</li>
+                    <li>Coaching overview card with your exact profile</li>
                     <li>Main-lift progression table (Weeks 1-6)</li>
-                    <li>Exercise substitutions based on limitations</li>
+                    <li>Day-by-day sessions with main and accessory work</li>
+                    <li>Execution standards and substitution notes</li>
                 </ul>
             </aside>
         </div>
@@ -178,6 +188,7 @@
 
     <section id="workoutResults" class="workout-results" hidden>
         <h2>Your Personalized 6-Week Program</h2>
+        <div id="programHero"></div>
         <div id="programSummary"></div>
         <div id="progressionTableWrap"></div>
         <div id="programWeeks"></div>
