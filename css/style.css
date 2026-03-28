@@ -1446,3 +1446,249 @@ article ul {
         padding: 2rem;
     }
 }
+
+/* Workout Generator */
+.workout-generator-hero .hero__content {
+    max-width: 980px;
+}
+
+.workout-generator-page {
+    max-width: 1200px;
+}
+
+.workout-generator-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 1.25rem;
+}
+
+.workout-form,
+.workout-preview,
+.program-card,
+.program-summary-card,
+.workout-cta-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(241, 245, 249, 0.9));
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 1rem;
+}
+
+.workout-form h2,
+.workout-preview h2,
+.workout-results h2,
+.program-card h3,
+.workout-cta-card h3 {
+    text-align: left;
+    margin-top: 0;
+}
+
+.workout-form__lead {
+    margin-top: -0.25rem;
+    color: #475569;
+}
+
+.workout-fieldset {
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    margin: 0 0 1rem;
+    padding: 0.85rem;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.workout-fieldset legend {
+    font-weight: 700;
+    padding: 0 0.5rem;
+}
+
+.workout-fieldset.two-col {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.workout-form label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    display: grid;
+    gap: 0.4rem;
+}
+
+.workout-form input,
+.workout-form select {
+    width: 100%;
+    border: 1px solid #94a3b8;
+    border-radius: 10px;
+    padding: 0.55rem 0.65rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.strength-grid {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.strength-card {
+    border: 1px solid #dbe4ef;
+    border-radius: 12px;
+    padding: 0.8rem;
+    background: #fff;
+}
+
+.strength-card h3 {
+    text-align: left;
+    font-size: 1rem;
+    margin: 0 0 0.6rem;
+}
+
+.inline-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+}
+
+.workout-preview ul,
+.substitution-list {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.workout-submit {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.03rem;
+}
+
+.form-error {
+    min-height: 1.2rem;
+    color: #b91c1c;
+    font-weight: 700;
+    margin: 0.4rem 0 0.8rem;
+}
+
+.workout-results {
+    max-width: 1200px;
+}
+
+.program-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.4rem 0.8rem;
+}
+
+.program-summary-note {
+    margin-bottom: 0;
+    color: #334155;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+}
+
+.table-wrap th,
+.table-wrap td {
+    border: 1px solid #d7e0ea;
+    padding: 0.55rem;
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.92rem;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.8rem;
+}
+
+.day-card {
+    border: 1px solid #d5dee8;
+    border-radius: 12px;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.day-card h4 {
+    margin: 0 0 0.4rem;
+    text-align: left;
+}
+
+.day-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.day-card li {
+    border-left: 3px solid #cbd5e1;
+    padding-left: 0.6rem;
+    display: grid;
+    gap: 0.1rem;
+}
+
+.day-card .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.day-card .label-main {
+    color: var(--accent-strong);
+}
+
+.rest-note,
+.field-note {
+    color: #475569;
+    font-size: 0.92rem;
+}
+
+.program-card h3 span {
+    display: inline-block;
+    margin-left: 0.45rem;
+    color: #475569;
+    font-size: 0.88rem;
+    font-weight: 400;
+}
+
+.workout-cta-card {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+@media (max-width: 980px) {
+    .workout-generator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .workout-preview {
+        order: -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .inline-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrap table {
+        min-width: 640px;
+    }
+
+    .workout-form,
+    .workout-preview,
+    .program-card,
+    .program-summary-card,
+    .workout-cta-card {
+        padding: 0.85rem;
+    }
+}
