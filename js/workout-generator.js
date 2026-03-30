@@ -14,28 +14,28 @@
 
     var weekPresets = {
         strength: [
-            { pct: 0.72, sets: 4, reps: 6, note: 'Build clean volume' },
-            { pct: 0.75, sets: 4, reps: 5, note: 'Add load, keep speed' },
-            { pct: 0.8, sets: 5, reps: 4, note: 'Hard week' },
-            { pct: 0.65, sets: 3, reps: 5, note: 'Deload and recover' },
-            { pct: 0.82, sets: 5, reps: 3, note: 'Heavy quality reps' },
-            { pct: 0.85, sets: 4, reps: 3, note: 'Top week / rep PR option' }
+            { pct: 0.7, sets: 4, reps: 6, note: 'Linear progression start' },
+            { pct: 0.72, sets: 4, reps: 6, note: 'Add load with clean reps' },
+            { pct: 0.74, sets: 4, reps: 5, note: 'Steady progression' },
+            { pct: 0.76, sets: 5, reps: 4, note: 'Progressive overload' },
+            { pct: 0.78, sets: 5, reps: 4, note: 'Heavy, controlled reps' },
+            { pct: 0.8, sets: 5, reps: 3, note: 'Top week' }
         ],
         hypertrophy: [
-            { pct: 0.68, sets: 4, reps: 8, note: 'Volume baseline' },
-            { pct: 0.7, sets: 4, reps: 8, note: 'Progressive overload' },
-            { pct: 0.74, sets: 4, reps: 7, note: 'Harder loading' },
-            { pct: 0.62, sets: 3, reps: 8, note: 'Deload and restore' },
-            { pct: 0.76, sets: 4, reps: 6, note: 'Heavier hypertrophy work' },
-            { pct: 0.78, sets: 4, reps: 6, note: 'Strongest week' }
+            { pct: 0.7, sets: 4, reps: 8, note: 'Linear progression start' },
+            { pct: 0.72, sets: 4, reps: 8, note: 'Add load with control' },
+            { pct: 0.74, sets: 4, reps: 7, note: 'Steady progression' },
+            { pct: 0.76, sets: 4, reps: 7, note: 'Progressive overload' },
+            { pct: 0.78, sets: 4, reps: 6, note: 'Heavier hypertrophy work' },
+            { pct: 0.8, sets: 4, reps: 6, note: 'Strongest week' }
         ],
         recomposition: [
-            { pct: 0.7, sets: 3, reps: 6, note: 'Efficient base work' },
-            { pct: 0.73, sets: 3, reps: 6, note: 'Small progression' },
-            { pct: 0.77, sets: 4, reps: 5, note: 'Highest effort week' },
-            { pct: 0.63, sets: 2, reps: 6, note: 'Fatigue reset' },
-            { pct: 0.79, sets: 4, reps: 4, note: 'Heavy and efficient' },
-            { pct: 0.82, sets: 4, reps: 4, note: 'Peak week with clean reps' }
+            { pct: 0.7, sets: 3, reps: 6, note: 'Linear progression start' },
+            { pct: 0.72, sets: 3, reps: 6, note: 'Small progression' },
+            { pct: 0.74, sets: 4, reps: 5, note: 'Steady progression' },
+            { pct: 0.76, sets: 4, reps: 5, note: 'Progressive overload' },
+            { pct: 0.78, sets: 4, reps: 4, note: 'Heavy and efficient' },
+            { pct: 0.8, sets: 4, reps: 4, note: 'Peak week with clean reps' }
         ]
     };
 
@@ -79,18 +79,18 @@
 
     function exercisesByDay(splitName, equipment) {
         var templates = {
-            'Full Body A': ['Squat pattern', 'Bench / horizontal press', 'Row', 'Hamstring accessory', 'Arms finisher'],
-            'Full Body B': ['Deadlift / hinge', 'Vertical press', 'Single-leg lower body', 'Lat pull', 'Core'],
-            'Full Body C': ['Front squat or leg press', 'Incline press', 'Chest-supported row', 'RDL or hip thrust', 'Lateral raises'],
-            'Upper 1': ['Bench / horizontal press', 'Row', 'Incline dumbbell press', 'Lat pulldown', 'Triceps + biceps'],
-            'Lower 1': ['Squat pattern', 'RDL', 'Leg press', 'Leg curl', 'Calf raises'],
-            'Upper 2': ['Overhead press', 'Weighted pull variation', 'Machine chest press', 'Rear delt + lateral raise', 'Arm superset'],
-            'Lower 2': ['Deadlift / hinge', 'Front squat variation', 'Lunge', 'Hamstring curl', 'Abs'],
-            Push: ['Bench / horizontal press', 'Incline press', 'Overhead press', 'Cable fly', 'Triceps'],
-            Pull: ['Deadlift / hinge', 'Row', 'Pulldown or pull-up', 'Rear delt', 'Biceps'],
-            Legs: ['Squat pattern', 'Romanian deadlift', 'Leg press', 'Hamstring curl', 'Calves'],
-            Upper: ['Bench variation', 'Row variation', 'Machine press', 'Pulldown', 'Arms + delts'],
-            Lower: ['Deadlift variation', 'Squat variation', 'Split squat', 'Leg curl', 'Core']
+            'Full Body A': ['Barbell squat', 'Flat barbell bench press', 'Chin-up', 'Barbell row', 'Abs'],
+            'Full Body B': ['Deadlift', 'Overhead press', 'Chin-up', 'Split squat', 'Abs'],
+            'Full Body C': ['Barbell squat', 'Flat barbell bench press', 'Deadlift (light technique)', 'Barbell row', 'Abs'],
+            'Upper 1': ['Flat barbell bench press', 'Chin-up', 'Barbell row', 'Overhead press', 'Abs'],
+            'Lower 1': ['Barbell squat', 'Deadlift', 'Walking lunge', 'Leg curl', 'Abs'],
+            'Upper 2': ['Flat barbell bench press', 'Chin-up', 'Barbell row', 'Close-grip bench press', 'Abs'],
+            'Lower 2': ['Deadlift', 'Barbell squat', 'Romanian deadlift', 'Step-up', 'Abs'],
+            Push: ['Flat barbell bench press', 'Overhead press', 'Close-grip bench press', 'Dips', 'Abs'],
+            Pull: ['Deadlift', 'Chin-up', 'Barbell row', 'Rear delt raise', 'Abs'],
+            Legs: ['Barbell squat', 'Deadlift', 'Romanian deadlift', 'Split squat', 'Abs'],
+            Upper: ['Flat barbell bench press', 'Chin-up', 'Barbell row', 'Overhead press', 'Abs'],
+            Lower: ['Deadlift', 'Barbell squat', 'Split squat', 'Hamstring curl', 'Abs']
         };
 
         var available = templates[splitName] ? templates[splitName].slice() : [];
@@ -105,6 +105,13 @@
             });
         }
         return available;
+    }
+
+    function getCoreExercises(experience) {
+        if (experience === 'Beginner') {
+            return ['Crunches', 'Fifer scissors'];
+        }
+        return ['Ab wheel rollout', 'Fifer scissors'];
     }
 
     function getSubstitutions(avoidLift, jointLimitation) {
@@ -132,16 +139,17 @@
     }
 
     function applyExerciseReplacements(name, avoidLift) {
-        if (avoidLift === 'Back squat' && name.indexOf('Squat pattern') >= 0) {
+        var lowerName = name.toLowerCase();
+        if (avoidLift === 'Back squat' && lowerName.indexOf('squat') >= 0) {
             return 'Front squat / hack squat';
         }
-        if (avoidLift === 'Barbell bench press' && name.indexOf('Bench') >= 0) {
+        if (avoidLift === 'Barbell bench press' && lowerName.indexOf('bench') >= 0) {
             return 'Dumbbell bench / machine press';
         }
-        if (avoidLift === 'Conventional deadlift' && name.indexOf('Deadlift') >= 0) {
+        if (avoidLift === 'Conventional deadlift' && lowerName.indexOf('deadlift') >= 0) {
             return 'Romanian deadlift / trap bar deadlift';
         }
-        if (avoidLift === 'Overhead press' && name.indexOf('Overhead press') >= 0) {
+        if (avoidLift === 'Overhead press' && lowerName.indexOf('overhead press') >= 0) {
             return 'Dumbbell shoulder press + lateral raise pairing';
         }
         return name;
@@ -227,22 +235,24 @@
     function renderProgression(maxes, profile) {
         var weeks = weekPresets[profile.type];
         var lifts = [
-            { key: 'bench', label: 'Bench pattern', max: maxes.bench },
-            { key: 'squat', label: 'Squat pattern', max: maxes.squat },
-            { key: 'deadlift', label: 'Hinge pattern', max: maxes.deadlift }
+            { key: 'bench', label: 'Flat barbell bench press', max: maxes.bench, weeklyAdd: 5 },
+            { key: 'squat', label: 'Barbell squat', max: maxes.squat, weeklyAdd: 5 },
+            { key: 'deadlift', label: 'Deadlift', max: maxes.deadlift, weeklyAdd: 10 }
         ];
 
         var headCells = weeks.map(function (_, i) { return '<th>Week ' + (i + 1) + '</th>'; }).join('');
         var bodyRows = lifts.map(function (lift) {
-            var row = weeks.map(function (week) {
-                var load = roundToNearest5(lift.max * week.pct);
-                return '<td>' + week.sets + 'x' + week.reps + ' @ ' + Math.round(week.pct * 100) + '% (~' + load + ' lbs)</td>';
+            var startLoad = roundToNearest5(lift.max * 0.7);
+            var row = weeks.map(function (week, weekIndex) {
+                var load = startLoad + (weekIndex * lift.weeklyAdd);
+                return '<td>' + week.sets + 'x' + week.reps + ' @ ' + Math.round((load / lift.max) * 100) + '% (~' + load + ' lbs)</td>';
             }).join('');
             return '<tr><th scope="row">' + lift.label + '</th>' + row + '</tr>';
         }).join('');
 
         progressionTarget.innerHTML = '<article class="program-card"><h3>Main Lift Progression (Weeks 1-6)</h3>'
             + '<div class="table-wrap"><table><thead><tr><th>Lift</th>' + headCells + '</tr></thead><tbody>' + bodyRows + '</tbody></table></div>'
+            + '<p class="field-note">Linear loading model: start at ~70% estimated 1RM, then add 5 lb/week on bench + squat and 10 lb/week on deadlift.</p>'
             + '<p class="field-note">Optional warm-up: 5-8 minutes of light movement + 2-4 progressive warm-up sets before your first main lift.</p>'
             + '</article>';
     }
@@ -281,11 +291,15 @@
                 });
                 var mainExercise = pool[0] || 'Main compound lift';
                 var accessory = pool.slice(1, accessoryCount);
-                var restText = profile.type === 'strength' ? '2-3 min on compounds, 60-90 sec on accessories' : '90-120 sec on compounds, 45-75 sec on accessories';
+                var coreExercises = getCoreExercises(data.experience);
+                var accessoryWithCore = accessory.map(function (exercise) {
+                    return exercise === 'Abs' ? coreExercises.join(' + ') : exercise;
+                });
+                var restText = '3-4 min on compounds, 2-3 min on accessories';
                 var sessionFocus = sessionFocusMap[dayName] || 'Balanced full-body emphasis';
                 var estimatedDuration = durationMap[data.workoutLength] || data.workoutLength;
 
-                var accessoryList = accessory.map(function (exercise) {
+                var accessoryList = accessoryWithCore.map(function (exercise) {
                     return '<li><span class="label">Accessory</span><strong>' + exercise + '</strong><span>3 sets x ' + profile.accessoryRepRange + '</span></li>';
                 }).join('');
 
