@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Answer a few questions and get a personalized 6-week weightlifting program.">
+    <meta name="description" content="Build a serious 6-week lifting plan with coaching-level structure, progression, and substitutions.">
     <title>Workout Generator | Matt McGinley Personal Training</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,9 +29,37 @@
         <div class="hero__content">
             <div class="hero__copy">
                 <p class="hero__eyebrow">Workout Generator</p>
-                <h1>Answer a few questions and get a personalized workout program</h1>
-                <p class="tagline">Built for real lifting: barbell, dumbbell, machine, and cable work designed around your goals, schedule, strength levels, and equipment.</p>
+                <p class="workout-trust-pill">Built by a coach who programs real barbell training, not random circuit templates.</p>
+                <h1>Get a serious 6-week program built for your goal, schedule, and lifting profile</h1>
+                <p class="tagline">In a few focused steps, generate a clean coaching-style plan with progression targets, exercise substitutions, and session-by-session execution notes.</p>
+                <ul class="hero-microproof">
+                    <li>Goal-specific split and loading progression</li>
+                    <li>Adjustments for joint or lift limitations</li>
+                    <li>Clear daily structure you can run immediately</li>
+                </ul>
             </div>
+            <aside class="hero-preview" aria-label="Sample output preview">
+                <h2>What you’ll receive</h2>
+                <div class="preview-stack" aria-hidden="true">
+                    <article class="preview-card preview-card--overview">
+                        <p class="preview-label">Coaching overview</p>
+                        <h3>4-day Intermediate Powerbuilding</h3>
+                        <p>Full-gym sessions · Shoulder-friendly swaps · Chest priority</p>
+                    </article>
+                    <article class="preview-card preview-card--table">
+                        <p class="preview-label">Week 1–6 progression</p>
+                        <div class="preview-table-lines"></div>
+                    </article>
+                    <article class="preview-card preview-card--day">
+                        <p class="preview-label">Sample training day</p>
+                        <ul>
+                            <li>Main lift: Bench press progression</li>
+                            <li>Accessory block: Row / incline press / delts</li>
+                            <li>Execution standards + rest guidance</li>
+                        </ul>
+                    </article>
+                </div>
+            </aside>
         </div>
     </header>
 
@@ -40,16 +68,18 @@
             <form id="workoutGeneratorForm" class="workout-form" novalidate>
                 <div class="workout-form__header">
                     <h2>Build Your 6-Week Plan</h2>
-                    <p class="workout-form__lead">Fill this out in under 3 minutes and get a polished, coach-style program you can run immediately.</p>
-                    <ul class="workout-form__highlights">
-                        <li>Personalized split + progression</li>
-                        <li>Exercise swaps for your limitations</li>
-                        <li>Clear weekly execution notes</li>
-                    </ul>
+                    <p class="workout-form__lead">Fast guided setup. Most lifters finish in around 3 minutes.</p>
+                    <div class="workout-form__progress" aria-live="polite">
+                        <p id="stepLabel" class="step-label">Step 1 of 5</p>
+                        <div class="step-progress-bar" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" aria-labelledby="stepLabel">
+                            <span id="stepProgressFill"></span>
+                        </div>
+                    </div>
                 </div>
 
-                <fieldset class="workout-fieldset">
+                <fieldset class="workout-fieldset form-step" data-step="1">
                     <legend>1) Training goal</legend>
+                    <p class="field-help">Your main outcome sets your split, loading style, and accessory volume.</p>
                     <label>Main goal
                         <select name="goal" required>
                             <option value="">Choose one</option>
@@ -61,13 +91,15 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="workout-fieldset two-col">
+                <fieldset class="workout-fieldset two-col form-step" data-step="2" hidden>
                     <legend>2) Experience + frequency</legend>
+                    <p class="field-help two-col-full">Experience and schedule determine exercise complexity and weekly stress.</p>
                     <label>Training experience
                         <select name="experience" required>
                             <option value="">Choose one</option>
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
                         </select>
                     </label>
                     <label>Days per week
@@ -81,8 +113,9 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="workout-fieldset two-col">
+                <fieldset class="workout-fieldset two-col form-step" data-step="3" hidden>
                     <legend>3) Session setup</legend>
+                    <p class="field-help two-col-full">This controls session density and equipment-specific exercise selection.</p>
                     <label>Workout length
                         <select name="workoutLength" required>
                             <option value="">Choose one</option>
@@ -102,8 +135,9 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="workout-fieldset two-col">
+                <fieldset class="workout-fieldset two-col form-step" data-step="4" hidden>
                     <legend>4) Priorities + limitations</legend>
+                    <p class="field-help two-col-full">Tell us what to emphasize and what to avoid so the plan stays productive and sustainable.</p>
                     <label>Priority area
                         <select name="priority" required>
                             <option value="">Choose one</option>
@@ -133,55 +167,68 @@
                             <option value="Wrist or elbow discomfort">Wrist or elbow discomfort</option>
                         </select>
                     </label>
+                    <p id="adaptationNote" class="adaptation-note two-col-full">No limitations selected yet. Your base template will use standard barbell-friendly movement patterns.</p>
                 </fieldset>
 
-                <fieldset class="workout-fieldset">
+                <fieldset class="workout-fieldset form-step" data-step="5" hidden>
                     <legend>5) Strength inputs (lbs)</legend>
-                    <p class="field-note">Enter your true 1RM. If you don't know it, leave it blank and use the estimate fields.</p>
+                    <p class="field-note">Enter your true 1RM. If unknown, enter a recent set and get a live estimate.</p>
                     <div class="strength-grid">
-                        <div class="strength-card">
+                        <div class="strength-card" data-lift="bench">
                             <h3>Bench press</h3>
                             <label>Known 1RM <input type="number" name="bench1rm" min="45" step="5" placeholder="ex: 225"></label>
                             <div class="inline-inputs">
                                 <label>Weight <input type="number" name="benchWeight" min="5" step="5" placeholder="185"></label>
                                 <label>Reps <input type="number" name="benchReps" min="1" max="15" step="1" placeholder="6"></label>
                             </div>
+                            <p id="benchEstimate" class="estimate-note">Estimated 1RM: —</p>
                         </div>
-                        <div class="strength-card">
+                        <div class="strength-card" data-lift="squat">
                             <h3>Squat</h3>
                             <label>Known 1RM <input type="number" name="squat1rm" min="65" step="5" placeholder="ex: 315"></label>
                             <div class="inline-inputs">
                                 <label>Weight <input type="number" name="squatWeight" min="5" step="5" placeholder="245"></label>
                                 <label>Reps <input type="number" name="squatReps" min="1" max="15" step="1" placeholder="5"></label>
                             </div>
+                            <p id="squatEstimate" class="estimate-note">Estimated 1RM: —</p>
                         </div>
-                        <div class="strength-card">
+                        <div class="strength-card" data-lift="deadlift">
                             <h3>Deadlift</h3>
                             <label>Known 1RM <input type="number" name="deadlift1rm" min="95" step="5" placeholder="ex: 365"></label>
                             <div class="inline-inputs">
                                 <label>Weight <input type="number" name="deadliftWeight" min="5" step="5" placeholder="315"></label>
                                 <label>Reps <input type="number" name="deadliftReps" min="1" max="15" step="1" placeholder="5"></label>
                             </div>
+                            <p id="deadliftEstimate" class="estimate-note">Estimated 1RM: —</p>
                         </div>
                     </div>
                 </fieldset>
 
                 <p id="workoutFormError" class="form-error" role="alert" aria-live="polite"></p>
                 <div class="workout-submit-wrap">
-                    <button type="submit" class="cta-button workout-submit">Generate my 6-week program</button>
-                    <p class="workout-submit-note">You’ll get a complete program summary, progression table, and day-by-day sessions.</p>
+                    <div class="form-nav-buttons">
+                        <button type="button" id="prevStepButton" class="secondary-button" hidden>Back</button>
+                        <button type="button" id="nextStepButton" class="secondary-button">Continue</button>
+                    </div>
+                    <button type="submit" class="cta-button workout-submit" id="submitPlanButton" hidden>Generate my 6-week program</button>
+                    <p class="workout-submit-note">You’ll receive a coaching overview, progression model, day-by-day sessions, and substitutions.</p>
                 </div>
             </form>
 
-            <aside class="workout-preview" aria-label="Example output preview">
-                <h2>Your custom deliverable includes</h2>
-                <p>A complete 6-week training blueprint with structure, progression, and execution details formatted like a premium coaching handoff.</p>
-                <ul>
-                    <li>Coaching overview card with your exact profile</li>
-                    <li>Main-lift progression table (Weeks 1-6)</li>
-                    <li>Day-by-day sessions with main and accessory work</li>
-                    <li>Execution standards and substitution notes</li>
-                </ul>
+            <aside class="workout-preview" aria-label="Plan personalization summary">
+                <h2>Live plan summary</h2>
+                <p>This updates as you answer each step so you can see exactly what the program will target.</p>
+                <div id="liveSummaryCard" class="live-summary-card">
+                    <p><strong>Program type:</strong> Select your goal and schedule.</p>
+                    <p><strong>Session setup:</strong> Add workout length and equipment.</p>
+                    <p><strong>Focus:</strong> Set your priority area and constraints.</p>
+                </div>
+                <section class="qualifier-card">
+                    <h3>Who this is for</h3>
+                    <p>Lifters who want structured progression, clear training sessions, and a practical plan they can follow consistently.</p>
+                    <h3>Who this is not for</h3>
+                    <p>People looking for random circuit workouts, entertainment-style training, or rehab programming.</p>
+                </section>
             </aside>
         </div>
     </section>
@@ -194,9 +241,9 @@
         <div id="programWeeks"></div>
         <div id="substitutionNotes"></div>
         <div class="workout-cta-card">
-            <h3>Want coaching built around your exact needs?</h3>
-            <p>Work with me for direct feedback, weekly adjustments, and accountability that keeps your progress moving.</p>
-            <a class="cta-button" href="begin.html">Work with me</a>
+            <h3>Want this plan coached week to week?</h3>
+            <p>You now have a strong starting blueprint. Coaching adds direct feedback, weekly adjustments, accountability, and decision-making support so your training keeps moving forward.</p>
+            <a class="cta-button" href="begin.html">Apply for coaching</a>
         </div>
     </section>
 
