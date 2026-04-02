@@ -12,6 +12,25 @@
     var substitutionsTarget = document.getElementById('substitutionNotes');
     var errorTarget = document.getElementById('workoutFormError');
 
+    var formSteps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
+    var stepLabel = document.getElementById('stepLabel');
+    var stepProgressFill = document.getElementById('stepProgressFill');
+    var progressBar = form.querySelector('.step-progress-bar');
+    var prevButton = document.getElementById('prevStepButton');
+    var nextButton = document.getElementById('nextStepButton');
+    var submitButton = document.getElementById('submitPlanButton');
+    var liveSummaryCard = document.getElementById('liveSummaryCard');
+    var adaptationNote = document.getElementById('adaptationNote');
+
+    var estimateTargets = {
+        bench: document.getElementById('benchEstimate'),
+        squat: document.getElementById('squatEstimate'),
+        deadlift: document.getElementById('deadliftEstimate')
+    };
+
+    var currentStep = 1;
+    var totalSteps = formSteps.length;
+
     var weekPresets = {
         strength: [
             { pct: 0.7, sets: 4, reps: 6, note: 'Linear progression start' },
@@ -138,6 +157,34 @@
         return substitutions;
     }
 
+    function getAdaptationPreview(avoidLift, jointLimitation) {
+        var preview = [];
+        var liftNoteMap = {
+            'Back squat': 'Back squat will be replaced with squat patterns that reduce spinal loading while keeping lower-body strength work productive.',
+            'Barbell bench press': 'Barbell bench press will be replaced with pressing variations that are more joint-friendly and still overload chest/triceps.',
+            'Conventional deadlift': 'Conventional deadlift will be replaced by hinge options that manage fatigue while preserving posterior-chain progression.',
+            'Overhead press': 'Overhead pressing volume will shift toward shoulder-friendly pressing and delt-focused accessory work.'
+        };
+        var jointNoteMap = {
+            'Shoulder discomfort': 'Shoulder discomfort setting reduces high-risk pressing angles and emphasizes stable pressing mechanics.',
+            'Knee discomfort': 'Knee discomfort setting prioritizes controlled knee tracking, tempo work, and machine support where needed.',
+            'Low back discomfort': 'Low back discomfort setting reduces hinge fatigue and prioritizes supported movements for safer loading.',
+            'Wrist or elbow discomfort': 'Wrist/elbow discomfort setting shifts to neutral-grip and cable-friendly arm and pressing selections.'
+        };
+
+        if (liftNoteMap[avoidLift]) {
+            preview.push(liftNoteMap[avoidLift]);
+        }
+        if (jointNoteMap[jointLimitation]) {
+            preview.push(jointNoteMap[jointLimitation]);
+        }
+
+        if (!preview.length) {
+            return 'No limitations selected yet. Your base template will use standard barbell-friendly movement patterns.';
+        }
+        return preview.join(' ');
+    }
+
     function applyExerciseReplacements(name, avoidLift) {
         var lowerName = name.toLowerCase();
         if (avoidLift === 'Back squat' && lowerName.indexOf('squat') >= 0) {
@@ -178,6 +225,105 @@
             'Overall balanced development': 'balanced accessory distribution'
         };
         return map[priority] || 'balanced accessory distribution';
+    }
+
+    function getFormPayload() {
+        var formData = new FormData(form);
+        return {
+            goal: formData.get('goal'),
+            experience: formData.get('experience'),
+            frequency: formData.get('frequency'),
+            workoutLength: formData.get('workoutLength'),
+            equipment: formData.get('equipment'),
+            priority: formData.get('priority'),
+            avoidLift: formData.get('avoidLift'),
+            jointLimitation: formData.get('jointLimitation')
+        };
+    }
+
+    function updateLiveSummary() {
+        var data = getFormPayload();
+        var planType = [data.frequency ? data.frequency + '-day' : null, data.experience || null, data.goal || 'program'].filter(Boolean).join(' ');
+        var sessionLine = [data.workoutLength || 'Select workout length', data.equipment || 'select equipment'].join(' · ');
+        var focusLine = data.priority || 'Select a training priority';
+        var notes = [];
+
+        if (data.jointLimitation && data.jointLimitation !== 'None') {
+            notes.push(data.jointLimitation.replace('discomfort', 'friendly substitutions').trim());
+        }
+        if (data.avoidLift && data.avoidLift !== 'None') {
+            notes.push('Avoiding ' + data.avoidLift.toLowerCase());
+        }
+
+        liveSummaryCard.innerHTML = '<p><strong>Program type:</strong> ' + planType + '</p>'
+            + '<p><strong>Session setup:</strong> ' + sessionLine + '</p>'
+            + '<p><strong>Focus:</strong> ' + focusLine + '</p>'
+            + '<p><strong>Adjustments:</strong> ' + (notes.length ? notes.join(' · ') : 'No special substitutions selected') + '</p>';
+
+        if (adaptationNote) {
+            adaptationNote.textContent = getAdaptationPreview(data.avoidLift, data.jointLimitation);
+        }
+    }
+
+    function updateEstimate(lift) {
+        var knownInput = form.querySelector('input[name="' + lift + '1rm"]');
+        var weightInput = form.querySelector('input[name="' + lift + 'Weight"]');
+        var repsInput = form.querySelector('input[name="' + lift + 'Reps"]');
+        var target = estimateTargets[lift];
+
+        if (!knownInput || !weightInput || !repsInput || !target) {
+            return;
+        }
+
+        var known = parseFloat(knownInput.value);
+        if (!isNaN(known) && known > 0) {
+            target.textContent = 'Estimated 1RM: ' + roundToNearest5(known) + ' lbs (using known max)';
+            return;
+        }
+
+        var weight = parseFloat(weightInput.value);
+        var reps = parseFloat(repsInput.value);
+
+        if (!isNaN(weight) && !isNaN(reps) && weight > 0 && reps > 0) {
+            target.textContent = 'Estimated 1RM: ' + roundToNearest5(estimate1RM(weight, reps)) + ' lbs';
+            return;
+        }
+
+        target.textContent = 'Estimated 1RM: —';
+    }
+
+    function showStep(stepNumber) {
+        currentStep = stepNumber;
+        formSteps.forEach(function (step) {
+            var stepIndex = parseInt(step.getAttribute('data-step'), 10);
+            step.hidden = stepIndex !== currentStep;
+        });
+
+        stepLabel.textContent = 'Step ' + currentStep + ' of ' + totalSteps;
+        stepProgressFill.style.width = ((currentStep / totalSteps) * 100) + '%';
+        progressBar.setAttribute('aria-valuenow', String(currentStep));
+
+        prevButton.hidden = currentStep === 1;
+        nextButton.hidden = currentStep === totalSteps;
+        submitButton.hidden = currentStep !== totalSteps;
+
+        var firstInput = form.querySelector('.form-step[data-step="' + currentStep + '"] input, .form-step[data-step="' + currentStep + '"] select');
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
+
+    function validateStep(stepNumber) {
+        var stepFields = form.querySelectorAll('.form-step[data-step="' + stepNumber + '"] [required]');
+        for (var i = 0; i < stepFields.length; i++) {
+            if (!stepFields[i].value) {
+                errorTarget.textContent = 'Please complete all required fields in this step before continuing.';
+                stepFields[i].focus();
+                return false;
+            }
+        }
+        errorTarget.textContent = '';
+        return true;
     }
 
     function renderSummary(data, split) {
@@ -283,7 +429,13 @@
         };
 
         weeks.forEach(function (week, weekIndex) {
-            html += '<article class="program-card"><h3>Week ' + (weekIndex + 1) + ' <span>' + week.note + '</span></h3><div class="week-grid">';
+            html += '<article class="program-card"><h3>Week ' + (weekIndex + 1) + ' <span>' + week.note + '</span></h3>';
+            html += '<div class="day-tabs" role="tablist" aria-label="Week ' + (weekIndex + 1) + ' training days">';
+            split.forEach(function (dayName, dayIndex) {
+                var isActive = dayIndex === 0;
+                html += '<button type="button" class="day-tab-button' + (isActive ? ' is-active' : '') + '" role="tab" aria-selected="' + (isActive ? 'true' : 'false') + '" data-week="' + weekIndex + '" data-day="' + dayIndex + '">Day ' + (dayIndex + 1) + '</button>';
+            });
+            html += '</div><div class="week-grid">';
 
             split.forEach(function (dayName, dayIndex) {
                 var pool = exercisesByDay(dayName, data.equipment).map(function (name) {
@@ -303,7 +455,7 @@
                     return '<li><span class="label">Accessory</span><strong>' + exercise + '</strong><span>3 sets x ' + profile.accessoryRepRange + '</span></li>';
                 }).join('');
 
-                html += '<div class="day-card">'
+                html += '<section class="day-card' + (dayIndex === 0 ? ' is-active' : '') + '" role="tabpanel" data-week-panel="' + weekIndex + '" data-day-panel="' + dayIndex + '"' + (dayIndex === 0 ? '' : ' hidden') + '>'
                     + '<h4>Day ' + (dayIndex + 1) + ': ' + dayName + '</h4>'
                     + '<p class="day-card__meta"><span>' + sessionFocus + '</span><span>Estimated duration: ' + estimatedDuration + '</span></p>'
                     + '<ul>'
@@ -311,7 +463,7 @@
                     + accessoryList
                     + '</ul>'
                     + '<p class="rest-note">Rest: ' + restText + '</p>'
-                    + '</div>';
+                    + '</section>';
             });
 
             html += '</div></article>';
@@ -330,21 +482,63 @@
             + '</ul></article>';
     }
 
+    nextButton.addEventListener('click', function () {
+        if (!validateStep(currentStep)) {
+            return;
+        }
+        showStep(Math.min(currentStep + 1, totalSteps));
+    });
+
+    prevButton.addEventListener('click', function () {
+        errorTarget.textContent = '';
+        showStep(Math.max(currentStep - 1, 1));
+    });
+
+    form.addEventListener('input', function () {
+        updateLiveSummary();
+        updateEstimate('bench');
+        updateEstimate('squat');
+        updateEstimate('deadlift');
+    });
+
+    form.addEventListener('change', function () {
+        updateLiveSummary();
+    });
+
+    weeksTarget.addEventListener('click', function (event) {
+        var trigger = event.target.closest('.day-tab-button');
+        if (!trigger) {
+            return;
+        }
+
+        var week = trigger.getAttribute('data-week');
+        var day = trigger.getAttribute('data-day');
+
+        var buttons = weeksTarget.querySelectorAll('.day-tab-button[data-week="' + week + '"]');
+        Array.prototype.forEach.call(buttons, function (button) {
+            var isCurrent = button.getAttribute('data-day') === day;
+            button.classList.toggle('is-active', isCurrent);
+            button.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        });
+
+        var panels = weeksTarget.querySelectorAll('.day-card[data-week-panel="' + week + '"]');
+        Array.prototype.forEach.call(panels, function (panel) {
+            var isCurrent = panel.getAttribute('data-day-panel') === day;
+            panel.classList.toggle('is-active', isCurrent);
+            panel.hidden = !isCurrent;
+        });
+    });
+
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         errorTarget.textContent = '';
 
+        if (!validateStep(currentStep)) {
+            return;
+        }
+
         var formData = new FormData(form);
-        var payload = {
-            goal: formData.get('goal'),
-            experience: formData.get('experience'),
-            frequency: formData.get('frequency'),
-            workoutLength: formData.get('workoutLength'),
-            equipment: formData.get('equipment'),
-            priority: formData.get('priority'),
-            avoidLift: formData.get('avoidLift'),
-            jointLimitation: formData.get('jointLimitation')
-        };
+        var payload = getFormPayload();
 
         if (!payload.goal || !payload.experience || !payload.frequency || !payload.workoutLength || !payload.equipment || !payload.priority) {
             errorTarget.textContent = 'Please complete all required fields before generating your program.';
@@ -375,4 +569,10 @@
         resultsSection.hidden = false;
         resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+
+    updateLiveSummary();
+    updateEstimate('bench');
+    updateEstimate('squat');
+    updateEstimate('deadlift');
+    showStep(1);
 })();
