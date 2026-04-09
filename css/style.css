@@ -1989,11 +1989,10 @@ article ul {
     }
 
     .workout-submit-wrap {
-        position: sticky;
-        bottom: 0.35rem;
-        background: linear-gradient(180deg, rgba(248, 250, 252, 0.35), rgba(248, 250, 252, 0.96));
-        padding: 0.8rem 0 0.2rem;
-        backdrop-filter: blur(4px);
+        position: static;
+        background: transparent;
+        padding: 0.9rem 0 0;
+        backdrop-filter: none;
     }
 
     .form-nav-buttons {
