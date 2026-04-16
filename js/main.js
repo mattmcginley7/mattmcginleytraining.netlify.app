@@ -308,7 +308,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'not-gaining-muscle': { topic: 'Muscle building', date: '2026-02-24', startHere: false },
         'consistency-beats-motivation': { topic: 'Mindset', date: '2026-03-02', startHere: false },
         'cheat-code-losing-weight': { topic: 'Fat loss', date: '2026-03-09', startHere: false },
-        'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false }
+        'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false },
+        'why-youre-stuck-checklist': { topic: 'Programming', date: '2026-04-16', startHere: false }
     };
 
     var prettyDate = function (isoDate) {
