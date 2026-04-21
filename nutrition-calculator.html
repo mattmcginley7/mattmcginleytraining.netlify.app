@@ -13,17 +13,17 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
-            --bg: #f8fafc;
-            /* neutral canvas */
-            --panel: #ffffff;
+            --bg: transparent;
+            /* canvas inherits the global site backdrop */
+            --panel: rgba(8, 19, 53, 0.9);
             /* cards */
-            --muted: #4b5563;
+            --muted: #cbd5e1;
             /* secondary text */
-            --fg: #0f172a;
+            --fg: #f8fafc;
             /* primary text */
-            --brand: #2563eb;
-            /* blue accent */
-            --brand-2: #60a5fa;
+            --brand: #f97316;
+            /* orange accent */
+            --brand-2: #fdba74;
             /* lighter accent */
             --ok: #16a34a;
             /* success */
@@ -31,9 +31,9 @@
             /* warning */
             --err: #dc2626;
             /* error */
-            --ring: 0 0 0 3px rgba(37, 99, 235, .35);
+            --ring: 0 0 0 3px rgba(249, 115, 22, .35);
             --radius: 16px;
-            --shadow: 0 10px 28px rgba(2, 8, 23, .06);
+            --shadow: 0 16px 32px rgba(2, 8, 23, .35);
         }
 
         * {
@@ -91,6 +91,7 @@
         .card {
             background: var(--panel);
             border-radius: var(--radius);
+            border: 1px solid rgba(148, 163, 184, 0.28);
             box-shadow: var(--shadow);
             padding: 18px
         }

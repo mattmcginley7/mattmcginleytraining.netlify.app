@@ -3,18 +3,18 @@
 }
 
 :root {
-    --primary-color: #0f172a;
-    --primary-soft: #1e293b;
+    --primary-color: #040b1f;
+    --primary-soft: #0b1535;
     --cta-color: #f97316;
-    --accent-color: #14b8a6;
-    --accent-strong: #0f766e;
-    --surface-color: #ffffff;
-    --surface-muted: #eef2f7;
-    --surface-tint: rgba(255, 255, 255, 0.72);
-    --border-color: #d7e0ea;
-    --text-color: #0f172a;
-    --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
-    --shadow-card: 0 16px 40px rgba(15, 23, 42, 0.12);
+    --accent-color: #fb923c;
+    --accent-strong: #f97316;
+    --surface-color: rgba(8, 19, 53, 0.9);
+    --surface-muted: rgba(8, 19, 53, 0.65);
+    --surface-tint: rgba(10, 24, 63, 0.8);
+    --border-color: rgba(148, 163, 184, 0.32);
+    --text-color: #f8fafc;
+    --shadow-soft: 0 16px 36px rgba(2, 6, 23, 0.35);
+    --shadow-card: 0 24px 50px rgba(2, 6, 23, 0.48);
 }
 
 body {
@@ -23,7 +23,10 @@ body {
     padding: 0;
     line-height: 1.7;
     font-size: 18px;
-    background: radial-gradient(circle at top, #f8fafc 0%, #e2e8f0 65%, #dbeafe 100%);
+    background:
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 28%),
+        radial-gradient(circle at 18% 10%, rgba(56, 189, 248, 0.15), transparent 30%),
+        linear-gradient(180deg, #020617 0%, #030b21 45%, #040b1f 100%);
     color: var(--text-color);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -37,7 +40,7 @@ h1 {
     font-size: 2.1em;
     margin: 0.5em 0 0 0;
     text-align: center;
-    color: var(--primary-color);
+    color: #f8fafc;
     letter-spacing: -0.02em;
 }
 
@@ -48,7 +51,7 @@ h2 {
     font-size: 1.6em;
     margin: 0.9em 0 0.5em 0;
     text-align: center;
-    color: var(--primary-color);
+    color: #f8fafc;
 }
 h3, h4{
     text-align: center;
@@ -63,6 +66,7 @@ section {
     border-radius: 20px;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(8px);
 }
 
 .intro-section {
@@ -76,9 +80,9 @@ section {
     overflow: hidden;
     padding: clamp(2.5rem, 4vw, 4rem) 1.5rem;
     background:
-        radial-gradient(circle at top left, rgba(20, 184, 166, 0.18), transparent 35%),
-        radial-gradient(circle at top right, rgba(249, 115, 22, 0.18), transparent 32%),
-        linear-gradient(135deg, #ffffff 0%, #eff6ff 45%, #fff7ed 100%);
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 40%),
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.2), transparent 36%),
+        linear-gradient(140deg, rgba(2, 6, 23, 0.92) 0%, rgba(6, 19, 52, 0.92) 45%, rgba(7, 29, 76, 0.92) 100%);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -126,9 +130,9 @@ section {
     justify-content: center;
     padding: 0.45rem 0.85rem;
     border-radius: 999px;
-    background: rgba(15, 118, 110, 0.08);
-    border: 1px solid rgba(15, 118, 110, 0.12);
-    color: var(--accent-strong);
+    background: rgba(249, 115, 22, 0.14);
+    border: 1px solid rgba(249, 115, 22, 0.35);
+    color: #fdba74;
     font-weight: 700;
     font-size: 0.82rem;
     text-transform: uppercase;
@@ -145,7 +149,7 @@ section {
     padding: 1rem 1.1rem;
     border-radius: 18px;
     background: var(--surface-tint);
-    border: 1px solid rgba(148, 163, 184, 0.35);
+    border: 1px solid rgba(148, 163, 184, 0.3);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(6px);
 }
@@ -154,13 +158,13 @@ section {
     display: block;
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #f8fafc;
 }
 
 .hero-trust__label {
     display: block;
     margin-top: 0.25rem;
-    color: #475569;
+    color: #d1d5db;
     font-size: 0.95rem;
 }
 
@@ -173,7 +177,7 @@ section {
     width: min(100%, 430px);
     border-radius: 28px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.86);
+    background: rgba(7, 18, 46, 0.88);
     border: 1px solid rgba(148, 163, 184, 0.35);
     box-shadow: 0 28px 55px rgba(15, 23, 42, 0.18);
     backdrop-filter: blur(8px);
@@ -197,7 +201,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-weight: 700;
-    color: #64748b;
+    color: #cbd5e1;
 }
 
 .hero-card__list {
@@ -636,7 +640,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #0f766e;
+    color: #fdba74;
     text-decoration: underline;
     text-decoration-thickness: 2px;
 }
@@ -658,58 +662,73 @@ a:focus {
     margin-top: 20px;
 }
 
-nav {
+body > nav {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    background: linear-gradient(90deg, var(--primary-color), #111827);
+    background: transparent;
     color: #fff;
-    padding: 10px 0;
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+    padding: 16px 12px;
+    box-shadow: 0 12px 26px rgba(2, 6, 23, 0.32);
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-nav ul {
+body > nav ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    background: rgba(2, 14, 44, 0.9);
+    backdrop-filter: blur(8px);
+    overflow-x: auto;
+    max-width: min(1380px, 100%);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-nav li {
-    margin: 0.5em 1em;
+body > nav ul::-webkit-scrollbar {
+    display: none;
 }
 
-nav a {
+body > nav li {
+    margin: 0;
+}
+
+body > nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 18px;
-    padding: 0.25em 0.75em;
-    border-radius: 4px;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 0.65rem 1.15rem;
+    border-radius: 999px;
     white-space: nowrap;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav a:focus-visible {
+body > nav a:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.75);
     outline-offset: 2px;
 }
 
-nav a[aria-current="page"] {
+body > nav a[aria-current="page"] {
     background: rgba(249, 115, 22, 0.95);
-    color: #fff;
-    box-shadow: 0 6px 14px rgba(249, 115, 22, 0.35);
+    color: #ffffff;
+    box-shadow: 0 12px 22px rgba(249, 115, 22, 0.4);
 }
 
-nav a:hover {
-    background-color: var(--cta-color);
+body > nav a:hover {
+    background-color: rgba(15, 23, 42, 0.5);
+    border-color: rgba(148, 163, 184, 0.35);
     color: #fff;
     transform: translateY(-1px);
-    box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 8px 16px rgba(2, 6, 23, 0.4);
 }
 
 #mainImage{
@@ -752,7 +771,7 @@ button:focus {
 
 .emailIG {
     font-weight: 600;
-    color: var(--primary-color);
+    color: #e2e8f0;
 }
 .programButtons{
     height: 30px;
@@ -807,11 +826,11 @@ form{
         font-size: 1.5em;
     }
 
-    nav {
+    body > nav {
         padding: 0.75rem 1rem;
     }
 
-    nav ul {
+    body > nav ul {
         gap: 0.5rem;
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -823,45 +842,40 @@ form{
         -webkit-overflow-scrolling: touch;
     }
 
-    nav ul::-webkit-scrollbar {
+    body > nav ul::-webkit-scrollbar {
         display: none;
     }
 
-    nav ul {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    nav li {
+    body > nav li {
         flex: 0 0 auto;
         margin: 0;
         scroll-snap-align: center;
     }
 
-    nav a {
+    body > nav a {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         font-size: 0.9rem;
         padding: 0.5rem 0.9rem;
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(148, 163, 184, 0.35);
         border-radius: 999px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 18px rgba(2, 6, 23, 0.3);
         transition: transform 0.2s ease, background-color 0.3s ease;
     }
 
-    nav a[aria-current="page"] {
+    body > nav a[aria-current="page"] {
         background-color: rgba(249, 115, 22, 0.95);
         border-color: rgba(249, 115, 22, 0.95);
     }
 
-    nav a:active {
+    body > nav a:active {
         transform: scale(0.98);
     }
 
-    nav a:hover {
-        background-color: rgba(249, 115, 22, 0.85);
+    body > nav a:hover {
+        background-color: rgba(30, 41, 59, 0.95);
     }
 
     #edCoanPhaseParagraph {
