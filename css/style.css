@@ -1518,6 +1518,10 @@ section,
     box-shadow: var(--shadow-deep);
 }
 
+.story-section {
+    background: linear-gradient(165deg, rgba(10, 30, 58, 0.95), rgba(7, 20, 40, 0.95));
+}
+
 .hero {
     background:
         radial-gradient(circle at 15% 0%, rgba(255, 106, 26, 0.22), transparent 36%),
