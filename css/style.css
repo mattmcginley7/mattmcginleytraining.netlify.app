@@ -1456,6 +1456,309 @@ article ul {
     align-items: start;
 }
 
+/* ===== Premium dark mobile-first redesign overrides ===== */
+:root {
+    --bg-base: #030816;
+    --bg-elevated: #07152d;
+    --bg-surface: #0b1f3d;
+    --bg-surface-2: #0f2a4f;
+    --text-primary: #f8fbff;
+    --text-secondary: #d1deef;
+    --text-muted: #9eb4cf;
+    --accent-orange: #ff6a1a;
+    --accent-orange-strong: #ff5400;
+    --border-strong: rgba(130, 166, 208, 0.34);
+    --glow-orange: 0 14px 34px rgba(255, 106, 26, 0.34);
+    --shadow-deep: 0 18px 36px rgba(1, 6, 20, 0.62);
+    --focus-ring: 0 0 0 3px rgba(255, 130, 48, 0.42);
+}
+
+body {
+    background:
+        radial-gradient(circle at 14% 0%, rgba(255, 106, 26, 0.18), transparent 32%),
+        radial-gradient(circle at 90% 18%, rgba(62, 120, 255, 0.18), transparent 34%),
+        linear-gradient(180deg, #020611 0%, #020917 42%, #031127 100%);
+    color: var(--text-secondary);
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-primary);
+}
+
+p, li, label, td, th {
+    color: var(--text-secondary);
+}
+
+a {
+    color: #ff934d;
+}
+
+a:hover,
+a:focus {
+    color: #ffab73;
+}
+
+a:visited {
+    color: #ff9f61;
+}
+
+section,
+.blog-discovery,
+.article-section article,
+.calculator-card,
+.resource-card,
+.workout-form,
+.workout-preview,
+.program-card,
+.program-summary-card,
+.workout-cta-card,
+.hero-preview {
+    background: linear-gradient(165deg, rgba(10, 30, 58, 0.95), rgba(7, 20, 40, 0.95));
+    border: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-deep);
+}
+
+.hero {
+    background:
+        radial-gradient(circle at 15% 0%, rgba(255, 106, 26, 0.22), transparent 36%),
+        radial-gradient(circle at 90% 15%, rgba(67, 120, 255, 0.24), transparent 36%),
+        linear-gradient(180deg, rgba(4, 13, 30, 0.96) 0%, rgba(3, 13, 31, 0.98) 100%);
+    border-bottom: 1px solid rgba(129, 165, 210, 0.26);
+}
+
+.hero__eyebrow {
+    background: rgba(255, 106, 26, 0.15);
+    border-color: rgba(255, 106, 26, 0.38);
+    color: #ffc49c;
+}
+
+.tagline,
+.subheading,
+.hero-card__label,
+.article-card__meta,
+.article-meta,
+.section-label,
+.metric__label,
+.hero-trust__label,
+.field-help,
+.article-nav__hint {
+    color: var(--text-muted);
+}
+
+.hero-card,
+.goal-recommendation,
+.hero-trust__item,
+.metric,
+.info-card,
+.result-card,
+.testimonial-card,
+.results-cta,
+.story-highlight,
+.preview-card,
+.workout-fieldset {
+    background: linear-gradient(160deg, rgba(14, 35, 66, 0.94), rgba(8, 22, 43, 0.97));
+    border-color: rgba(137, 169, 208, 0.3);
+    box-shadow: var(--shadow-deep);
+}
+
+.hero-card__body ul li,
+.checklist li,
+.result-card__list li,
+.testimonial-card blockquote,
+.preview-card p,
+.preview-card ul,
+.article-excerpt,
+.workout-form__lead {
+    color: var(--text-secondary);
+}
+
+.checklist li::before {
+    background: rgba(255, 106, 26, 0.2);
+    color: #ffba89;
+}
+
+.cta-button,
+button,
+.article-nav__toggle {
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-strong) 100%);
+    color: #fff;
+    box-shadow: var(--glow-orange);
+}
+
+.cta-button:hover,
+.cta-button:focus,
+button:hover,
+button:focus,
+.article-nav__toggle:hover,
+.article-nav__toggle:focus {
+    background: linear-gradient(135deg, #ff7b32 0%, #ff6415 100%);
+    color: #fff;
+}
+
+.secondary-button {
+    background: rgba(5, 18, 38, 0.9);
+    border: 2px solid rgba(255, 106, 26, 0.75);
+    color: #ffe0cc;
+}
+
+.secondary-button:hover,
+.secondary-button:focus {
+    color: #fff;
+    background: rgba(9, 26, 50, 0.98);
+    box-shadow: 0 0 0 1px rgba(255, 106, 26, 0.5), 0 14px 28px rgba(2, 8, 24, 0.56);
+}
+
+input,
+textarea,
+select {
+    background: rgba(5, 17, 34, 0.95);
+    color: var(--text-primary);
+    border: 1px solid rgba(152, 182, 220, 0.45);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #89a0be;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+nav {
+    background: rgba(2, 12, 28, 0.86);
+    border-bottom: 1px solid rgba(132, 170, 216, 0.24);
+    backdrop-filter: blur(10px);
+}
+
+nav ul {
+    background: rgba(5, 22, 44, 0.82);
+    border: 1px solid rgba(124, 161, 206, 0.26);
+    border-radius: 999px;
+    padding: 0.25rem;
+    gap: 0.35rem;
+}
+
+nav a {
+    border-radius: 999px;
+    color: #f7fbff;
+}
+
+nav a:hover {
+    background: rgba(255, 106, 26, 0.92);
+}
+
+nav a[aria-current="page"] {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-strong));
+    color: #fff;
+}
+
+.emailIG {
+    color: #ffb07a;
+}
+
+.article-nav__panel,
+.start-here-card,
+.article-card,
+.blog-filter {
+    background: linear-gradient(160deg, rgba(10, 30, 57, 0.95), rgba(8, 22, 42, 0.95));
+    border-color: rgba(124, 161, 206, 0.34);
+    color: var(--text-secondary);
+}
+
+.article-nav a {
+    color: var(--text-primary);
+}
+
+.article-nav a:hover,
+.article-nav a:focus {
+    background-color: rgba(255, 106, 26, 0.2);
+    color: #fff;
+}
+
+.article-table th {
+    background: rgba(255, 106, 26, 0.2);
+    color: #ffe4d0;
+}
+
+.article-table td,
+.article-table th {
+    border-color: rgba(130, 165, 207, 0.4);
+}
+
+@media (max-width: 600px) {
+    section {
+        margin: 1.2rem 0.8rem;
+        padding: 1.1rem 0.95rem;
+        border-radius: 18px;
+    }
+
+    .hero {
+        padding: 1.75rem 1rem 1.35rem;
+    }
+
+    .hero__copy {
+        text-align: left;
+    }
+
+    .hero__copy h1,
+    .hero__copy .tagline,
+    .hero__copy .subheading,
+    .hero__copy aside {
+        text-align: left;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+        line-height: 1.06;
+        letter-spacing: -0.03em;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    nav {
+        padding: 0.75rem 0.65rem;
+    }
+
+    nav ul {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        width: 100%;
+        padding: 0.25rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.56rem 1rem;
+        background: transparent;
+        border: 1px solid transparent;
+    }
+
+    nav a:not([aria-current="page"]) {
+        background: rgba(143, 173, 214, 0.14);
+        border-color: rgba(140, 173, 211, 0.22);
+    }
+
+    .hero-actions {
+        gap: 0.65rem;
+    }
+
+    .cta-button,
+    .secondary-button {
+        border-radius: 16px;
+        min-height: 54px;
+    }
+}
+
 .workout-trust-pill {
     display: inline-block;
     margin: 0 0 0.7rem;
@@ -2003,4 +2306,44 @@ article ul {
     .day-tab-button {
         width: 100%;
     }
+}
+
+/* final override order for premium dark theme */
+.workout-trust-pill,
+.preview-label,
+.day-card .label,
+.program-card h3 span {
+    color: var(--text-muted);
+}
+
+.workout-trust-pill,
+.preview-card,
+.hero-preview,
+.workout-form,
+.workout-preview,
+.program-card,
+.program-summary-card,
+.workout-cta-card,
+.workout-fieldset,
+.day-card,
+.table-wrap,
+.qualifier-card {
+    background: linear-gradient(160deg, rgba(10, 30, 57, 0.95), rgba(8, 22, 42, 0.95));
+    border-color: rgba(124, 161, 206, 0.34);
+    color: var(--text-secondary);
+}
+
+.day-card li {
+    border-left-color: rgba(255, 106, 26, 0.65);
+}
+
+.workout-form label,
+.step-label,
+.workout-form h2,
+.workout-preview h2,
+.program-card h3,
+.workout-cta-card h3,
+.qualifier-card h3,
+.preview-card h3 {
+    color: var(--text-primary);
 }
