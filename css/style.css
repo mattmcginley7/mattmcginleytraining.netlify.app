@@ -1720,6 +1720,35 @@ nav a[aria-current="page"] {
     color: #fff;
 }
 
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    background: linear-gradient(180deg, rgba(1, 8, 31, 0.98) 0%, rgba(2, 12, 34, 0.96) 100%);
+    border-bottom: 1px solid rgba(255, 107, 8, 0.25);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
+}
+
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.site-brand img {
+    display: block;
+    width: clamp(180px, 22vw, 360px);
+    max-width: 100%;
+    height: auto;
+}
+
+.site-nav ul {
+    margin-left: auto;
+}
+
 .emailIG {
     color: #ffb07a;
 }
@@ -1808,6 +1837,21 @@ nav a[aria-current="page"] {
     nav a:not([aria-current="page"]) {
         background: rgba(143, 173, 214, 0.14);
         border-color: rgba(140, 173, 211, 0.22);
+    }
+
+    .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+        padding: 0.65rem 0.6rem 0.75rem;
+    }
+
+    .site-brand img {
+        width: clamp(150px, 58vw, 300px);
+    }
+
+    .site-nav ul {
+        margin-left: 0;
     }
 
     .hero-actions {
