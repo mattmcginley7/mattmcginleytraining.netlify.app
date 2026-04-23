@@ -681,6 +681,28 @@ nav {
     z-index: 100;
 }
 
+
+
+.nav-brand {
+    width: min(1180px, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.nav-brand a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-brand img {
+    display: block;
+    width: min(100%, 320px);
+    height: auto;
+}
+
 nav ul {
     list-style: none;
     margin: 0;
@@ -1788,6 +1810,15 @@ nav a[aria-current="page"] {
 
     nav {
         padding: 0.75rem 0.65rem;
+    }
+
+    .nav-brand {
+        padding: 0 0.2rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .nav-brand img {
+        width: min(100%, 260px);
     }
 
     nav ul {
