@@ -668,6 +668,30 @@ a:focus {
     margin-top: 20px;
 }
 
+.site-logo-top {
+    display: flex;
+    justify-content: center;
+    padding: 0.85rem 1rem 0.55rem;
+    background: linear-gradient(90deg, rgba(1, 8, 31, 0.95), rgba(6, 24, 82, 0.95));
+}
+
+.site-logo-top__inner {
+    width: min(100%, 760px);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.95rem 1.35rem;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+}
+
+.site-logo-top__inner img {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    height: auto;
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -863,6 +887,15 @@ form{
 
     nav {
         padding: 0.75rem 1rem;
+    }
+
+    .site-logo-top {
+        padding: 0.75rem 0.9rem 0.45rem;
+    }
+
+    .site-logo-top__inner {
+        padding: 0.65rem 0.75rem;
+        border-radius: 18px;
     }
 
     nav ul {
