@@ -198,6 +198,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+
+    var siteHeader = document.querySelector('.site-header');
+    var siteMenuButton = document.querySelector('.site-header__menu-button');
+    if (siteHeader && siteMenuButton) {
+        siteMenuButton.addEventListener('click', function () {
+            var isOpen = siteHeader.classList.toggle('site-header--open');
+            siteMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
+
     var goalConfig = {
         'fat-loss': {
             title: 'Start with consistent training + a manageable calorie deficit',

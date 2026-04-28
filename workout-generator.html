@@ -11,8 +11,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
+    <nav class="site-header" aria-label="Primary navigation">
+        <a class="site-header__brand" href="index.html">
+            <img src="381180AB-BEB5-4D56-95B0-6B0FF96F9CB3.png" alt="Matt McGinley Training logo" class="site-header__logo">
+        </a>
+        <button class="site-header__menu-button" type="button" aria-expanded="false" aria-controls="site-nav-list" aria-label="Toggle navigation menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+        <ul id="site-nav-list">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
