@@ -2415,9 +2415,13 @@ nav a[aria-current="page"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-    flex-wrap: nowrap;
-    padding: 0.75rem 0.9rem;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    min-height: 76px;
+    padding: 14px 22px;
+    background: #050b14;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: none;
 }
 
 .site-header__brand {
@@ -2428,9 +2432,9 @@ nav a[aria-current="page"] {
 }
 
 .site-header__logo {
-    width: clamp(180px, 58vw, 360px);
-    max-width: 100%;
-    max-height: 64px;
+    width: clamp(190px, 56vw, 230px);
+    max-width: 65vw;
+    max-height: 48px;
     height: auto;
     object-fit: contain;
     display: block;
@@ -2442,26 +2446,35 @@ nav a[aria-current="page"] {
     justify-content: center;
     flex-direction: column;
     gap: 0.28rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid rgba(140, 173, 211, 0.45);
-    background: rgba(10, 26, 49, 0.9);
-    min-width: 44px;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    min-width: 48px;
     padding: 0;
     box-shadow: none;
+    flex: 0 0 auto;
 }
 
 .site-header__menu-button span {
-    width: 22px;
+    width: 20px;
     height: 2px;
-    background: #f7fbff;
+    background: #fff;
     border-radius: 999px;
+}
+
+.site-header ul {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
 }
 
 @media (max-width: 600px) {
     .site-header {
-        align-items: flex-start;
+        min-height: 72px;
+        padding: 14px 20px;
     }
 
     .site-header__menu-button {
@@ -2469,17 +2482,40 @@ nav a[aria-current="page"] {
     }
 
     .site-header__logo {
-        width: clamp(160px, 54vw, 300px);
-        max-height: 56px;
+        width: clamp(190px, 56vw, 230px);
+        max-width: 65vw;
+        max-height: 48px;
     }
 
     .site-header ul {
         display: none;
         width: 100%;
-        margin-top: 0.65rem;
+        margin-top: 0.6rem;
     }
 
     .site-header.site-header--open ul {
         display: flex;
+        border-radius: 18px;
+        padding: 0.35rem;
+        background: rgba(5, 22, 44, 0.88);
+        border: 1px solid rgba(124, 161, 206, 0.26);
+    }
+}
+
+@media (max-width: 380px) {
+    .site-header {
+        padding-inline: 16px;
+    }
+
+    .site-header__logo {
+        width: clamp(165px, 54vw, 210px);
+        max-height: 44px;
+    }
+
+    .site-header__menu-button {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        border-radius: 14px;
     }
 }
