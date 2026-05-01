@@ -14,17 +14,24 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" aria-current="page">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="articles.html">Articles</a></li>
-            <li><a href="calculators.html">Calculators</a></li>
-            <li><a href="workout-generator.html">Workout Generator</a></li>
-            <li><a href="nutrition-calculator.html">Nutrition Calculator</a></li>
-            <li><a href="begin.html">Begin</a></li>
+    <nav class="site-nav">
+        <a class="site-brand" href="index.html" aria-label="Matt McGinley Personal Training home">
+            <span class="site-brand__mark" aria-hidden="true">MM</span>
+            <span class="site-brand__text">Matt McGinley Personal Training</span>
+        </a>
+        <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open navigation menu">
+            <span class="site-nav__hamburger" aria-hidden="true"></span>
+        </button>
+        <ul id="site-menu" class="site-nav__menu">
+                <li><a href="index.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5.25V14h-4.5v7H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg></span><span>Home</span></a></li>
+                <li><a href="about.html" aria-current="page"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.75 0-6.75 1.88-6.75 4.2V21h13.5v-2.55c0-2.32-3-4.2-6.75-4.2z"/></svg></span><span>About</span></a></li>
+                <li><a href="services.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.75h15v3h-15zm0 5.25h15v3h-15zm0 5.25h15v3h-15z"/></svg></span><span>Services</span></a></li>
+                <li><a href="resources.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 4.5h13.5A1.5 1.5 0 0 1 20.25 6v12a1.5 1.5 0 0 1-1.5 1.5H8.25l-4.5-4.5V6a1.5 1.5 0 0 1 1.5-1.5zm3 13.5v-3h-3z"/></svg></span><span>Resources</span></a></li>
+                <li><a href="articles.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 4.5h13.5v15h-13.5zm3 3v1.5h7.5V7.5zm0 3.75v1.5h7.5v-1.5zm0 3.75v1.5h5.25V15z"/></svg></span><span>Articles</span></a></li>
+                <li><a href="calculators.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75h12A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75zm1.5 3v3h9v-3zm0 4.5v1.5H9v-1.5zm3 0v1.5h1.5v-1.5zm3 0v1.5H15v-1.5zm-6 3v1.5H9v-1.5zm3 0v1.5h1.5v-1.5zm3 0v1.5H15v-1.5z"/></svg></span><span>Calculators</span></a></li>
+                <li><a href="workout-generator.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.25 9h3v6h-3zm16.5 0h3v6h-3zM6 10.5h12v3H6zm1.5-3h2.25v9H7.5zm6.75 0h2.25v9h-2.25z"/></svg></span><span>Workout Generator</span></a></li>
+                <li><a href="nutrition-calculator.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3.75a3.75 3.75 0 0 1 3.75 3.75c0 1.6-1.01 3.05-2.45 3.57l.95 8.68H6.3l.95-8.68A3.75 3.75 0 0 1 7.5 3.75zm8.25 0c.41 0 .75.34.75.75v15.75h-1.5V12h-2.25V4.5c0-.41.34-.75.75-.75z"/></svg></span><span>Nutrition Calculator</span></a></li>
+                <li><a href="begin.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.25 5.25 9 6.75-9 6.75z"/></svg></span><span>Begin</span></a></li>
         </ul>
     </nav>
     <header class="hero">
