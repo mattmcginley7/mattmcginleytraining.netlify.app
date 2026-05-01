@@ -167,6 +167,15 @@ function calculateBMI() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    var siteNav = document.querySelector('.site-nav');
+    var menuToggle = document.querySelector('.site-nav__toggle');
+    if (siteNav && menuToggle) {
+        menuToggle.addEventListener('click', function () {
+            var isOpen = siteNav.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
+
     var smolovButton = document.querySelector('#smolovCalculator');
     if (smolovButton) {
         smolovButton.addEventListener('click', smolovNumbers);
