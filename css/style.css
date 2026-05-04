@@ -1198,6 +1198,10 @@ article ul {
     margin: 0;
     padding: 0;
     display: block;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    gap: 0;
 }
 
 .article-nav__toggle {
