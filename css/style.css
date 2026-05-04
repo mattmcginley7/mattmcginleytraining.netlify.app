@@ -130,17 +130,54 @@ section {
 
 .hero__eyebrow {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.45rem 0.85rem;
-    border-radius: 999px;
-    background: rgba(255, 107, 8, 0.16);
-    border: 1px solid rgba(255, 107, 8, 0.35);
-    color: #ffd6be;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0;
+    max-width: min(100%, 34rem);
+    color: #ffab73;
     font-weight: 700;
-    font-size: 0.82rem;
+    font-size: 0.74rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.13em;
+}
+
+.eyebrow-icon {
+    width: 18px;
+    height: 10px;
+    margin-top: 0.28rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 124, 51, 0.75);
+    box-shadow: 0 0 10px rgba(255, 124, 51, 0.45);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.eyebrow-icon::before,
+.eyebrow-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(255, 124, 51, 0.88);
+    transform: translateY(-50%);
+}
+
+.eyebrow-icon::before { left: -4px; }
+.eyebrow-icon::after { right: -4px; }
+
+.eyebrow-divider {
+    width: 1px;
+    min-height: 1.5em;
+    background: rgba(255, 171, 115, 0.75);
+    margin-top: 0.05rem;
+    flex-shrink: 0;
+}
+
+.hero-eyebrow {
+    line-height: 1.45;
+    overflow-wrap: anywhere;
 }
 
 .hero-trust {
@@ -949,31 +986,40 @@ nav a:hover {
     position: sticky;
 }
 
-.site-brand {
+.site-brand,
+.brand-lockup {
     display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.7rem;
     text-decoration: none;
     color: #fff;
 }
 
-.site-brand__mark {
-    width: 2.2rem;
-    height: 2.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.55);
+.site-brand__mark,
+.brand-mark {
+    width: clamp(52px, 15vw, 64px);
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(255, 255, 255, 0.36);
     border-radius: 999px;
+    background: rgba(7, 19, 44, 0.68);
+    box-shadow: 0 0 0 1px rgba(255, 124, 51, 0.2), 0 0 18px rgba(255, 124, 51, 0.34);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
+    font-weight: 800;
+    font-size: clamp(0.88rem, 2.9vw, 1rem);
+    letter-spacing: 0.03em;
+    color: #fff;
+    flex-shrink: 0;
 }
 
-.site-brand__text {
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.2;
+.site-brand__text,
+.brand-wordmark {
+    font-size: clamp(0.98rem, 3.1vw, 1.08rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.015em;
+    color: #fff;
 }
 
 .site-nav__toggle {
@@ -1046,6 +1092,18 @@ nav a:hover {
 
 @media (min-width: 900px) {
     .site-brand__text { font-size: 1rem; }
+}
+
+
+@media (max-width: 420px) {
+    .hero__eyebrow {
+        align-items: center;
+    }
+
+    .eyebrow-divider {
+        align-self: stretch;
+        min-height: 2.2em;
+    }
 }
 
 @media (min-width: 768px) {
@@ -1695,11 +1753,6 @@ section,
     border-bottom: 1px solid rgba(129, 165, 210, 0.26);
 }
 
-.hero__eyebrow {
-    background: rgba(255, 106, 26, 0.15);
-    border-color: rgba(255, 106, 26, 0.38);
-    color: #ffc49c;
-}
 
 .tagline,
 .subheading,
