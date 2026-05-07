@@ -1454,6 +1454,16 @@ article ul {
     font-size: 1.05em;
 }
 
+
+.article-hero-image {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0.75rem 0 0.85rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
 .article-meta {
     font-family: 'Open Sans', Arial, sans-serif;
     color: #475569;
