@@ -303,6 +303,25 @@ document.addEventListener('DOMContentLoaded', function () {
     var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
     var blogFilterButtons = document.querySelector('#blogFilterButtons');
 
+
+    var articleImageConfig = {
+        'day-one-start-lifting': '5AECB6B5-6E6B-4D34-A8CD-A39D973B70D0.png',
+        'great-physique-timeline': 'C7D364DB-2726-41E8-A64D-60C85B18C5DD.png',
+        'coffee-caffeine-performance': '69F7F193-CBB5-464F-96DF-9F74E723F9A7.png',
+        'lead-in-protein-powder': '068855D1-A489-4CD4-A0F9-C73A08ED3F93.png',
+        'best-training-split': 'A2033B4B-0BB9-4313-855C-ECB3240A4366.png',
+        'pump-feels-good': '309A1FA2-08DA-4BF5-9689-195EC0D2C083.png',
+        'twinkie-diet': 'AF75B285-8960-416C-8864-5CD099CFC3A4.png',
+        'effective-reps': '23A9E45E-7627-4B59-8A3D-FA745320644D.png',
+        'big-bench-press': 'A57D4640-6A5A-4E08-A789-B0E9203CD55A.png',
+        'day-one-plan': '7763DC36-9F29-47C6-85ED-6979AEAC682F.png',
+        'not-gaining-muscle': '381180AB-BEB5-4D56-95B0-6B0FF96F9CB3.png',
+        'consistency-beats-motivation': '2BA020E6-811C-4A80-837B-5FA4F16C8251.png',
+        'cheat-code-losing-weight': '10D35718-DEAF-4E9F-8ADC-A3662746B222.png',
+        'correct-way-to-bulk': 'EA037B85-BFBF-4B13-8A76-3EBBE7663301.png',
+        'why-youre-stuck-checklist': '855CD7F8-997F-4768-8F87-CAF5D51D95A7.png'
+    };
+
     var articleMetaConfig = {
         'day-one-start-lifting': { topic: 'Beginner training', date: '2026-01-03', startHere: true },
         'great-physique-timeline': { topic: 'Muscle building', date: '2026-01-08', startHere: true },
@@ -342,6 +361,16 @@ document.addEventListener('DOMContentLoaded', function () {
             var targetId = article.getAttribute('id');
             if (!heading || !targetId) {
                 return;
+            }
+
+
+            var articleImage = articleImageConfig[targetId];
+            if (articleImage && !article.querySelector('.article-hero-image')) {
+                var heroImage = document.createElement('img');
+                heroImage.className = 'article-hero-image';
+                heroImage.src = articleImage;
+                heroImage.alt = heading.textContent.trim();
+                article.insertBefore(heroImage, heading.nextSibling);
             }
 
             var configuredMeta = articleMetaConfig[targetId] || {
