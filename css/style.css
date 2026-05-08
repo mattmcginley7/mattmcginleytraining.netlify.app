@@ -1371,11 +1371,10 @@ article ul {
 .featured-article-card {
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    overflow: hidden;
     background: #fff;
 }
 
-.featured-article-card img { width: 100%; aspect-ratio: 16/9; object-fit: contain; display:block; background: #f8fafc; }
+.featured-article-card img { width: 100%; height: auto; object-fit: contain; display:block; background: #f8fafc; border-radius: 12px 12px 0 0; }
 .featured-article-card__content { padding: 0.9rem 1rem 1rem; }
 .featured-article-card h3 { margin: 0.4rem 0 0; font-size: 1.2rem; }
 
@@ -1386,8 +1385,9 @@ article ul {
     margin-top: 1rem;
 }
 
-.article-card { border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; background:#fff; }
-.article-card__image-wrap img { width:100%; aspect-ratio: 4/3; object-fit: contain; display:block; background: #f8fafc; }
+.article-card { border: 1px solid var(--border-color); border-radius: 10px; background:#fff; }
+.article-card__image-wrap { overflow: visible; }
+.article-card__image-wrap img { width:100%; height: auto; object-fit: contain; display:block; background: #f8fafc; border-radius: 10px 10px 0 0; }
 .article-card__body { padding: 0.75rem 0.85rem 0.9rem; }
 .article-card h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
 
