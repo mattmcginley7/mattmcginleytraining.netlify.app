@@ -294,14 +294,8 @@ document.addEventListener('DOMContentLoaded', function () {
         renderGoalRecommendation('fat-loss');
     }
 
-    var articleNav = document.querySelector('.article-nav');
-    var articleList = document.querySelector('.article-nav__list');
-    var articleToggle = document.querySelector('.article-nav__toggle');
-    var articlePanel = document.querySelector('.article-nav__panel');
     var articles = document.querySelectorAll('.article-section article');
-    var featuredArticleSpotlight = document.querySelector('#featuredArticleSpotlight');
     var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
-    var blogFilterButtons = document.querySelector('#blogFilterButtons');
 
     var articleMetaConfig = {
         'day-one-start-lifting': { topic: 'Beginner training', date: '2026-01-03', startHere: true },
@@ -333,10 +327,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var articleCards = [];
 
-    if (articleNav && articleList && articles.length) {
-        articleList.innerHTML = '';
-
-        articles.forEach(function (article, index) {
+    if (articleDiscoveryGrid && articles.length) {
+        articles.forEach(function (article) {
             var heading = article.querySelector('h2');
             var firstParagraph = article.querySelector('p');
             var articleImage = article.querySelector('img');
@@ -351,12 +343,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 startHere: false
             };
             var readTime = computeReadTime(article);
-            var excerpt = firstParagraph ? firstParagraph.textContent.trim() : 'Read this article for practical coaching guidance.';
-
-            if (firstParagraph) {
-                firstParagraph.classList.add('article-excerpt');
-            }
-
             var existingMetaRow = article.querySelector('.article-meta');
             if (!existingMetaRow) {
                 var metaRow = document.createElement('p');
@@ -364,26 +350,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 metaRow.textContent = configuredMeta.topic + ' • ' + prettyDate(configuredMeta.date) + ' • ' + readTime + ' min read';
                 article.insertBefore(metaRow, firstParagraph || heading.nextSibling);
             }
-
-            var listItem = document.createElement('li');
-            var link = document.createElement('a');
-            link.href = '#' + targetId;
-            link.textContent = (index + 1) + '. ' + heading.textContent.trim();
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                var target = document.getElementById(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    if (history.pushState) {
-                        history.pushState(null, '', '#' + targetId);
-                    } else {
-                        window.location.hash = targetId;
-                    }
-                }
-            });
-
-            listItem.appendChild(link);
-            articleList.appendChild(listItem);
 
             articleCards.push({
                 id: targetId,
@@ -393,116 +359,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 readTime: readTime,
                 image: articleImage ? articleImage.getAttribute('src') : 'PersonalTrainingAILogo.jpeg',
                 imageAlt: articleImage ? articleImage.getAttribute('alt') : heading.textContent.trim() + ' article image',
-                excerpt: excerpt,
                 startHere: configuredMeta.startHere
             });
         });
 
-        if (articleDiscoveryGrid && articleCards.length) {
-            var topicOrder = ['all', 'beginner training', 'muscle building', 'fat loss', 'nutrition', 'supplements', 'science', 'motivation'];
-            var availableTopics = articleCards.map(function (card) { return card.topic.toLowerCase(); });
-            var topics = topicOrder.filter(function (topic) {
-                return topic === 'all' || availableTopics.indexOf(topic) !== -1;
+        if (articleCards.length) {
+            articleDiscoveryGrid.innerHTML = '';
+            articleCards.forEach(function (card) {
+                var cardArticle = document.createElement('article');
+                cardArticle.className = 'article-card';
+                cardArticle.innerHTML = '<a class="article-card__link" href="#' + card.id + '"><div class="article-card__image-wrap"><img src="' + card.image + '" alt="' + card.imageAlt + '" loading="lazy"></div>'
+                    + '<div class="article-card__body"><h3>' + card.title + '</h3>'
+                    + '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p></div></a>';
+                articleDiscoveryGrid.appendChild(cardArticle);
             });
-
-            if (blogFilterButtons) {
-                blogFilterButtons.innerHTML = '';
-                topics.forEach(function (topic) {
-                    var filterButton = document.createElement('button');
-                    var readableTopic = topic === 'all' ? 'All topics' : topic.replace(/\b\w/g, function (char) { return char.toUpperCase(); });
-                    filterButton.type = 'button';
-                    filterButton.className = 'blog-filter' + (topic === 'all' ? ' is-active' : '');
-                    filterButton.setAttribute('data-topic', topic);
-                    filterButton.setAttribute('aria-pressed', topic === 'all' ? 'true' : 'false');
-                    filterButton.textContent = readableTopic;
-                    blogFilterButtons.appendChild(filterButton);
-                });
-            }
-
-            var renderDiscoveryCards = function (activeTopic) {
-                articleDiscoveryGrid.innerHTML = '';
-                var filteredCards = articleCards.filter(function (card) {
-                    return activeTopic === 'all' || card.topic.toLowerCase() === activeTopic;
-                });
-
-                filteredCards.forEach(function (card) {
-                    var cardArticle = document.createElement('article');
-                    cardArticle.className = 'article-card';
-                    cardArticle.innerHTML = '<a class="article-card__link" href="#' + card.id + '"><div class="article-card__image-wrap"><img src="' + card.image + '" alt="' + card.imageAlt + '" loading="lazy"></div>'
-                        + '<div class="article-card__body"><h3>' + card.title + '</h3>'
-                        + '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p></div></a>';
-                    articleDiscoveryGrid.appendChild(cardArticle);
-
-                    var articleNode = document.getElementById(card.id);
-                    if (articleNode) {
-                        articleNode.hidden = false;
-                    }
-                });
-
-                articles.forEach(function (articleNode) {
-                    var id = articleNode.getAttribute('id');
-                    var nodeCard = articleCards.find(function (card) { return card.id === id; });
-                    if (!nodeCard) {
-                        return;
-                    }
-                    articleNode.hidden = !(activeTopic === 'all' || nodeCard.topic.toLowerCase() === activeTopic);
-                });
-            };
-
-            renderDiscoveryCards('all');
-
-            if (featuredArticleSpotlight && articleCards.length) {
-                var featured = articleCards.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); })[0];
-                featuredArticleSpotlight.innerHTML = '<a class="featured-article-card" href="#' + featured.id + '">'
-                    + '<img src="' + featured.image + '" alt="' + featured.imageAlt + '" loading="lazy">'
-                    + '<div class="featured-article-card__content"><p class="article-card__meta">' + featured.topic + ' • ' + prettyDate(featured.date) + ' • ' + featured.readTime + ' min read</p>'
-                    + '<h3>' + featured.title + '</h3></div></a>';
-            }
-
-            if (blogFilterButtons) {
-                blogFilterButtons.addEventListener('click', function (event) {
-                    var button = event.target.closest('.blog-filter');
-                    if (!button) {
-                        return;
-                    }
-                    var activeTopic = button.getAttribute('data-topic');
-                    var allButtons = blogFilterButtons.querySelectorAll('.blog-filter');
-                    allButtons.forEach(function (item) {
-                        var isActive = item === button;
-                        item.classList.toggle('is-active', isActive);
-                        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-                    });
-                    renderDiscoveryCards(activeTopic);
-                });
-            }
+        } else {
+            articleDiscoveryGrid.innerHTML = '<p class="article-nav__empty">No articles found.</p>';
         }
-
-        if (!articleList.children.length) {
-            articleList.innerHTML = '<li class="article-nav__empty">No articles found.</li>';
-        }
-
-        var setPanelState = function (isOpen) {
-            articleNav.classList.toggle('article-nav--open', isOpen);
-            articleNav.classList.toggle('article-nav--closed', !isOpen);
-            if (articlePanel) {
-                articlePanel.hidden = !isOpen;
-            }
-            if (articleToggle) {
-                articleToggle.setAttribute('aria-expanded', isOpen);
-            }
-        };
-
-        if (articleToggle && articlePanel) {
-            articleToggle.addEventListener('click', function () {
-                var isOpen = articlePanel.hidden;
-                setPanelState(isOpen);
-            });
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape' && articleNav.classList.contains('article-nav--open')) {
-                setPanelState(false);
-            }
-        });
     }
 });
