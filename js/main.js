@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var articleToggle = document.querySelector('.article-nav__toggle');
     var articlePanel = document.querySelector('.article-nav__panel');
     var articles = document.querySelectorAll('.article-section article');
-    var startHereGrid = document.querySelector('#startHereGrid');
+    var featuredArticleSpotlight = document.querySelector('#featuredArticleSpotlight');
     var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
     var blogFilterButtons = document.querySelector('#blogFilterButtons');
 
@@ -308,17 +308,17 @@ document.addEventListener('DOMContentLoaded', function () {
         'great-physique-timeline': { topic: 'Muscle building', date: '2026-01-08', startHere: true },
         'coffee-caffeine-performance': { topic: 'Nutrition', date: '2026-01-14', startHere: false },
         'lead-in-protein-powder': { topic: 'Supplements', date: '2026-01-18', startHere: false },
-        'best-training-split': { topic: 'Programming', date: '2026-01-23', startHere: false },
+        'best-training-split': { topic: 'Science', date: '2026-01-23', startHere: false },
         'pump-feels-good': { topic: 'Muscle building', date: '2026-01-30', startHere: false },
         'twinkie-diet': { topic: 'Fat loss', date: '2026-02-04', startHere: false },
-        'effective-reps': { topic: 'Programming', date: '2026-02-09', startHere: false },
+        'effective-reps': { topic: 'Science', date: '2026-02-09', startHere: false },
         'big-bench-press': { topic: 'Strength', date: '2026-02-14', startHere: false },
         'day-one-plan': { topic: 'Beginner training', date: '2026-02-20', startHere: true },
         'not-gaining-muscle': { topic: 'Muscle building', date: '2026-02-24', startHere: false },
-        'consistency-beats-motivation': { topic: 'Mindset', date: '2026-03-02', startHere: false },
+        'consistency-beats-motivation': { topic: 'Motivation', date: '2026-03-02', startHere: false },
         'cheat-code-losing-weight': { topic: 'Fat loss', date: '2026-03-09', startHere: false },
         'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false },
-        'why-youre-stuck-checklist': { topic: 'Programming', date: '2026-04-16', startHere: false }
+        'why-youre-stuck-checklist': { topic: 'Science', date: '2026-04-16', startHere: false }
     };
 
     var prettyDate = function (isoDate) {
@@ -339,6 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
         articles.forEach(function (article, index) {
             var heading = article.querySelector('h2');
             var firstParagraph = article.querySelector('p');
+            var articleImage = article.querySelector('img');
             var targetId = article.getAttribute('id');
             if (!heading || !targetId) {
                 return;
@@ -390,18 +391,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 topic: configuredMeta.topic,
                 date: configuredMeta.date,
                 readTime: readTime,
+                image: articleImage ? articleImage.getAttribute('src') : 'PersonalTrainingAILogo.jpeg',
+                imageAlt: articleImage ? articleImage.getAttribute('alt') : heading.textContent.trim() + ' article image',
                 excerpt: excerpt,
                 startHere: configuredMeta.startHere
             });
         });
 
         if (articleDiscoveryGrid && articleCards.length) {
-            var topics = ['all'];
-            articleCards.forEach(function (card) {
-                var normalized = card.topic.toLowerCase();
-                if (topics.indexOf(normalized) === -1) {
-                    topics.push(normalized);
-                }
+            var topicOrder = ['all', 'beginner training', 'muscle building', 'fat loss', 'nutrition', 'supplements', 'science', 'motivation'];
+            var availableTopics = articleCards.map(function (card) { return card.topic.toLowerCase(); });
+            var topics = topicOrder.filter(function (topic) {
+                return topic === 'all' || availableTopics.indexOf(topic) !== -1;
             });
 
             if (blogFilterButtons) {
@@ -427,9 +428,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 filteredCards.forEach(function (card) {
                     var cardArticle = document.createElement('article');
                     cardArticle.className = 'article-card';
-                    cardArticle.innerHTML = '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p>'
-                        + '<h3><a href="#' + card.id + '">' + card.title + '</a></h3>'
-                        + '<p>' + card.excerpt + '</p>';
+                    cardArticle.innerHTML = '<a class="article-card__link" href="#' + card.id + '"><div class="article-card__image-wrap"><img src="' + card.image + '" alt="' + card.imageAlt + '" loading="lazy"></div>'
+                        + '<div class="article-card__body"><h3>' + card.title + '</h3>'
+                        + '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p></div></a>';
                     articleDiscoveryGrid.appendChild(cardArticle);
 
                     var articleNode = document.getElementById(card.id);
@@ -450,16 +451,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             renderDiscoveryCards('all');
 
-            if (startHereGrid) {
-                startHereGrid.innerHTML = '';
-                articleCards.filter(function (card) { return card.startHere; }).slice(0, 3).forEach(function (card) {
-                    var startCard = document.createElement('article');
-                    startCard.className = 'start-here-card';
-                    startCard.innerHTML = '<p class="article-card__meta">' + card.topic + ' • ' + card.readTime + ' min read</p>'
-                        + '<h3><a href="#' + card.id + '">' + card.title + '</a></h3>'
-                        + '<p>' + card.excerpt + '</p>';
-                    startHereGrid.appendChild(startCard);
-                });
+            if (featuredArticleSpotlight && articleCards.length) {
+                var featured = articleCards.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); })[0];
+                featuredArticleSpotlight.innerHTML = '<a class="featured-article-card" href="#' + featured.id + '">'
+                    + '<img src="' + featured.image + '" alt="' + featured.imageAlt + '" loading="lazy">'
+                    + '<div class="featured-article-card__content"><p class="article-card__meta">' + featured.topic + ' • ' + prettyDate(featured.date) + ' • ' + featured.readTime + ' min read</p>'
+                    + '<h3>' + featured.title + '</h3></div></a>';
             }
 
             if (blogFilterButtons) {
