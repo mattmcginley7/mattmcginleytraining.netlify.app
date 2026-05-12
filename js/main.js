@@ -294,12 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderGoalRecommendation('fat-loss');
     }
 
-    var articleNav = document.querySelector('.article-nav');
-    var articleList = document.querySelector('.article-nav__list');
-    var articleToggle = document.querySelector('.article-nav__toggle');
-    var articlePanel = document.querySelector('.article-nav__panel');
     var articles = document.querySelectorAll('.article-section article');
-    var featuredArticleSpotlight = document.querySelector('#featuredArticleSpotlight');
     var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
     var blogFilterButtons = document.querySelector('#blogFilterButtons');
 
@@ -333,12 +328,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var articleCards = [];
 
-    if (articleNav && articleList && articles.length) {
-        articleList.innerHTML = '';
-
-        articles.forEach(function (article, index) {
+    if (articles.length) {
+        articles.forEach(function (article) {
             var heading = article.querySelector('h2');
-            var firstParagraph = article.querySelector('p');
             var articleImage = article.querySelector('img');
             var targetId = article.getAttribute('id');
             if (!heading || !targetId) {
@@ -351,11 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 startHere: false
             };
             var readTime = computeReadTime(article);
-            var excerpt = firstParagraph ? firstParagraph.textContent.trim() : 'Read this article for practical coaching guidance.';
-
-            if (firstParagraph) {
-                firstParagraph.classList.add('article-excerpt');
-            }
+            var firstParagraph = article.querySelector('p');
 
             var existingMetaRow = article.querySelector('.article-meta');
             if (!existingMetaRow) {
@@ -365,26 +353,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 article.insertBefore(metaRow, firstParagraph || heading.nextSibling);
             }
 
-            var listItem = document.createElement('li');
-            var link = document.createElement('a');
-            link.href = '#' + targetId;
-            link.textContent = (index + 1) + '. ' + heading.textContent.trim();
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                var target = document.getElementById(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    if (history.pushState) {
-                        history.pushState(null, '', '#' + targetId);
-                    } else {
-                        window.location.hash = targetId;
-                    }
-                }
-            });
-
-            listItem.appendChild(link);
-            articleList.appendChild(listItem);
-
             articleCards.push({
                 id: targetId,
                 title: heading.textContent.trim(),
@@ -393,7 +361,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 readTime: readTime,
                 image: articleImage ? articleImage.getAttribute('src') : 'PersonalTrainingAILogo.jpeg',
                 imageAlt: articleImage ? articleImage.getAttribute('alt') : heading.textContent.trim() + ' article image',
-                excerpt: excerpt,
                 startHere: configuredMeta.startHere
             });
         });
@@ -451,14 +418,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             renderDiscoveryCards('all');
 
-            if (featuredArticleSpotlight && articleCards.length) {
-                var featured = articleCards.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); })[0];
-                featuredArticleSpotlight.innerHTML = '<a class="featured-article-card" href="#' + featured.id + '">'
-                    + '<img src="' + featured.image + '" alt="' + featured.imageAlt + '" loading="lazy">'
-                    + '<div class="featured-article-card__content"><p class="article-card__meta">' + featured.topic + ' • ' + prettyDate(featured.date) + ' • ' + featured.readTime + ' min read</p>'
-                    + '<h3>' + featured.title + '</h3></div></a>';
-            }
-
             if (blogFilterButtons) {
                 blogFilterButtons.addEventListener('click', function (event) {
                     var button = event.target.closest('.blog-filter');
@@ -477,32 +436,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (!articleList.children.length) {
-            articleList.innerHTML = '<li class="article-nav__empty">No articles found.</li>';
-        }
-
-        var setPanelState = function (isOpen) {
-            articleNav.classList.toggle('article-nav--open', isOpen);
-            articleNav.classList.toggle('article-nav--closed', !isOpen);
-            if (articlePanel) {
-                articlePanel.hidden = !isOpen;
-            }
-            if (articleToggle) {
-                articleToggle.setAttribute('aria-expanded', isOpen);
-            }
-        };
-
-        if (articleToggle && articlePanel) {
-            articleToggle.addEventListener('click', function () {
-                var isOpen = articlePanel.hidden;
-                setPanelState(isOpen);
-            });
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape' && articleNav.classList.contains('article-nav--open')) {
-                setPanelState(false);
-            }
-        });
     }
 });
