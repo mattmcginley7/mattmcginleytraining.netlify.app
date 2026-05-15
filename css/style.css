@@ -2230,6 +2230,29 @@ nav a[aria-current="page"] {
     margin-bottom: 0;
 }
 
+.strength-card,
+.live-summary-card,
+.qualifier-card,
+.adaptation-note {
+    background: linear-gradient(165deg, rgba(8, 20, 40, 0.96), rgba(5, 14, 30, 0.98));
+    border: 1px solid rgba(124, 161, 206, 0.3);
+    color: var(--text-secondary);
+}
+
+.strength-card h3,
+.live-summary-card strong,
+.qualifier-card h3 {
+    color: var(--text-primary);
+}
+
+.live-summary-card p,
+.qualifier-card p,
+.estimate-note,
+.adaptation-note,
+.field-note {
+    color: rgba(245, 247, 250, 0.82);
+}
+
 .program-hero-card {
     margin-bottom: 1rem;
     border-radius: 20px;
