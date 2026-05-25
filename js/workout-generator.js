@@ -33,12 +33,12 @@
 
     var weekPresets = {
         strength: [
-            { pct: 0.7, sets: 4, reps: 6, note: 'Linear progression start' },
-            { pct: 0.72, sets: 4, reps: 6, note: 'Add load with clean reps' },
-            { pct: 0.74, sets: 4, reps: 5, note: 'Steady progression' },
-            { pct: 0.76, sets: 5, reps: 4, note: 'Progressive overload' },
-            { pct: 0.78, sets: 5, reps: 4, note: 'Heavy, controlled reps' },
-            { pct: 0.8, sets: 5, reps: 3, note: 'Top week' }
+            { pct: 0.7, sets: 5, reps: 5, note: 'Linear progression start' },
+            { pct: 0.72, sets: 5, reps: 5, note: 'Add load with clean reps' },
+            { pct: 0.74, sets: 5, reps: 5, note: 'Steady progression' },
+            { pct: 0.76, sets: 5, reps: 5, note: 'Progressive overload' },
+            { pct: 0.78, sets: 5, reps: 5, note: 'Heavy, controlled reps' },
+            { pct: 0.8, sets: 5, reps: 5, note: 'Top week' }
         ],
         hypertrophy: [
             { pct: 0.7, sets: 4, reps: 8, note: 'Linear progression start' },

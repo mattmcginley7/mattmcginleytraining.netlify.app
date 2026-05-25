@@ -2528,6 +2528,26 @@ nav a[aria-current="page"] {
     color: var(--text-primary);
 }
 
+
+.program-hero-card__standards,
+.program-hero-card__notes {
+    background: rgba(15, 23, 42, 0.78);
+    border-color: rgba(148, 163, 184, 0.45);
+}
+
+.program-hero-card__standards h4,
+.program-hero-card__notes h4,
+.program-hero-card__standards ul,
+.program-hero-card__notes ul {
+    color: #e2e8f0;
+}
+
+.program-hero-card__chips span {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border-color: rgba(148, 163, 184, 0.4);
+}
+
 /* ===== Compact card density refresh ===== */
 :root {
     --section-gap: clamp(1.2rem, 3.2vw, 2.3rem);
