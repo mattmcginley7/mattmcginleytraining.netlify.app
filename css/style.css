@@ -1162,6 +1162,17 @@ article ul {
     margin: 0 18px 0.6em 36px;
 }
 
+.article-note {
+    margin: 1rem 0 1.5rem;
+    padding: 0.9rem 1rem;
+    border-left: 4px solid var(--primary-color);
+    background: rgba(0, 87, 255, 0.12);
+}
+
+.article-note p {
+    margin: 0;
+}
+
 /* Table of contents for articles page */
 .article-nav {
     display: block;
