@@ -318,7 +318,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'consistency-beats-motivation': { topic: 'Motivation', date: '2026-03-02', startHere: false },
         'cheat-code-losing-weight': { topic: 'Fat loss', date: '2026-03-09', startHere: false },
         'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false },
-        'why-youre-stuck-checklist': { topic: 'Science', date: '2026-04-16', startHere: false }
+        'why-youre-stuck-checklist': { topic: 'Science', date: '2026-04-16', startHere: false },
+        'retatrutide-weight-loss-medication-not-cheating': { topic: 'Fat loss', date: '2026-05-29', startHere: false }
     };
 
     var prettyDate = function (isoDate) {
