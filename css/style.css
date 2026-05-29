@@ -1388,7 +1388,7 @@ article ul {
 .blog-filter.is-active { background: rgba(0, 87, 255, 0.15); border-color: var(--primary-color); color: #0f172a; }
 
 .article-section article[id] {
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 0.75rem;
     background: var(--surface-color);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -1397,6 +1397,50 @@ article ul {
     font-family: 'Merriweather', serif;
     line-height: 1.75;
     scroll-margin-top: 1rem;
+}
+
+.article-expandable {
+    border-radius: 8px;
+}
+
+.article-expandable__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.4rem;
+}
+
+.article-expandable__summary::-webkit-details-marker { display: none; }
+
+.article-expandable__headline {
+    display: grid;
+    grid-template-columns: minmax(110px, 180px) 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.article-expandable__headline img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #f8fafc;
+}
+
+.article-expandable__headline h2 {
+    margin: 0 0 0.35rem;
+}
+
+.article-collapsible .article-meta {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.article-collapsible .article-expandable > *:not(summary) {
+    padding: 0 1rem;
+}
+
+.article-collapsible .article-expandable > *:last-child {
+    padding-bottom: 1rem;
 }
 
 @media (max-width: 760px) {

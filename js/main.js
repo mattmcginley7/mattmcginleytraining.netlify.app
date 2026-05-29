@@ -299,71 +299,46 @@ document.addEventListener('DOMContentLoaded', function () {
     var articleToggle = document.querySelector('.article-nav__toggle');
     var articlePanel = document.querySelector('.article-nav__panel');
     var articles = document.querySelectorAll('.article-section article');
-    var featuredArticleSpotlight = document.querySelector('#featuredArticleSpotlight');
-    var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
-    var blogFilterButtons = document.querySelector('#blogFilterButtons');
-
-    var articleMetaConfig = {
-        'day-one-start-lifting': { topic: 'Beginner training', date: '2026-01-03', startHere: true },
-        'great-physique-timeline': { topic: 'Muscle building', date: '2026-01-08', startHere: true },
-        'coffee-caffeine-performance': { topic: 'Nutrition', date: '2026-01-14', startHere: false },
-        'lead-in-protein-powder': { topic: 'Supplements', date: '2026-01-18', startHere: false },
-        'best-training-split': { topic: 'Science', date: '2026-01-23', startHere: false },
-        'pump-feels-good': { topic: 'Muscle building', date: '2026-01-30', startHere: false },
-        'twinkie-diet': { topic: 'Fat loss', date: '2026-02-04', startHere: false },
-        'effective-reps': { topic: 'Science', date: '2026-02-09', startHere: false },
-        'big-bench-press': { topic: 'Strength', date: '2026-02-14', startHere: false },
-        'day-one-plan': { topic: 'Beginner training', date: '2026-02-20', startHere: true },
-        'not-gaining-muscle': { topic: 'Muscle building', date: '2026-02-24', startHere: false },
-        'consistency-beats-motivation': { topic: 'Motivation', date: '2026-03-02', startHere: false },
-        'cheat-code-losing-weight': { topic: 'Fat loss', date: '2026-03-09', startHere: false },
-        'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false },
-        'why-youre-stuck-checklist': { topic: 'Science', date: '2026-04-16', startHere: false }
-    };
-
-    var prettyDate = function (isoDate) {
-        var parsed = new Date(isoDate + 'T00:00:00');
-        return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    };
 
     var computeReadTime = function (article) {
         var words = article.textContent.trim().split(/\s+/).length;
         return Math.max(2, Math.round(words / 220));
     };
 
-    var articleCards = [];
-
     if (articleNav && articleList && articles.length) {
         articleList.innerHTML = '';
 
         articles.forEach(function (article, index) {
             var heading = article.querySelector('h2');
-            var firstParagraph = article.querySelector('p');
             var articleImage = article.querySelector('img');
             var targetId = article.getAttribute('id');
             if (!heading || !targetId) {
                 return;
             }
 
-            var configuredMeta = articleMetaConfig[targetId] || {
-                topic: 'Training',
-                date: '2026-01-01',
-                startHere: false
-            };
             var readTime = computeReadTime(article);
-            var excerpt = firstParagraph ? firstParagraph.textContent.trim() : 'Read this article for practical coaching guidance.';
+            var details = document.createElement('details');
+            details.className = 'article-expandable';
+            details.id = targetId + '-details';
+            article.classList.add('article-collapsible');
 
-            if (firstParagraph) {
-                firstParagraph.classList.add('article-excerpt');
-            }
+            var summary = document.createElement('summary');
+            summary.className = 'article-expandable__summary';
+            summary.innerHTML = '<div class="article-expandable__headline"><img src="' + (articleImage ? articleImage.getAttribute('src') : 'PersonalTrainingAILogo.jpeg') + '" alt="' + (articleImage ? articleImage.getAttribute('alt') : heading.textContent.trim() + ' article image') + '" loading="lazy"><div><h2>' + heading.textContent.trim() + '</h2><p class="article-meta">' + readTime + ' min read</p></div></div>';
+            details.appendChild(summary);
 
-            var existingMetaRow = article.querySelector('.article-meta');
-            if (!existingMetaRow) {
-                var metaRow = document.createElement('p');
-                metaRow.className = 'article-meta';
-                metaRow.textContent = configuredMeta.topic + ' • ' + prettyDate(configuredMeta.date) + ' • ' + readTime + ' min read';
-                article.insertBefore(metaRow, firstParagraph || heading.nextSibling);
+            while (article.firstChild) {
+                details.appendChild(article.firstChild);
             }
+            var originalHeading = details.querySelector('h2');
+            if (originalHeading) {
+                originalHeading.remove();
+            }
+            var originalImage = details.querySelector('img');
+            if (originalImage) {
+                originalImage.remove();
+            }
+            article.appendChild(details);
 
             var listItem = document.createElement('li');
             var link = document.createElement('a');
@@ -373,6 +348,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
                 var target = document.getElementById(targetId);
                 if (target) {
+                    var targetDetails = target.querySelector('.article-expandable');
+                    if (targetDetails) {
+                        targetDetails.open = true;
+                    }
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     if (history.pushState) {
                         history.pushState(null, '', '#' + targetId);
@@ -384,98 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             listItem.appendChild(link);
             articleList.appendChild(listItem);
-
-            articleCards.push({
-                id: targetId,
-                title: heading.textContent.trim(),
-                topic: configuredMeta.topic,
-                date: configuredMeta.date,
-                readTime: readTime,
-                image: articleImage ? articleImage.getAttribute('src') : 'PersonalTrainingAILogo.jpeg',
-                imageAlt: articleImage ? articleImage.getAttribute('alt') : heading.textContent.trim() + ' article image',
-                excerpt: excerpt,
-                startHere: configuredMeta.startHere
-            });
         });
-
-        if (articleDiscoveryGrid && articleCards.length) {
-            var topicOrder = ['all', 'beginner training', 'muscle building', 'fat loss', 'nutrition', 'supplements', 'science', 'motivation'];
-            var availableTopics = articleCards.map(function (card) { return card.topic.toLowerCase(); });
-            var topics = topicOrder.filter(function (topic) {
-                return topic === 'all' || availableTopics.indexOf(topic) !== -1;
-            });
-
-            if (blogFilterButtons) {
-                blogFilterButtons.innerHTML = '';
-                topics.forEach(function (topic) {
-                    var filterButton = document.createElement('button');
-                    var readableTopic = topic === 'all' ? 'All topics' : topic.replace(/\b\w/g, function (char) { return char.toUpperCase(); });
-                    filterButton.type = 'button';
-                    filterButton.className = 'blog-filter' + (topic === 'all' ? ' is-active' : '');
-                    filterButton.setAttribute('data-topic', topic);
-                    filterButton.setAttribute('aria-pressed', topic === 'all' ? 'true' : 'false');
-                    filterButton.textContent = readableTopic;
-                    blogFilterButtons.appendChild(filterButton);
-                });
-            }
-
-            var renderDiscoveryCards = function (activeTopic) {
-                articleDiscoveryGrid.innerHTML = '';
-                var filteredCards = articleCards.filter(function (card) {
-                    return activeTopic === 'all' || card.topic.toLowerCase() === activeTopic;
-                });
-
-                filteredCards.forEach(function (card) {
-                    var cardArticle = document.createElement('article');
-                    cardArticle.className = 'article-card';
-                    cardArticle.innerHTML = '<a class="article-card__link" href="#' + card.id + '"><div class="article-card__image-wrap"><img src="' + card.image + '" alt="' + card.imageAlt + '" loading="lazy"></div>'
-                        + '<div class="article-card__body"><h3>' + card.title + '</h3>'
-                        + '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p></div></a>';
-                    articleDiscoveryGrid.appendChild(cardArticle);
-
-                    var articleNode = document.getElementById(card.id);
-                    if (articleNode) {
-                        articleNode.hidden = false;
-                    }
-                });
-
-                articles.forEach(function (articleNode) {
-                    var id = articleNode.getAttribute('id');
-                    var nodeCard = articleCards.find(function (card) { return card.id === id; });
-                    if (!nodeCard) {
-                        return;
-                    }
-                    articleNode.hidden = !(activeTopic === 'all' || nodeCard.topic.toLowerCase() === activeTopic);
-                });
-            };
-
-            renderDiscoveryCards('all');
-
-            if (featuredArticleSpotlight && articleCards.length) {
-                var featured = articleCards.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); })[0];
-                featuredArticleSpotlight.innerHTML = '<a class="featured-article-card" href="#' + featured.id + '">'
-                    + '<img src="' + featured.image + '" alt="' + featured.imageAlt + '" loading="lazy">'
-                    + '<div class="featured-article-card__content"><p class="article-card__meta">' + featured.topic + ' • ' + prettyDate(featured.date) + ' • ' + featured.readTime + ' min read</p>'
-                    + '<h3>' + featured.title + '</h3></div></a>';
-            }
-
-            if (blogFilterButtons) {
-                blogFilterButtons.addEventListener('click', function (event) {
-                    var button = event.target.closest('.blog-filter');
-                    if (!button) {
-                        return;
-                    }
-                    var activeTopic = button.getAttribute('data-topic');
-                    var allButtons = blogFilterButtons.querySelectorAll('.blog-filter');
-                    allButtons.forEach(function (item) {
-                        var isActive = item === button;
-                        item.classList.toggle('is-active', isActive);
-                        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-                    });
-                    renderDiscoveryCards(activeTopic);
-                });
-            }
-        }
 
         if (!articleList.children.length) {
             articleList.innerHTML = '<li class="article-nav__empty">No articles found.</li>';
