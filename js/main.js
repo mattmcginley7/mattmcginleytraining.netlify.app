@@ -320,7 +320,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'correct-way-to-bulk': { topic: 'Nutrition', date: '2026-03-16', startHere: false },
         'why-youre-stuck-checklist': { topic: 'Science', date: '2026-04-16', startHere: false },
         'retatrutide-weight-loss-medication-not-cheating': { topic: 'Fat loss', date: '2026-05-29', startHere: false },
-        'cardio-burns-calories-lifting-builds-engine': { topic: 'Fat loss', date: '2026-06-14', startHere: true }
+        'cardio-burns-calories-lifting-builds-engine': { topic: 'Fat loss', date: '2026-06-14', startHere: true },
+        'why-everyone-became-overweight': { topic: 'Fat loss', date: '2026-06-28', startHere: true }
     };
 
     var prettyDate = function (isoDate) {
