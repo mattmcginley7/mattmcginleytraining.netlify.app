@@ -13,259 +13,233 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
-            --bg: #070a0c;
-            /* neutral canvas */
-            --panel: #101519;
-            /* cards */
-            --muted: rgba(247,242,234,.72);
-            /* secondary text */
-            --fg: #f7f2ea;
-            /* primary text */
-            --brand: #f0ad38;
-            /* blue accent */
-            --brand-2: #ffd36a;
-            /* lighter accent */
-            --ok: #16a34a;
-            /* success */
-            --warn: #f59e0b;
-            /* warning */
-            --err: #dc2626;
-            /* error */
-            --ring: 0 0 0 3px rgba(37, 99, 235, .35);
-            --radius: 16px;
-            --shadow: 0 10px 28px rgba(2, 8, 23, .06);
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        html,
-        body {
-            height: 100%
+            --nutrition-bg: #05070b;
+            --nutrition-panel: rgba(18, 23, 34, 0.88);
+            --nutrition-panel-strong: rgba(11, 18, 32, 0.96);
+            --nutrition-border: rgba(0, 87, 255, 0.24);
+            --nutrition-border-soft: rgba(148, 163, 184, 0.24);
+            --nutrition-text: #f5f7fa;
+            --nutrition-muted: rgba(226, 232, 240, 0.76);
+            --nutrition-blue: #0057ff;
+            --nutrition-blue-soft: rgba(0, 87, 255, 0.16);
+            --nutrition-green: #16a34a;
+            --nutrition-warn: #f59e0b;
+            --nutrition-error: #ef4444;
+            --nutrition-radius: 24px;
+            --nutrition-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
         }
 
         body {
-            margin: 0;
-            font-family: 'Outfit', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--fg)
+            background:
+                radial-gradient(circle at top left, rgba(0, 87, 255, 0.22), transparent 32rem),
+                radial-gradient(circle at bottom right, rgba(0, 87, 255, 0.12), transparent 28rem),
+                var(--nutrition-bg);
         }
 
-        .wrap {
-            max-width: 1100px;
-            margin: 32px auto;
-            padding: 0 20px
+        .nutrition-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: clamp(1.25rem, 3vw, 2.5rem) 1rem 2.5rem;
         }
 
-        header.hero {
+        .nutrition-hero {
             display: grid;
-            gap: 10px;
-            margin: 8px 0 22px;
-            text-align: center
+            gap: 1rem;
+            margin: 1rem auto 1.5rem;
+            text-align: center;
+            max-width: 860px;
         }
 
-        header h1 {
+        .nutrition-eyebrow,
+        .step-label {
+            color: var(--nutrition-blue);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .nutrition-hero h1 {
             margin: 0;
-            font-size: clamp(28px, 4vw, 42px);
-            line-height: 1.1
+            font-size: clamp(2.2rem, 5vw, 4.35rem);
+            line-height: 0.96;
         }
 
-        header p {
-            margin: 0;
-            color: var(--muted)
+        .nutrition-hero p {
+            margin: 0 auto;
+            max-width: 730px;
+            color: var(--nutrition-muted);
+            font-size: clamp(1rem, 2vw, 1.18rem);
         }
 
-        .grid {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            margin: 0 auto;
+            border: 1px solid var(--nutrition-border);
+            color: #dbeafe;
+            background: var(--nutrition-blue-soft);
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .calculator-layout {
             display: grid;
-            gap: 18px
+            gap: 1.15rem;
         }
 
-        @media (min-width:960px) {
-            .grid {
-                grid-template-columns: 520px 1fr;
-                align-items: start
+        @media (min-width: 980px) {
+            .calculator-layout {
+                grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+                align-items: start;
             }
         }
 
-        .card {
-            background: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 18px
+        .nutrition-card {
+            background: linear-gradient(145deg, var(--nutrition-panel), rgba(18, 23, 34, 0.72));
+            border: 1px solid var(--nutrition-border-soft);
+            border-radius: var(--nutrition-radius);
+            box-shadow: var(--nutrition-shadow);
+            padding: clamp(1.1rem, 2.2vw, 1.6rem);
         }
 
-        .card h2 {
-            margin: 4px 0 10px;
-            font-size: 18px
+        .nutrition-card h2 {
+            margin: 0 0 0.4rem;
+            text-align: left;
+            font-size: clamp(1.35rem, 2vw, 1.75rem);
+        }
+
+        .card-intro {
+            color: var(--nutrition-muted);
+            margin: 0 0 1rem;
+        }
+
+        .step-grid {
+            display: grid;
+            gap: 0.95rem;
+        }
+
+        .form-step {
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 18px;
+            padding: 1rem;
+            background: rgba(5, 7, 11, 0.28);
+        }
+
+        .field-grid,
+        .field-grid-3 {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        @media (min-width: 680px) {
+            .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .field-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
 
         label {
             display: block;
-            font-weight: 600;
-            margin: 10px 0 6px
+            color: #fff;
+            font-weight: 700;
+            margin: 0 0 0.4rem;
         }
 
-        .row {
-            display: grid;
-            gap: 12px;
-            grid-template-columns: 1fr 1fr
-        }
-
-        .row-3 {
-            display: grid;
-            gap: 12px;
-            grid-template-columns: 1fr 1fr 1fr
-        }
-
-        input[type=number],
-        select {
+        input[type=number], select {
             width: 100%;
-            border-radius: 12px;
-            border: 1px solid #d1d5db;
-            background: #fff;
-            color: var(--fg);
-            padding: 12px;
-            font-size: 15px;
-            outline: none
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.36);
+            background: rgba(255, 255, 255, 0.96);
+            color: #0f172a;
+            padding: 0.78rem 0.9rem;
+            font: inherit;
+            outline: none;
         }
 
-        input[type=number]:focus,
-        select:focus {
-            box-shadow: var(--ring);
-            border-color: transparent
+        input[type=number]:focus, select:focus {
+            border-color: var(--nutrition-blue);
+            box-shadow: 0 0 0 4px rgba(0, 87, 255, 0.18);
         }
 
-        .muted {
-            color: var(--muted);
-            font-size: 13px
-        }
+        .muted { color: var(--nutrition-muted); font-size: 0.92rem; }
 
-        .switch {
+        .unit-switch {
             display: inline-flex;
-            background: #e5e7eb;
-            border-radius: 12px;
-            overflow: hidden
+            padding: 0.25rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.24);
         }
 
-        .switch button {
+        .unit-switch button {
             border: 0;
             background: transparent;
-            color: var(--muted);
-            padding: 10px 12px;
-            font-weight: 700;
-            cursor: pointer
+            color: var(--nutrition-muted);
+            border-radius: 999px;
+            padding: 0.62rem 1rem;
+            font-weight: 800;
+            cursor: pointer;
         }
 
-        .switch button.active {
-            background: var(--brand);
-            color: #fff
+        .unit-switch button.active { background: var(--nutrition-blue); color: #fff; }
+
+        .help-callout {
+            border-left: 4px solid var(--nutrition-blue);
+            background: rgba(0, 87, 255, 0.1);
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            color: #dbeafe;
+            margin-top: 0.85rem;
         }
 
         .btn {
             display: inline-flex;
-            gap: 8px;
             align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
             border: 0;
-            border-radius: 12px;
-            background: var(--brand);
+            border-radius: 14px;
+            background: var(--nutrition-blue);
             color: #fff;
-            font-weight: 700;
-            padding: 12px 16px;
-            cursor: pointer
+            font-weight: 800;
+            padding: 0.85rem 1.05rem;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .btn.secondary {
-            background: #fff;
-            color: var(--fg);
-            border: 1px solid #d1d5db
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(148, 163, 184, 0.28);
         }
 
-        .kpis {
-            display: grid;
-            gap: 12px;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))
+        .action-row { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; margin-top: 1rem; }
+
+        .result-card {
+            position: sticky;
+            top: 1rem;
         }
 
-        .kpi {
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            border-radius: 14px;
-            padding: 12px;
-            text-align: center
-        }
+        .kpis { display: grid; gap: 0.8rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .kpi { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 18px; padding: 0.95rem; }
+        .kpi h3 { margin: 0 0 0.35rem; text-align: left; color: var(--nutrition-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .kpi p { margin: 0; font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 800; color: #fff; }
 
-        .kpi h3 {
-            margin: 0 0 6px;
-            font-size: 12px;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--muted)
-        }
+        .formula-note { margin: 1rem 0; padding: 0.9rem; border-radius: 18px; background: rgba(0, 87, 255, 0.11); color: #dbeafe; }
+        .macro-row { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; margin-top: 0.7rem; }
+        .bar { height: 0.72rem; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; }
+        .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--nutrition-blue), #60a5fa); }
+        .addon-list { margin: 0.75rem 0 0 1.15rem; color: var(--nutrition-muted); }
+        .addon-list strong { color: #fff; }
 
-        .kpi p {
-            margin: 0;
-            font-size: 22px;
-            font-variant-numeric: tabular-nums
-        }
-
-        .bar {
-            height: 10px;
-            background: #e5e7eb;
-            border-radius: 999px;
-            overflow: hidden
-        }
-
-        .bar>span {
-            display: block;
-            height: 100%;
-            background: linear-gradient(90deg, var(--brand), var(--brand-2))
-        }
-
-        .cta-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center
-        }
-
-        .chart {
-            width: 100%;
-            height: 200px;
-            display: grid;
-            place-items: center
-        }
-
-        .donut {
-            transform: rotate(-90deg)
-        }
-
-        details {
-            border: 1px dashed #e5e7eb;
-            border-radius: 12px;
-            padding: 10px 12px
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: 700
-        }
-
-        footer {
-            margin: 30px 0 10px;
-            color: var(--muted);
-            font-size: 12px;
-            text-align: center
-        }
-
-        .badge {
-            display: inline-block;
-            font-size: 11px;
-            border: 1px solid #d1d5db;
-            color: var(--muted);
-            padding: 4px 8px;
-            border-radius: 999px
-        }
+        details { border: 1px solid rgba(148, 163, 184, 0.22); border-radius: 16px; padding: 0.9rem 1rem; background: rgba(255,255,255,0.04); }
+        details + details { margin-top: 0.7rem; }
+        summary { cursor: pointer; font-weight: 800; color: #fff; }
+        footer { margin: 2rem 0 0; color: var(--nutrition-muted); font-size: 0.85rem; text-align: center; }
     </style>
 </head>
 
@@ -293,235 +267,154 @@
                 <li><a href="begin.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.25 5.25 9 6.75-9 6.75z"/></svg></span><span>Begin</span></a></li>
         </ul>
     </nav>
-    <div class="wrap">
-        <header class="hero" aria-labelledby="title">
-            <h1 id="title">Nutrition & Macro Calculator</h1>
-            <p>Fast, science-based targets for calories, macros, hydration, and performance — for anyone training or
-                recomposing. <span class="badge">BETA</span></p>
+    <div class="nutrition-wrap">
+        <header class="nutrition-hero" aria-labelledby="title">
+            <span class="badge">Katch-McArdle Based</span>
+            <p class="nutrition-eyebrow">Nutrition & Macro Calculator</p>
+            <h1 id="title">Build targets from your lean body mass.</h1>
+            <p>Enter your body weight, body-fat estimate, activity, and goal. The calculator uses Katch-McArdle to estimate metabolism from lean mass, then turns that into simple calories, protein, fat, carbs, and training add-ons.</p>
         </header>
 
-        <div class="grid">
-            <!-- LEFT: INPUTS -->
-            <section class="card" aria-labelledby="calc-title">
-                <h2 id="calc-title">Your Details</h2>
+        <main class="calculator-layout">
+            <section class="nutrition-card" aria-labelledby="calc-title">
+                <h2 id="calc-title">Your details</h2>
+                <p class="card-intro">Follow the steps from top to bottom. If you do not know your exact body-fat percentage, use your best visual estimate and adjust calories from your 2-3 week trend.</p>
 
-                <div class="muted" style="margin-bottom:8px">Units</div>
-                <div class="switch" id="unitSwitch" role="tablist" aria-label="Unit toggle">
-                    <button type="button" data-unit="metric" aria-selected="false" role="tab">Metric</button>
-                    <button type="button" data-unit="imperial" class="active" aria-selected="true"
-                        role="tab">Imperial</button>
+                <div class="step-grid">
+                    <div class="form-step">
+                        <p class="step-label">Step 1 · Units</p>
+                        <div class="unit-switch" id="unitSwitch" role="tablist" aria-label="Unit toggle">
+                            <button type="button" data-unit="metric" aria-selected="false" role="tab">Metric</button>
+                            <button type="button" data-unit="imperial" class="active" aria-selected="true" role="tab">Imperial</button>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <p class="step-label">Step 2 · Body stats</p>
+                        <div class="field-grid" id="metricFields" style="display:none;">
+                            <div>
+                                <label for="heightCm">Height (cm)</label>
+                                <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="180" />
+                            </div>
+                            <div>
+                                <label for="weightKg">Weight (kg)</label>
+                                <input id="weightKg" type="number" inputmode="decimal" min="40" max="200" value="87" />
+                            </div>
+                        </div>
+
+                        <div class="field-grid" id="imperialFields">
+                            <div>
+                                <label for="heightFt">Height</label>
+                                <div class="field-grid">
+                                    <input id="heightFt" type="number" min="4" max="7" value="5" aria-label="Feet" />
+                                    <input id="heightIn" type="number" min="0" max="11" value="11" aria-label="Inches" />
+                                </div>
+                            </div>
+                            <div>
+                                <label for="weightLb">Weight (lb)</label>
+                                <input id="weightLb" type="number" inputmode="decimal" min="90" max="440" value="192" />
+                            </div>
+                        </div>
+
+                        <div class="field-grid" style="margin-top:0.85rem">
+                            <div>
+                                <label for="bodyFat">Body fat %</label>
+                                <input id="bodyFat" type="number" min="3" max="60" step="0.1" value="18" />
+                                <p class="muted">Required for Katch-McArdle because it calculates from lean body mass.</p>
+                            </div>
+                            <div>
+                                <label for="age">Age</label>
+                                <input id="age" type="number" inputmode="numeric" min="13" max="90" value="28" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <p class="step-label">Step 3 · Activity & goal</p>
+                        <div class="field-grid">
+                            <div>
+                                <label for="activity">Training / activity level</label>
+                                <select id="activity">
+                                    <option value="1.2">Sedentary (little/no exercise)</option>
+                                    <option value="1.375">Light (1–3 days/wk)</option>
+                                    <option value="1.55" selected>Moderate (3–5 days/wk)</option>
+                                    <option value="1.725">High (6–7 days/wk)</option>
+                                    <option value="1.9">Athlete/2-a-days</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="goal">Goal</label>
+                                <select id="goal">
+                                    <option value="-0.2">Fat loss (−20%)</option>
+                                    <option value="-0.1">Recomp / small cut (−10%)</option>
+                                    <option value="0">Maintenance</option>
+                                    <option value="0.1" selected>Lean bulk (+10%)</option>
+                                    <option value="0.15">Aggressive bulk (+15%)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <details>
+                        <summary>Optional fine-tuning</summary>
+                        <div class="field-grid-3" style="margin-top:0.85rem">
+                            <div><label for="protein">Protein (g/kg)</label><input id="protein" type="number" min="1.6" max="2.6" step="0.1" value="2.1" /></div>
+                            <div><label for="fat">Fat (g/kg)</label><input id="fat" type="number" min="0.6" max="1.2" step="0.1" value="0.8" /></div>
+                            <div><label for="hydration">Hydration (mL/kg)</label><input id="hydration" type="number" min="25" max="50" step="1" value="35" /></div>
+                            <div><label for="caffeineMg">Caffeine (mg/kg)</label><input id="caffeineMg" type="number" min="0" max="6" step="0.5" value="3" /></div>
+                            <div><label for="creatine">Creatine</label><select id="creatine"><option value="5" selected>5 g/day</option><option value="3">3 g/day</option><option value="0">None</option></select></div>
+                        </div>
+                    </details>
                 </div>
 
-                <div class="row" style="margin-top:12px">
-                    <div>
-                        <label for="sex">Sex</label>
-                        <select id="sex" autocomplete="sex">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="age">Age</< /label>
-                            <input id="age" type="number" inputmode="numeric" min="13" max="90" value="28" />
-                    </div>
-                </div>
+                <div class="help-callout">Katch-McArdle formula: BMR = 370 + (21.6 × lean body mass in kg).</div>
 
-                <div class="row" id="metricFields" style="display:none;">
-                    <div>
-                        <label for="heightCm">Height (cm)</label>
-                        <input id="heightCm" type="number" inputmode="decimal" min="120" max="230" value="180" />
-                        <p class="muted">5'11" ≈ 180 cm</p>
-                    </div>
-                    <div>
-                        <label for="weightKg">Weight (kg)</label>
-                        <input id="weightKg" type="number" inputmode="decimal" min="40" max="200" value="87" />
-                    </div>
-                </div>
-
-                <div class="row" id="imperialFields">
-                    <div>
-                        <label for="heightFt">Height (ft + in)</label>
-                        <div class="row">
-                            <input id="heightFt" type="number" min="4" max="7" value="5" aria-label="Feet" />
-                            <input id="heightIn" type="number" min="0" max="11" value="11" aria-label="Inches" />
-                        </div>
-                    </div>
-                    <div>
-                        <label for="weightLb">Weight (lb)</label>
-                        <input id="weightLb" type="number" inputmode="decimal" min="90" max="440" value="192" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div>
-                        <label for="activity">Activity</label>
-                        <select id="activity">
-                            <option value="1.2">Sedentary (little/no exercise)</option>
-                            <option value="1.375">Light (1–3 days/wk)</option>
-                            <option value="1.55" selected>Moderate (3–5 days/wk)</option>
-                            <option value="1.725">High (6–7 days/wk)</option>
-                            <option value="1.9">Athlete/2-a-days</option>
-                        </select>
-                        <p class="muted">Scales BMR → TDEE.</p>
-                    </div>
-                    <div>
-                        <label for="goal">Goal</label>
-                        <select id="goal">
-                            <option value="-0.2">Cut (up to −20%)</option>
-                            <option value="-0.1">Recomp / Small Cut (−10%)</option>
-                            <option value="0">Maintenance</option>
-                            <option value="0.1" selected>Lean Bulk (+10%)</option>
-                            <option value="0.15">Aggressive Bulk (+15%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <details style="margin-top:6px">
-                    <summary>Advanced options (macro ranges, equation, hydration, caffeine)</summary>
-                    <div class="row" style="margin-top:10px">
-                        <div>
-                            <label for="protein">Protein (g/kg)</label>
-                            <input id="protein" type="number" min="1.6" max="2.6" step="0.1" value="2.1" />
-                            <p class="muted">General: 1.6–2.2 g/kg. Cutting or lean: 2.0–2.6 g/kg.</p>
-                        </div>
-                        <div>
-                            <label for="fat">Fat (g/kg)</label>
-                            <input id="fat" type="number" min="0.6" max="1.2" step="0.1" value="0.8" />
-                            <p class="muted">Avoid < ~0.6 g/kg long term.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <label for="equation">BMR Equation</label>
-                            <select id="equation">
-                                <option value="msj" selected>Mifflin–St Jeor (default)</option>
-                                <option value="katch">Katch–McArdle (needs body fat%)</option>
-                                <option value="revisedhb">Revised Harris–Benedict</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="bodyFat">Body Fat % (optional)</label>
-                            <input id="bodyFat" type="number" min="3" max="60" step="0.1" placeholder="e.g., 12" />
-                            <p class="muted">Used only for Katch–McArdle.</p>
-                        </div>
-                    </div>
-                    <div class="row-3">
-                        <div>
-                            <label for="hydration">Hydration (mL/kg)</label>
-                            <input id="hydration" type="number" min="25" max="50" step="1" value="35" />
-                        </div>
-                        <div>
-                            <label for="caffeineMg">Caffeine (mg/kg)</label>
-                            <input id="caffeineMg" type="number" min="0" max="6" step="0.5" value="3" />
-                        </div>
-                        <div>
-                            <label for="creatine">Creatine</label>
-                            <select id="creatine">
-                                <option value="5" selected>5 g/day</option>
-                                <option value="3">3 g/day</option>
-                                <option value="0">None</option>
-                            </select>
-                        </div>
-                    </div>
-                </details>
-
-                <div class="cta-row" style="margin-top:14px">
-                    <button class="btn" id="calc">⚡ Calculate</button>
-                    <button class="btn secondary" id="save">Save</button>
-                    <button class="btn secondary" id="share">Copy Share Link</button>
+                <div class="action-row">
+                    <button class="btn" id="calc" type="button">Calculate targets</button>
+                    <button class="btn secondary" id="save" type="button">Save</button>
+                    <button class="btn secondary" id="share" type="button">Copy share link</button>
                     <span class="muted" id="status" aria-live="polite"></span>
                 </div>
             </section>
 
-            <!-- RIGHT: RESULTS -->
-            <section class="card" aria-labelledby="res-title">
-                <h2 id="res-title">Your Targets</h2>
-
+            <section class="nutrition-card result-card" aria-labelledby="res-title">
+                <h2 id="res-title">Your targets</h2>
+                <p class="card-intro">Use these as your starting numbers, then adjust based on body weight, gym performance, hunger, and recovery.</p>
                 <div class="kpis" aria-live="polite">
-                    <div class="kpi">
-                        <h3>Daily Calories</h3>
-                        <p id="kcal">—</p>
-                    </div>
-                    <div class="kpi">
-                        <h3>Protein</h3>
-                        <p id="pOut">— g</p>
-                    </div>
-                    <div class="kpi">
-                        <h3>Fat</h3>
-                        <p id="fOut">— g</p>
-                    </div>
-                    <div class="kpi">
-                        <h3>Carbs</h3>
-                        <p id="cOut">— g</p>
-                    </div>
+                    <div class="kpi"><h3>Daily calories</h3><p id="kcal">—</p></div>
+                    <div class="kpi"><h3>Lean body mass</h3><p id="lbmOut">—</p></div>
+                    <div class="kpi"><h3>Protein</h3><p id="pOut">— g</p></div>
+                    <div class="kpi"><h3>Fat</h3><p id="fOut">— g</p></div>
+                    <div class="kpi"><h3>Carbs</h3><p id="cOut">— g</p></div>
+                    <div class="kpi"><h3>Estimated TDEE</h3><p id="tdeeOut">—</p></div>
                 </div>
 
-                <div class="chart" aria-hidden="true">
-                    <!-- SVG donut shows macro split visually -->
-                    <svg id="donut" class="donut" viewBox="0 0 42 42" width="180" height="180" role="img">
-                        <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e5e7eb" stroke-width="8">
-                        </circle>
-                        <circle id="segP" cx="21" cy="21" r="15.915" fill="transparent" stroke="#2563eb"
-                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
-                        <circle id="segF" cx="21" cy="21" r="15.915" fill="transparent" stroke="#60a5fa"
-                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
-                        <circle id="segC" cx="21" cy="21" r="15.915" fill="transparent" stroke="#16a34a"
-                            stroke-width="8" stroke-dasharray="0 100" stroke-linecap="butt"></circle>
-                    </svg>
+                <div class="formula-note" id="formulaNote">Enter your stats and calculate to see your Katch-McArdle BMR.</div>
+
+                <div>
+                    <div class="macro-row"><span class="muted">Protein</span><span class="muted" id="pPct">—%</span></div><div class="bar"><span id="barP" style="width:0%"></span></div>
+                    <div class="macro-row"><span class="muted">Fat</span><span class="muted" id="fPct">—%</span></div><div class="bar"><span id="barF" style="width:0%"></span></div>
+                    <div class="macro-row"><span class="muted">Carbs</span><span class="muted" id="cPct">—%</span></div><div class="bar"><span id="barC" style="width:0%"></span></div>
                 </div>
 
-                <div style="display:grid;gap:10px;margin-top:-4px">
-                    <div>
-                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Protein</span><span
-                                class="muted" id="pPct">—%</span></div>
-                        <div class="bar"><span id="barP" style="width:0%"></span></div>
-                    </div>
-                    <div>
-                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Fat</span><span
-                                class="muted" id="fPct">—%</span></div>
-                        <div class="bar"><span id="barF" style="width:0%"></span></div>
-                    </div>
-                    <div>
-                        <div class="row" style="grid-template-columns:1fr auto"><span class="muted">Carbs</span><span
-                                class="muted" id="cPct">—%</span></div>
-                        <div class="bar"><span id="barC" style="width:0%"></span></div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top:12px">
-                    <h2 style="font-size:16px;margin:0 0 6px">Performance Add‑Ons</h2>
-                    <ul style="margin:6px 0 0 18px;line-height:1.7">
-                        <li>Hydration target: <strong id="water"></strong> water/day (baseline). Add 350–700 mL per 30
-                            min intense training.</li>
-                        <li>Caffeine guideline: <strong id="caff"></strong> 45–60 min pre‑training (avoid within ~8 h of
-                            bedtime).</li>
-                        <li>Creatine: <strong id="crea"></strong> daily, any time. Consistency > timing.</li>
+                <div class="nutrition-card" style="margin-top:1rem; box-shadow:none;">
+                    <h2 style="font-size:1.15rem">Performance add-ons</h2>
+                    <ul class="addon-list">
+                        <li>Hydration target: <strong id="water"></strong> water/day baseline.</li>
+                        <li>Caffeine guideline: <strong id="caff"></strong> 45–60 min pre-training.</li>
+                        <li>Creatine: <strong id="crea"></strong> daily. Consistency beats timing.</li>
                     </ul>
                 </div>
 
-                <div class="cta-row" style="margin-top:14px">
-                    <a class="btn" href="mailto:matthewmcginley@live.com">📞 Book a free consult</a>
-                </div>
+                <div class="action-row"><a class="btn" href="mailto:matthewmcginley@live.com">Book a free consult</a></div>
             </section>
-        </div>
+        </main>
 
-        <section class="card" style="margin-top:18px">
-            <h2 style="margin:4px 0 10px">FAQ</h2>
-            <details>
-                <summary>How accurate is this calculator?</summary>
-                <p class="muted">All calculators estimate energy needs using population equations. Start here, then
-                    adjust calories ±5–10% based on weekly trends in weight, performance, and recovery.</p>
-            </details>
-            <details>
-                <summary>What macro ranges do you recommend?</summary>
-                <p class="muted">Protein 1.6–2.2 g/kg (up to 2.6 g/kg when cutting or very lean), fat 0.6–1.0 g/kg,
-                    carbs fill remaining calories. Ensure adequate dietary variety and micronutrients.</p>
-            </details>
-            <details>
-                <summary>Why cap cutting and bulking adjustments?</summary>
-                <p class="muted">Defaults cap deficits at −20% and surpluses at +15% to protect training quality and
-                    recovery. Advanced lifters may use different strategies short‑term.</p>
-            </details>
+        <section class="nutrition-card" style="margin-top:1.15rem">
+            <h2>FAQ</h2>
+            <details><summary>Why Katch-McArdle?</summary><p class="muted">It bases BMR on lean body mass, which makes it especially useful for lifters and people focused on body composition.</p></details>
+            <details><summary>What if my body-fat estimate is not perfect?</summary><p class="muted">That is normal. Use the estimate as a starting point, track your 7-day average body weight, and adjust calories by 5–10% if progress stalls for 2–3 weeks.</p></details>
+            <details><summary>What macro ranges do you recommend?</summary><p class="muted">Protein 1.6–2.2 g/kg, higher when cutting or very lean; fat around 0.6–1.0 g/kg; carbs fill the remaining calories.</p></details>
         </section>
 
         <footer>
@@ -545,7 +438,6 @@
             }));
 
             function calc() {
-                const sex = $('#sex').value;
                 const age = +$('#age').value;
                 let heightCm, weightKg;
                 if (state.unit === 'metric') {
@@ -558,7 +450,7 @@
                 const goal = +$('#goal').value;
                 const pPerKg = +$('#protein').value;
                 const fPerKg = +$('#fat').value;
-                const equation = $('#equation').value;
+                const equation = 'katch';
                 const bf = parseFloat($('#bodyFat').value);
                 const hydrationMlPerKg = +$('#hydration').value;
                 const caffeineMgPerKg = +$('#caffeineMg').value;
@@ -566,19 +458,10 @@
 
                 if (!heightCm || !weightKg) { setStatus('Enter valid height and weight', 'warn'); return; }
 
-                // BMR calculations
-                let BMR = 0;
-                if (equation === 'msj') {
-                    BMR = (sex === 'male' ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
-                        : 10 * weightKg + 6.25 * heightCm - 5 * age - 161);
-                } else if (equation === 'revisedhb') {
-                    if (sex === 'male') BMR = 13.397 * weightKg + 4.799 * heightCm - 5.677 * age + 88.362;
-                    else BMR = 9.247 * weightKg + 3.098 * heightCm - 4.330 * age + 447.593;
-                } else if (equation === 'katch') {
-                    if (!bf || bf <= 3 || bf >= 60) { setStatus('Enter Body Fat% (3–60) to use Katch–McArdle', 'warn'); return; }
-                    const LBM = weightKg * (1 - bf / 100);
-                    BMR = 370 + 21.6 * LBM;
-                }
+                // Katch-McArdle BMR calculation
+                if (!bf || bf <= 3 || bf >= 60) { setStatus('Enter Body Fat% (3–60) to use Katch-McArdle', 'warn'); return; }
+                const LBM = weightKg * (1 - bf / 100);
+                const BMR = 370 + 21.6 * LBM;
 
                 let TDEE = BMR * activity;
                 const adj = clamp(goal, -0.20, 0.15);
@@ -607,6 +490,9 @@
                 $('#pOut').textContent = proteinG + " g";
                 $('#fOut').textContent = fatG + " g";
                 $('#cOut').textContent = carbsG + " g";
+                $('#lbmOut').textContent = Math.round(LBM) + " kg";
+                $('#tdeeOut').textContent = Math.round(TDEE).toLocaleString() + " kcal";
+                $('#formulaNote').textContent = 'Katch-McArdle BMR: ' + Math.round(BMR).toLocaleString() + ' kcal/day from ' + Math.round(LBM) + ' kg lean body mass.';
 
                 // Percentages, bars, donut
                 const kcalC = carbsG * 4; const totalK = Math.max(1, kcalP + kcalF + kcalC);
@@ -614,10 +500,6 @@
                 $('#pPct').textContent = pctP + '%'; $('#fPct').textContent = pctF + '%'; $('#cPct').textContent = pctC + '%';
                 $('#barP').style.width = pctP + '%'; $('#barF').style.width = pctF + '%'; $('#barC').style.width = pctC + '%';
 
-                const segP = $('#segP'), segF = $('#segF'), segC = $('#segC');
-                segP.setAttribute('stroke-dasharray', pctP + ' ' + (100 - pctP));
-                segF.setAttribute('stroke-dasharray', pctF + ' ' + (100 - pctF)); segF.setAttribute('stroke-dashoffset', -pctP);
-                segC.setAttribute('stroke-dasharray', pctC + ' ' + (100 - pctC)); segC.setAttribute('stroke-dashoffset', -(pctP + pctF));
 
                 // Performance extras
                 const waterMl = Math.round(hydrationMlPerKg * weightKg);
@@ -627,24 +509,24 @@
                 $('#crea').textContent = creatineG + ' g';
 
                 // Save/share payload
-                const payload = { sex, age, heightCm, weightKg, activity, goal, pPerKg, fPerKg, equation, bf: isNaN(bf) ? undefined : bf, hydrationMlPerKg, caffeineMgPerKg, creatineG, unit: state.unit, out: { kcal: targetKcal, p: proteinG, f: fatG, c: carbsG, pct: { p: pctP, f: pctF, c: pctC } } };
+                const payload = { age, heightCm, weightKg, activity, goal, pPerKg, fPerKg, equation, bf: isNaN(bf) ? undefined : bf, hydrationMlPerKg, caffeineMgPerKg, creatineG, unit: state.unit, out: { kcal: targetKcal, p: proteinG, f: fatG, c: carbsG, pct: { p: pctP, f: pctF, c: pctC } } };
                 localStorage.setItem('matt-nutrition-calc', JSON.stringify(payload));
 
-                const qp = new URLSearchParams({ u: state.unit, s: sex[0], a: age, h: Math.round(heightCm), w: Math.round(weightKg), act: activity, g: goal, pp: pPerKg, ff: fPerKg, eq: equation, bf: isNaN(bf) ? '' : bf, hy: hydrationMlPerKg, cf: caffeineMgPerKg, cr: creatineG });
+                const qp = new URLSearchParams({ u: state.unit, a: age, h: Math.round(heightCm), w: Math.round(weightKg), act: activity, g: goal, pp: pPerKg, ff: fPerKg, bf: isNaN(bf) ? '' : bf, hy: hydrationMlPerKg, cf: caffeineMgPerKg, cr: creatineG });
                 history.replaceState(null, '', '?' + qp.toString());
 
                 setStatus('Updated', 'ok');
                 return payload;
             }
 
-            function setStatus(msg, tone) { const el = $('#status'); el.textContent = msg; el.style.color = tone === 'ok' ? 'var(--ok)' : tone === 'warn' ? 'var(--warn)' : tone === 'err' ? 'var(--err)' : 'var(--muted)'; }
+            function setStatus(msg, tone) { const el = $('#status'); el.textContent = msg; el.style.color = tone === 'ok' ? 'var(--nutrition-green)' : tone === 'warn' ? 'var(--nutrition-warn)' : tone === 'err' ? 'var(--nutrition-error)' : 'var(--muted)'; }
 
             function restore() {
                 const saved = localStorage.getItem('matt-nutrition-calc');
                 const params = new URLSearchParams(location.search);
                 let data = saved ? JSON.parse(saved) : null;
                 if (params.has('u')) {
-                    data = data || {}; data.unit = params.get('u'); data.sex = (params.get('s') === 'm') ? 'male' : 'female'; data.age = +params.get('a'); data.heightCm = +params.get('h'); data.weightKg = +params.get('w'); data.activity = +params.get('act'); data.goal = +params.get('g'); data.pPerKg = +params.get('pp'); data.fPerKg = +params.get('ff'); data.equation = params.get('eq'); data.bf = params.get('bf') ? +params.get('bf') : undefined; data.hydrationMlPerKg = +params.get('hy'); data.caffeineMgPerKg = +params.get('cf'); data.creatineG = +params.get('cr');
+                    data = data || {}; data.unit = params.get('u'); data.age = +params.get('a'); data.heightCm = +params.get('h'); data.weightKg = +params.get('w'); data.activity = +params.get('act'); data.goal = +params.get('g'); data.pPerKg = +params.get('pp'); data.fPerKg = +params.get('ff'); data.bf = params.get('bf') ? +params.get('bf') : undefined; data.hydrationMlPerKg = +params.get('hy'); data.caffeineMgPerKg = +params.get('cf'); data.creatineG = +params.get('cr');
                 }
                 if (!data) return;
 
@@ -654,7 +536,6 @@
                 $('#imperialFields').style.display = unit === 'imperial' ? '' : 'none';
                 Array.from(document.querySelectorAll('#unitSwitch button')).forEach(b => { const active = b.dataset.unit === unit; b.classList.toggle('active', active); b.setAttribute('aria-selected', active) });
 
-                $('#sex').value = data.sex || 'male';
                 $('#age').value = data.age || 28;
                 if (unit === 'metric') {
                     $('#heightCm').value = Math.round(data.heightCm || 180);
@@ -667,8 +548,7 @@
                 $('#goal').value = data.goal || 0.1;
                 $('#protein').value = data.pPerKg || 2.1;
                 $('#fat').value = data.fPerKg || 0.8;
-                $('#equation').value = data.equation || 'msj';
-                $('#bodyFat').value = data.bf || '';
+                $('#bodyFat').value = data.bf || 18;
                 $('#hydration').value = data.hydrationMlPerKg || 35;
                 $('#caffeineMg').value = data.caffeineMgPerKg || 3;
                 $('#creatine').value = data.creatineG || 5;
@@ -690,9 +570,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"How accurate is this calculator?","acceptedAnswer":{"@type":"Answer","text":"All calculators estimate energy needs using population equations. Start here, then adjust calories based on trends in body weight, performance, and recovery."}},
-    {"@type":"Question","name":"What macro ranges do you recommend?","acceptedAnswer":{"@type":"Answer","text":"Protein 1.6–2.2 g/kg (up to 2.6 g/kg when cutting or very lean), fat 0.6–1.0 g/kg, carbs fill the rest."}},
-    {"@type":"Question","name":"Why cap cutting and bulking adjustments?","acceptedAnswer":{"@type":"Answer","text":"Defaults cap deficits at −20% and surpluses at +15% to protect training quality and recovery."}}
+    {"@type":"Question","name":"Why Katch-McArdle?","acceptedAnswer":{"@type":"Answer","text":"It bases BMR on lean body mass, which makes it especially useful for lifters and people focused on body composition."}},
+    {"@type":"Question","name":"What if my body-fat estimate is not perfect?","acceptedAnswer":{"@type":"Answer","text":"Use the estimate as a starting point, track your 7-day average body weight, and adjust calories by 5-10% if progress stalls for 2-3 weeks."}},
+    {"@type":"Question","name":"What macro ranges do you recommend?","acceptedAnswer":{"@type":"Answer","text":"Protein 1.6-2.2 g/kg, higher when cutting or very lean; fat around 0.6-1.0 g/kg; carbs fill the remaining calories."}}
   ]
 }
 </script>
