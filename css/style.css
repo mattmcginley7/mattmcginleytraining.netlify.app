@@ -2807,3 +2807,244 @@ input, textarea, select {
     .hero-actions { gap: 0.55rem; margin-top: 1rem; }
     nav a { padding: 0.45rem 0.7rem; font-size: 0.84rem; }
 }
+
+/* ===== Senior redesign polish layer (2026) ===== */
+:root {
+    --color-ink: #05070b;
+    --color-charcoal: #090d12;
+    --color-panel: #101720;
+    --color-panel-2: #151e29;
+    --color-cream: #f4efe6;
+    --color-cream-2: #fffaf0;
+    --color-text: #f8f4eb;
+    --color-text-soft: #d9d0c3;
+    --color-muted: #a99f91;
+    --color-accent: #d9932f;
+    --color-accent-2: #f0b35b;
+    --color-danger: #ff6b5f;
+    --line: rgba(244, 239, 230, 0.16);
+    --line-strong: rgba(244, 239, 230, 0.28);
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --radius-xl: 40px;
+    --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.28);
+    --shadow-hard: 0 30px 90px rgba(0, 0, 0, 0.46);
+    --container: 1180px;
+    --measure: 72ch;
+    --speed: 180ms ease;
+    --focus-ring: 0 0 0 4px rgba(217, 147, 47, 0.28);
+}
+
+html { overflow-x: hidden; }
+body {
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 16% -10%, rgba(217, 147, 47, 0.16), transparent 34rem),
+        radial-gradient(circle at 88% 8%, rgba(244, 239, 230, 0.08), transparent 30rem),
+        linear-gradient(180deg, #05070b 0%, #080c11 46%, #0b0f14 100%);
+    color: var(--color-text-soft);
+    font-family: 'Outfit', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.68;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.18;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+h1, h2, h3, h4 { color: var(--color-text); line-height: 1.02; letter-spacing: -0.045em; }
+h1 { font-size: clamp(2.5rem, 7vw, 5.9rem); text-align: inherit; max-width: 11ch; }
+h2 { font-size: clamp(2rem, 4.2vw, 3.7rem); text-align: inherit; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+h4 { font-size: 1.12rem; color: var(--color-cream); letter-spacing: -0.01em; }
+p { color: var(--color-text-soft); }
+section > p, article > p, .resource-card p, .calculator-card p { max-width: var(--measure); }
+
+.site-nav {
+    width: min(calc(100% - 1.25rem), 1360px);
+    margin: .6rem auto 0;
+    top: .6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(8, 12, 17, 0.78);
+    box-shadow: 0 16px 42px rgba(0,0,0,.28);
+    backdrop-filter: blur(18px);
+    padding: .55rem .7rem;
+}
+.site-brand__mark { border-right-color: var(--line-strong); }
+.site-brand__mark span::after { background: var(--color-accent); }
+.site-nav__menu { box-shadow: var(--shadow-hard); }
+.site-nav__menu a { min-height: 44px; }
+nav a[aria-current="page"], .site-nav__menu a[href="begin.html"] {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+    color: #191007;
+    box-shadow: 0 10px 26px rgba(217,147,47,.24);
+}
+nav a:hover, nav a:focus { background: rgba(244,239,230,.12); color: var(--color-cream-2); }
+nav a:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: none; box-shadow: var(--focus-ring) !important; }
+.site-nav__toggle { border-color: var(--line-strong); border-radius: 999px; min-width: 46px; }
+.site-nav.is-open .site-nav__hamburger { background: transparent; }
+.site-nav.is-open .site-nav__hamburger::before { transform: translateY(2px) rotate(45deg); }
+.site-nav.is-open .site-nav__hamburger::after { transform: translateY(0) rotate(-45deg); }
+
+.hero {
+    margin-top: -4.75rem;
+    padding: clamp(7.5rem, 13vw, 12rem) clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 7rem);
+    background:
+        linear-gradient(115deg, rgba(5,7,11,.98) 0%, rgba(12,17,23,.94) 54%, rgba(30,22,11,.92) 100%);
+    border-bottom: 1px solid var(--line);
+}
+.hero::before { background: rgba(217,147,47,.24); filter: blur(36px); }
+.hero::after { background: rgba(244,239,230,.08); filter: blur(40px); }
+.hero__content { max-width: var(--container); gap: clamp(2rem, 6vw, 5rem); }
+.hero__eyebrow, .section-label, .result-card__eyebrow { color: var(--color-accent-2); letter-spacing: .18em; }
+.tagline { color: var(--color-text-soft); font-size: clamp(1.08rem, 2vw, 1.45rem); max-width: 62ch; }
+.hero-card, .info-card, .metric, .resource-card, .calculator-card, .article-section article[id], .featured-article-card, .article-card, .story-highlight, .result-card, .workout-form, .workout-preview, .program-card, .program-summary-card, .workout-cta-card, .card {
+    background: linear-gradient(160deg, rgba(244,239,230,.075), rgba(244,239,230,.035));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+.hero-card { overflow: hidden; transform: rotate(1deg); }
+.hero-card img { aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+.hero-card__body { background: rgba(5,7,11,.88); }
+
+section { width: min(calc(100% - 2rem), var(--container)); max-width: var(--container); margin: clamp(2rem, 5vw, 5rem) auto; padding: clamp(1.25rem, 3vw, 3rem); }
+.intro-section__content { max-width: 780px; }
+.info-grid, .results-grid, .metrics { gap: 1rem; }
+.info-card, .result-card, .resource-card, .calculator-card { padding: clamp(1.15rem, 2.4vw, 2rem); transition: transform var(--speed), border-color var(--speed), background var(--speed); }
+.info-card:hover, .article-card:hover, .featured-article-card:hover { transform: translateY(-3px); border-color: rgba(217,147,47,.45); }
+.info-card h3, .result-card h3, .resource-card h2, .calculator-card h2 { text-align: left; margin-top: 0; }
+.story-section { max-width: 980px; }
+.story-section p { margin-inline: auto; font-size: clamp(1rem, 1.5vw, 1.16rem); }
+.story-section p:nth-of-type(4) { padding: 1.2rem 1.4rem; border-left: 4px solid var(--color-accent); background: rgba(217,147,47,.08); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+
+.cta-button, button, .btn, .article-nav__toggle {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2)) !important;
+    color: #171008 !important;
+    border: 0;
+    border-radius: 999px;
+    min-height: 48px;
+    box-shadow: 0 14px 34px rgba(217,147,47,.28);
+}
+.secondary-button, .btn.secondary {
+    background: rgba(244,239,230,.06) !important;
+    color: var(--color-cream) !important;
+    border: 1px solid var(--line-strong) !important;
+    border-radius: 999px;
+}
+.cta-button:hover, button:hover, .btn:hover { transform: translateY(-2px); filter: saturate(1.08); }
+
+img { border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
+img:hover { transform: none; }
+#mainImage { max-width: min(900px, calc(100% - 2rem)); aspect-ratio: 16/8; object-fit: cover; margin-top: 2rem; }
+iframe { border: 1px solid var(--line); min-height: 280px; }
+
+input, textarea, select, input[type=number] {
+    width: 100%; max-width: 100%; min-height: 48px; border-radius: 14px !important;
+    background: rgba(5,7,11,.74) !important; color: var(--color-text) !important;
+    border: 1px solid var(--line-strong) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+label { color: var(--color-cream); text-align: left; }
+form { text-align: left; }
+.calculator-card button, .workout-submit, .form-nav-buttons button { margin-top: .7rem; }
+[id$="Result"], .form-error, .estimate-note, .adaptation-note, .field-note, .rest-note { color: var(--color-text-soft); }
+.form-error { color: var(--color-danger); }
+
+.article-section { max-width: 1040px; }
+.article-section article[id] { padding: clamp(1.25rem, 3vw, 3rem); scroll-margin-top: 6rem; }
+.article-section article[id] p, .article-section article[id] li { color: #e4dbcf; font-size: 1.03rem; }
+.article-section article[id] h2 { max-width: 15ch; }
+.article-card, .featured-article-card { overflow: hidden; background-color: rgba(13,19,26,.92); }
+.article-card__body, .featured-article-card__content { padding: 1.15rem; }
+.blog-filter { border-radius: 999px; color: var(--color-cream); }
+.blog-filter.is-active { background: var(--color-accent); color: #171008; }
+.article-nav__panel { background: rgba(8,12,17,.98); backdrop-filter: blur(12px); }
+
+.resource-card:has(#supplementsWarning), .resource-card:has(#mattM30) { border-color: rgba(255,107,95,.45); }
+#mattM30, #supplementsWarning { color: #ff9a90; font-weight: 800; }
+#myFitnessPal, #myFitnessPal2 { max-width: min(320px, 100%); }
+
+.background { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: .7rem; padding: 0; list-style: none; }
+.background li { margin: 0; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(244,239,230,.055); }
+#startParagraph { max-width: 760px; margin-inline: auto; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgba(244,239,230,.055); }
+
+.site-footer { width: min(calc(100% - 2rem), var(--container)); margin: 5rem auto 1rem; padding: 2rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgba(8,12,17,.78); box-shadow: var(--shadow-soft); }
+.site-footer__grid { display: grid; gap: 1.25rem; align-items: start; }
+.site-footer__brand { font-weight: 800; color: var(--color-text); font-size: 1.2rem; }
+.site-footer__links { display: flex; flex-wrap: wrap; gap: .55rem 1rem; padding: 0; margin: 0; list-style: none; }
+.site-footer a { color: var(--color-text-soft); }
+.site-footer__cta { justify-self: start; }
+
+/* Nutrition calculator inline stylesheet compatibility */
+.wrap { max-width: 1120px !important; }
+.card h2, .card h3, header.hero h1 { color: var(--color-text) !important; }
+.muted, header.hero p { color: var(--color-text-soft) !important; }
+.switch { background: rgba(244,239,230,.1) !important; }
+.switch button.active { background: var(--color-accent) !important; color: #171008 !important; }
+
+@media (min-width: 760px) {
+    .site-footer__grid { grid-template-columns: 1fr 2fr auto; }
+    .info-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .hero__copy h1 { text-align: left; }
+    .site-nav__toggle { display: none; }
+    .site-nav__menu { display: flex; position: static; width: auto; flex-direction: row; background: transparent; border: 0; box-shadow: none; padding: 0; }
+    .site-nav__menu a { font-size: .84rem; padding: .48rem .68rem; }
+    .nav-icon { display: none; }
+}
+@media (max-width: 759px) {
+    .site-nav { border-radius: 24px; align-items: center; }
+    .site-nav__menu { background: rgba(8,12,17,.98); border-color: var(--line-strong); top: calc(100% + .5rem); }
+    .hero { margin-top: -5.5rem; padding-top: 8.5rem; }
+    h1 { max-width: 10ch; }
+    section { width: min(calc(100% - 1rem), var(--container)); padding: 1rem; }
+    .contact-strip { width: 100%; align-items: flex-start; }
+    .contact-divider { display: none; }
+    .workout-generator-layout, .workout-generator-hero .hero__content { grid-template-columns: 1fr; }
+    .workout-preview { position: static; }
+    .row, .row-3, .inline-inputs { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
+}
+
+/* Footer nav must not inherit sticky header nav treatment. */
+.site-footer nav,
+.site-footer__nav {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+.site-footer nav ul,
+.site-footer__links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    gap: .65rem 1rem !important;
+}
+.site-footer nav li { margin: 0 !important; }
+.site-footer nav a { padding: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 1rem !important; }
+
+/* Force the standalone nutrition calculator into the same premium shell despite its page-local CSS. */
+body { background: radial-gradient(circle at 16% -10%, rgba(217, 147, 47, 0.16), transparent 34rem), linear-gradient(180deg, #05070b 0%, #080c11 46%, #0b0f14 100%) !important; color: var(--color-text-soft) !important; }
+.card, .results, .macrobar, .meal, .tip { background: linear-gradient(160deg, rgba(244,239,230,.075), rgba(244,239,230,.035)) !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow-soft) !important; color: var(--color-text-soft) !important; }
+.card h2, .card h3, .results h2, .results h3 { text-align: left !important; }
