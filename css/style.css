@@ -2827,3 +2827,316 @@ input, textarea, select {
     .hero-actions { gap: 0.55rem; margin-top: 1rem; }
     nav a { padding: 0.45rem 0.7rem; font-size: 0.84rem; }
 }
+
+/* ===== Approved mobile mockup alignment: charcoal / warm gold system ===== */
+:root {
+    --page-bg: #0b0d0f;
+    --surface-elevated: #14171a;
+    --surface-card: #181b1f;
+    --surface-card-2: #20242a;
+    --cream-panel: #f3ead8;
+    --text-primary: #fff8ea;
+    --text-muted: #c9c2b5;
+    --text-subtle: #9f988d;
+    --gold-accent: #d8a441;
+    --gold-hover: #efbf62;
+    --border-subtle: rgba(255, 248, 234, 0.11);
+    --border-gold: rgba(216, 164, 65, 0.42);
+    --button-primary: #d8a441;
+    --button-secondary: #111315;
+    --focus-state: 0 0 0 3px rgba(216, 164, 65, 0.32);
+    --mobile-page-pad: clamp(1rem, 4.5vw, 1.35rem);
+    --mobile-section-gap: 1.15rem;
+    --mobile-card-pad: 1rem;
+    --mobile-radius: 20px;
+    --mobile-radius-sm: 15px;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background: radial-gradient(circle at 50% -10%, rgba(216, 164, 65, 0.13), transparent 28rem), var(--page-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+h1, h2, h3, h4 { color: var(--text-primary) !important; }
+p, li, label, figcaption, .subheading, .tagline, .article-nav__hint, .muted, .field-help, .workout-form__lead { color: var(--text-muted) !important; }
+a, .emailIG { color: var(--gold-accent) !important; }
+a:hover, a:focus-visible { color: var(--gold-hover) !important; }
+
+.hero__eyebrow,
+.section-label,
+.blog-discovery__intro p:first-child,
+.workout-trust-pill,
+.step-label,
+.hero-card__label {
+    color: var(--gold-accent) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.site-nav {
+    background: rgba(11, 13, 15, 0.98) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.site-brand__mark {
+    border-color: var(--border-gold) !important;
+    color: var(--gold-accent) !important;
+}
+
+.nav-icon,
+.contact-icon,
+.resource-card h2::before,
+.service-card h2::before,
+.calculator-card h2::before,
+section > h4::before,
+.article-card__topic::before,
+.workout-form__header h2::before,
+.card > h2::before,
+.blog-discovery h2::before {
+    color: var(--gold-accent) !important;
+}
+
+.nav-icon svg,
+.contact-icon svg { fill: none !important; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+section,
+.hero,
+.hero-card,
+.goal-recommendation,
+.goal-pill,
+.hero-trust__item,
+.metric,
+.info-card,
+.result-card,
+.testimonial-card,
+.results-cta,
+.story-highlight,
+.article-card,
+.featured-article-card,
+.resource-card,
+.calculator-card,
+.article-nav__panel,
+.preview-card,
+.hero-preview,
+.contact-strip,
+.workout-form,
+.workout-preview,
+.program-card,
+.program-summary-card,
+.workout-cta-card,
+.qualifier-card,
+.live-summary-card,
+.card,
+.kpi,
+.strength-card,
+.workout-fieldset,
+.blog-discovery,
+.article-section article {
+    background: var(--surface-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--mobile-radius) !important;
+    box-shadow: none !important;
+}
+
+.info-card,
+.story-highlight,
+.contact-strip,
+.hero-card__body {
+    background: var(--cream-panel) !important;
+    color: #161310 !important;
+}
+.info-card *, .story-highlight *, .contact-strip *, .hero-card__body * { color: #251f18 !important; }
+
+.result-card,
+.metric,
+.kpi,
+.results-cta,
+.workout-cta-card,
+.program-summary-card {
+    border-color: var(--border-gold) !important;
+    background: linear-gradient(180deg, #191b1e, #111315) !important;
+}
+
+button,
+.cta-button,
+.btn,
+input[type="submit"],
+.blog-filter.is-active {
+    background: var(--button-primary) !important;
+    border: 1px solid var(--button-primary) !important;
+    color: #15110a !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    min-height: 46px;
+    box-shadow: none !important;
+}
+
+.secondary-button,
+.btn.secondary,
+.blog-filter,
+.article-nav__toggle,
+.goal-pill {
+    background: var(--button-secondary) !important;
+    border: 1px solid var(--border-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: var(--focus-state) !important;
+    border-color: var(--gold-accent) !important;
+}
+
+input, textarea, select {
+    background: #0f1113 !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    min-height: 46px;
+}
+
+.resource-card h2::before,
+.service-card h2::before,
+.calculator-card h2::before,
+section > h4::before,
+.workout-form__header h2::before,
+.card > h2::before,
+.blog-discovery h2::before {
+    content: "";
+    display: inline-block;
+    width: 2.35rem;
+    height: 2.35rem;
+    margin: 0 auto 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-gold);
+    background: radial-gradient(circle, rgba(216,164,65,0.18), transparent 58%), var(--button-secondary);
+    vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+    body { font-size: 16px; line-height: 1.62; }
+
+    .site-nav {
+        min-height: 62px;
+        padding: 0.7rem var(--mobile-page-pad) !important;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .site-brand__name, .site-brand__subtitle { font-size: 0.95rem !important; }
+    .site-nav__toggle {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        padding: 0 !important;
+        background: var(--surface-card) !important;
+        color: var(--text-primary) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: 14px !important;
+    }
+
+    .site-nav__menu {
+        left: var(--mobile-page-pad) !important;
+        right: var(--mobile-page-pad) !important;
+        top: calc(100% + 0.5rem) !important;
+        padding: 0.75rem !important;
+        background: #111315 !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: 20px !important;
+    }
+
+    .site-nav__menu a {
+        min-height: 46px;
+        padding: 0.7rem 0.85rem !important;
+        border-radius: 14px !important;
+    }
+
+    .hero {
+        margin: 0 !important;
+        padding: 2rem var(--mobile-page-pad) 1.4rem !important;
+        border-radius: 0 0 26px 26px !important;
+        border-inline: 0 !important;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 10vw, 3.05rem) !important;
+        line-height: 0.98;
+        text-align: left !important;
+        margin: 0.35rem 0 0.8rem !important;
+    }
+    h2 { font-size: clamp(1.55rem, 7vw, 2.15rem) !important; line-height: 1.08; text-align: left !important; }
+    h3, h4 { text-align: left !important; }
+    .tagline, .hero .tagline { text-align: left !important; max-width: 36ch; }
+    aside { text-align: left; }
+
+    section, .wrap, .article-section {
+        width: auto !important;
+        max-width: none !important;
+        margin: var(--mobile-section-gap) var(--mobile-page-pad) !important;
+        padding: var(--mobile-card-pad) !important;
+    }
+
+    .hero__content,
+    .workout-generator-layout,
+    .grid,
+    .row,
+    .row-3,
+    .two-col,
+    .strength-grid,
+    .info-grid,
+    .results-grid,
+    .testimonial-grid,
+    .start-here-grid,
+    .article-discovery-grid,
+    .resources-section,
+    .metrics,
+    .kpis {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+    }
+
+    .resource-card,
+    .calculator-card,
+    .article-card,
+    .featured-article-card,
+    .workout-form,
+    .workout-preview,
+    .card,
+    .workout-fieldset,
+    .article-section article {
+        padding: var(--mobile-card-pad) !important;
+        margin: 0 0 0.9rem !important;
+    }
+
+    .cta-button, .secondary-button, .btn, button, input[type="submit"], .hero-actions a, .cta-row > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    img, iframe, video, table { max-width: 100% !important; }
+    iframe { width: 100% !important; border-radius: var(--mobile-radius-sm); }
+    table { display: block; overflow-x: auto; }
+
+    ul, ol { padding-left: 1.15rem; }
+    .background, .hero-microproof, .checklist {
+        background: var(--cream-panel) !important;
+        border-radius: var(--mobile-radius-sm);
+        padding: 0.9rem 0.9rem 0.9rem 1.8rem !important;
+    }
+    .background li, .hero-microproof li, .checklist li { color: #251f18 !important; }
+}
