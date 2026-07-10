@@ -509,3 +509,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Shared footer and navigation polish for the static site.
+document.addEventListener('DOMContentLoaded', function () {
+    var nav = document.querySelector('.site-nav');
+    if (nav) {
+        var beginLink = nav.querySelector('a[href="begin.html"] span:last-child');
+        if (beginLink && beginLink.textContent.trim() === 'Begin') {
+            beginLink.textContent = 'Start Here';
+        }
+    }
+
+    if (!document.querySelector('.site-footer')) {
+        var footer = document.createElement('footer');
+        footer.className = 'site-footer';
+        footer.innerHTML = '<div class="site-footer__grid">' +
+            '<div><div class="site-footer__brand">Matt McGinley Training</div><p>Direct, simple coaching for losing fat, building muscle, and getting stronger.</p></div>' +
+            '<nav class="site-footer__nav" aria-label="Footer navigation"><ul class="site-footer__links">' +
+            '<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="resources.html">Resources</a></li><li><a href="articles.html">Articles</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="workout-generator.html">Workout Generator</a></li><li><a href="nutrition-calculator.html">Nutrition Calculator</a></li><li><a href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a></li><li><a href="https://www.instagram.com/mattmcginley7">Instagram</a></li>' +
+            '</ul></nav><a class="cta-button site-footer__cta" href="begin.html">Start Here</a></div>';
+        document.body.appendChild(footer);
+    }
+});
