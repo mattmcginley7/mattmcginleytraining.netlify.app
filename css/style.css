@@ -2990,3 +2990,196 @@ iframe { border: 1px solid var(--border-color); border-radius: 9px; box-shadow: 
 @media (min-width: 900px) {
     body, .site-nav, .hero, section { max-width: 760px; }
 }
+
+/* ===== Site-wide page polish: align interior pages with front-page aesthetic ===== */
+.page-hero {
+    min-height: clamp(260px, 36vh, 390px);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: clamp(2rem, 6vw, 4.75rem) 1rem;
+}
+
+.page-hero h1 {
+    margin: 0;
+    font-size: clamp(2.45rem, 8vw, 5.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.065em;
+}
+
+.page-hero .tagline {
+    max-width: 44rem;
+    margin: 1rem auto 0;
+}
+
+.page-hero aside {
+    margin-top: 1.2rem;
+}
+
+section:not(.hero):not(.article-nav):not(.qualifier-card) {
+    width: min(100% - 2rem, 980px);
+}
+
+body.interior-page > section,
+.calculator-section,
+.resources-section,
+.article-section {
+    margin-top: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+body.interior-page > section:not(.calculator-section):not(.resources-section):not(.article-section),
+.calculator-card,
+.resource-card,
+.article-section article[id],
+.blog-discovery,
+.featured-article-card,
+.article-card,
+.start-here-card {
+    border: 1px solid rgba(121, 152, 255, 0.24);
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(14, 35, 66, 0.94), rgba(8, 22, 43, 0.97));
+    box-shadow: var(--shadow-deep);
+}
+
+body.interior-page > section:not(.calculator-section):not(.resources-section):not(.article-section) {
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.calculator-section,
+.resources-section,
+.article-section {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.calculator-card,
+.resource-card,
+.article-section article[id],
+.blog-discovery {
+    padding: clamp(1rem, 2.4vw, 1.55rem);
+    margin-bottom: 1rem;
+}
+
+.article-section article[id] {
+    font-family: 'Outfit', 'Roboto', sans-serif;
+    line-height: 1.72;
+    scroll-margin-top: 5rem;
+}
+
+.article-section article[id] h2,
+.article-section article[id] h3,
+.article-section article[id] h4,
+.calculator-card h2,
+.calculator-card h3,
+.resource-card h2,
+.resource-card h3 {
+    color: var(--text-primary);
+}
+
+.featured-article-card,
+.article-card {
+    overflow: hidden;
+}
+
+.featured-article-card img,
+.article-card__image-wrap img {
+    background: rgba(5, 17, 34, 0.7);
+}
+
+.article-card__body,
+.featured-article-card__content {
+    background: transparent;
+}
+
+.blog-filter {
+    min-width: auto;
+    min-height: 0;
+    height: auto;
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.blog-filter.is-active {
+    background: rgba(0, 87, 255, 0.32);
+    color: #fff;
+}
+
+.article-note,
+.adaptation-note,
+.live-summary-card,
+.qualifier-card,
+.strength-card,
+.program-hero-card,
+.program-hero-card__standards,
+.program-hero-card__notes,
+.workout-form,
+.workout-preview,
+.program-card,
+.program-summary-card,
+.workout-cta-card,
+.hero-preview,
+.preview-card,
+.workout-fieldset {
+    background: linear-gradient(160deg, rgba(14, 35, 66, 0.94), rgba(8, 22, 43, 0.97));
+    border-color: rgba(121, 152, 255, 0.24);
+    color: var(--text-secondary);
+}
+
+.workout-trust-pill,
+.step-label,
+.program-hero-card__eyebrow,
+.program-hero-card__intro,
+.program-summary-note,
+.preview-label,
+.preview-card p,
+.program-hero-card ul,
+.substitution-list,
+.workout-submit-note,
+.rest-note {
+    color: var(--text-secondary);
+}
+
+.secondary-button,
+.day-tab-button {
+    background: rgba(5, 18, 38, 0.9);
+    border-color: rgba(0, 87, 255, 0.75);
+    color: #F5F7FA;
+}
+
+.table-wrap th,
+.table-wrap td {
+    border-color: rgba(130, 165, 207, 0.4);
+}
+
+.table-wrap th {
+    background: rgba(0, 87, 255, 0.2);
+    color: #F5F7FA;
+}
+
+@media (min-width: 768px) {
+    body.interior-page > section:not(.calculator-section):not(.resources-section):not(.article-section) {
+        column-count: 1;
+    }
+}
+
+@media (max-width: 760px) {
+    .page-hero {
+        min-height: auto;
+        text-align: left;
+        place-items: start;
+    }
+
+    .page-hero h1,
+    .page-hero .tagline,
+    .page-hero aside {
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    section:not(.hero):not(.article-nav):not(.qualifier-card) {
+        width: min(100% - 1.2rem, 980px);
+    }
+}
