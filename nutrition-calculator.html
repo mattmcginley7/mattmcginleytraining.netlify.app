@@ -9,7 +9,7 @@
         content="Calculate calories and macros with the Katch-McArdle formula using lean body mass, body fat percentage, and training goals." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
@@ -29,48 +29,61 @@
         }
 
         body {
-            background:
-                radial-gradient(circle at 12% 8%, rgba(0, 87, 255, 0.18), transparent 34rem),
-                radial-gradient(circle at 85% 18%, rgba(25, 195, 125, 0.10), transparent 28rem),
-                linear-gradient(180deg, #05070b 0%, #09101b 50%, #05070b 100%);
+            background: #05070B;
         }
 
         .nutrition-page {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: clamp(1rem, 3vw, 2rem);
+            max-width: none;
+            margin: 0;
+            padding: 0;
         }
 
         .nutrition-hero {
             position: relative;
             display: grid;
-            gap: 1.6rem;
-            margin: clamp(1.5rem, 4vw, 3rem) 0 1.2rem;
-            padding: clamp(2rem, 5vw, 4.5rem);
+            gap: 2rem;
+            align-items: center;
+            margin: 0 0 2.5rem;
+            padding: clamp(2.5rem, 4vw, 4rem) 1.5rem;
             overflow: hidden;
-            border: 1px solid var(--nutrition-border);
-            border-radius: 36px;
-            background:
-                linear-gradient(135deg, rgba(18, 23, 34, 0.92), rgba(5, 7, 11, 0.72)),
-                radial-gradient(circle at 75% 20%, rgba(0, 87, 255, 0.28), transparent 18rem);
-            box-shadow: var(--nutrition-shadow);
+            border-bottom: 1px solid rgba(0, 87, 255, 0.12);
+            background: transparent;
+            box-shadow: none;
         }
 
+        @media (min-width: 900px) {
+            .nutrition-hero {
+                grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+            }
+        }
+
+        .nutrition-hero::before,
         .nutrition-hero::after {
             content: "";
             position: absolute;
-            inset: auto -8rem -14rem auto;
-            width: 28rem;
-            height: 28rem;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            background: rgba(0, 87, 255, 0.18);
-            filter: blur(8px);
+            background: rgba(0, 87, 255, 0.16);
+            filter: blur(12px);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .nutrition-hero::before {
+            top: -100px;
+            left: -80px;
+        }
+
+        .nutrition-hero::after {
+            right: -100px;
+            bottom: -120px;
         }
 
         .nutrition-hero__content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+            max-width: 680px; margin: 0 auto;
         }
 
         .nutrition-eyebrow,
@@ -79,7 +92,7 @@
             align-items: center;
             gap: 0.45rem;
             margin: 0 0 1rem;
-            color: var(--nutrition-blue-light);
+            color: var(--primary-color);
             font-size: 0.78rem;
             font-weight: 900;
             letter-spacing: 0.16em;
@@ -90,9 +103,9 @@
             max-width: 12ch;
             margin: 0;
             text-align: left;
-            font-size: clamp(2.6rem, 8vw, 6.2rem);
-            line-height: 0.92;
-            letter-spacing: -0.075em;
+            font-size: clamp(2.5rem, 7vw, 5.4rem);
+            line-height: 0.95;
+            letter-spacing: -0.055em;
         }
 
         .nutrition-hero p {
@@ -109,6 +122,7 @@
             flex-wrap: wrap;
             gap: 0.8rem;
             align-items: center;
+            justify-content: center;
         }
 
         .nutrition-actions {
@@ -143,6 +157,17 @@
             box-shadow: none;
         }
 
+        .nutrition-hero__visual {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nutrition-hero__visual .hero-card__list {
+            color: #121722;
+        }
+
         .nutrition-pill {
             display: inline-flex;
             gap: 0.45rem;
@@ -157,6 +182,8 @@
         }
 
         .nutrition-layout {
+            width: min(100% - 2rem, 1180px);
+            margin: 0 auto;
             display: grid;
             gap: 1.1rem;
             align-items: start;
@@ -169,10 +196,10 @@
         }
 
         .nutrition-card {
-            border: 1px solid var(--nutrition-border);
-            border-radius: var(--nutrition-radius);
-            background: var(--nutrition-panel);
-            box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(121, 152, 255, 0.24);
+            border-radius: 22px;
+            background: var(--surface-muted);
+            box-shadow: none;
             backdrop-filter: blur(12px);
         }
 
@@ -192,9 +219,7 @@
         }
 
         .formula-card {
-            background:
-                linear-gradient(145deg, rgba(0, 87, 255, 0.16), rgba(18, 23, 34, 0.92)),
-                var(--nutrition-panel);
+            background: transparent;
         }
 
         .formula-card code {
@@ -205,7 +230,7 @@
             border-radius: 18px;
             background: rgba(3, 7, 18, 0.58);
             color: #ffffff;
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Outfit', 'Roboto', sans-serif;
             font-size: clamp(1rem, 2vw, 1.22rem);
             font-weight: 900;
             white-space: normal;
@@ -290,9 +315,7 @@
             position: sticky;
             top: 1rem;
             overflow: hidden;
-            background:
-                radial-gradient(circle at top right, rgba(0, 87, 255, 0.22), transparent 16rem),
-                var(--nutrition-panel-strong);
+            background: var(--surface-muted);
         }
 
         .result-hero {
@@ -301,7 +324,8 @@
             margin-bottom: 1rem;
             padding: 1.15rem;
             border-radius: 22px;
-            background: linear-gradient(135deg, rgba(0, 87, 255, 0.98), rgba(0, 43, 127, 0.95));
+            background: rgba(0, 87, 255, 0.16);
+            border: 1px solid rgba(121, 152, 255, 0.24);
         }
 
         .result-hero span {
@@ -446,8 +470,14 @@
             font-weight: 900;
         }
 
+        .nutrition-wide-card {
+            width: min(100% - 2rem, 1180px);
+            margin: 1.1rem auto 0;
+        }
+
         .nutrition-footer {
-            margin: 2rem 0 0;
+            margin: 2rem auto 0;
+            width: min(100% - 2rem, 1180px);
             color: var(--nutrition-muted);
             font-size: 0.85rem;
             text-align: center;
@@ -510,11 +540,24 @@
                     <a class="nutrition-button" href="#calculator">Calculate macros</a>
                     <a class="nutrition-button nutrition-button--ghost" href="#method">Why this formula?</a>
                 </div>
+                <div class="nutrition-pills" aria-label="Page highlights">
+                    <span class="nutrition-pill">✓ Katch-McArdle only</span>
+                    <span class="nutrition-pill">✓ Lean body mass driven</span>
+                    <span class="nutrition-pill">✓ Coaching-style adjustments</span>
+                </div>
             </div>
-            <div class="nutrition-pills" aria-label="Page highlights">
-                <span class="nutrition-pill">✓ Katch-McArdle only</span>
-                <span class="nutrition-pill">✓ Lean body mass driven</span>
-                <span class="nutrition-pill">✓ Coaching-style adjustments</span>
+            <div class="nutrition-hero__visual">
+                <div class="hero-card">
+                    <img src="IMG_3785.jpeg" alt="Matt McGinley showing the physique built through consistent training">
+                    <div class="hero-card__body">
+                        <p class="hero-card__label">Nutrition tool</p>
+                        <ul class="hero-card__list">
+                            <li>Lean mass calorie estimate</li>
+                            <li>Practical macro targets</li>
+                            <li>Simple coaching-style adjustments</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -635,7 +678,7 @@
             </aside>
         </div>
 
-        <section id="method" class="nutrition-card" style="margin-top: 1.1rem;">
+        <section id="method" class="nutrition-card nutrition-wide-card">
             <div class="nutrition-card__inner formula-card">
                 <p class="section-kicker">The method</p>
                 <h2>Only the Katch-McArdle formula</h2>
@@ -649,7 +692,7 @@
             </div>
         </section>
 
-        <section class="nutrition-card nutrition-faq" style="margin-top: 1.1rem;">
+        <section class="nutrition-card nutrition-faq nutrition-wide-card">
             <div class="nutrition-card__inner">
                 <p class="section-kicker">FAQ</p>
                 <h2>How to use these numbers</h2>
