@@ -14,7 +14,7 @@
     <title>Articles - Matt McGinley Personal Training</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="interior-page">
+<body class="interior-page articles-page">
     <nav class="site-nav">
         <a class="site-brand" href="index.html" aria-label="Matt McGinley Personal Training home">
             <span class="site-brand__mark" aria-hidden="true"><span>MM</span></span>
@@ -40,24 +40,31 @@
     </nav>
     <header class="hero page-hero">
         <h1>Articles</h1>
-        <p class="tagline">Thoughts on training and nutrition</p>
+        <p class="tagline">A searchable training library for fat loss, strength, muscle, nutrition, and mindset.</p>
         <aside><a class="emailIG" href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a> |
             <a class="emailIG" href="https://www.instagram.com/mattmcginley7"> Instagram</a></aside>
     </header>
     <section class="article-section">
         <section class="blog-discovery" aria-labelledby="blogDiscoveryHeading">
             <div class="blog-discovery__intro">
-                <h2 id="blogDiscoveryHeading">Featured article</h2>
-                <p>Latest coaching insight from Matt.</p>
+                <p class="section-label">Training library</p>
+                <h2 id="blogDiscoveryHeading">Find the article you need fast</h2>
+                <p>Use the search, topic filters, or article cards below to jump directly to any full article on the page.</p>
+            </div>
+            <div class="blog-discovery__tools" aria-label="Article discovery tools">
+                <label class="article-search" for="articleSearchInput">
+                    <span>Search articles</span>
+                    <input id="articleSearchInput" type="search" placeholder="Search fat loss, bench press, caffeine…" autocomplete="off">
+                </label>
+                <div class="blog-filters" aria-label="Filter articles by topic">
+                    <h3>Browse by topic</h3>
+                    <div class="blog-filters__buttons" id="blogFilterButtons">
+                        <button type="button" class="blog-filter is-active" data-topic="all" aria-pressed="true">All topics</button>
+                    </div>
+                </div>
             </div>
             <div class="featured-article-spotlight" id="featuredArticleSpotlight">
                 <p class="article-nav__empty">Loading featured article…</p>
-            </div>
-            <div class="blog-filters" aria-label="Filter articles by topic">
-                <h3>Browse by topic</h3>
-                <div class="blog-filters__buttons" id="blogFilterButtons">
-                    <button type="button" class="blog-filter is-active" data-topic="all" aria-pressed="true">All topics</button>
-                </div>
             </div>
             <div class="article-discovery-grid" id="articleDiscoveryGrid" aria-live="polite">
                 <p class="article-nav__empty">Loading article previews…</p>
