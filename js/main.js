@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var featuredArticleSpotlight = document.querySelector('#featuredArticleSpotlight');
     var articleDiscoveryGrid = document.querySelector('#articleDiscoveryGrid');
     var blogFilterButtons = document.querySelector('#blogFilterButtons');
+    var articleSearchInput = document.querySelector('#articleSearchInput');
 
     var articleMetaConfig = {
         'day-one-start-lifting': { topic: 'Beginner training', date: '2026-01-03', startHere: true },
@@ -422,18 +423,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
+            var activeArticleTopic = 'all';
+
             var renderDiscoveryCards = function (activeTopic) {
+                activeArticleTopic = activeTopic || activeArticleTopic || 'all';
+                var searchTerm = articleSearchInput ? articleSearchInput.value.trim().toLowerCase() : '';
                 articleDiscoveryGrid.innerHTML = '';
                 var filteredCards = articleCards.filter(function (card) {
-                    return activeTopic === 'all' || card.topic.toLowerCase() === activeTopic;
+                    var matchesTopic = activeArticleTopic === 'all' || card.topic.toLowerCase() === activeArticleTopic;
+                    var searchableText = [card.title, card.topic, card.excerpt].join(' ').toLowerCase();
+                    var matchesSearch = !searchTerm || searchableText.indexOf(searchTerm) !== -1;
+                    return matchesTopic && matchesSearch;
                 });
+
+                if (!filteredCards.length) {
+                    articleDiscoveryGrid.innerHTML = '<p class="article-nav__empty article-nav__empty--wide">No articles match that search. Try another topic or keyword.</p>';
+                }
 
                 filteredCards.forEach(function (card) {
                     var cardArticle = document.createElement('article');
                     cardArticle.className = 'article-card';
                     cardArticle.innerHTML = '<a class="article-card__link" href="#' + card.id + '"><div class="article-card__image-wrap"><img src="' + card.image + '" alt="' + card.imageAlt + '" loading="lazy"></div>'
-                        + '<div class="article-card__body"><h3>' + card.title + '</h3>'
-                        + '<p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p></div></a>';
+                        + '<div class="article-card__body"><p class="article-card__meta">' + card.topic + ' • ' + prettyDate(card.date) + ' • ' + card.readTime + ' min read</p>'
+                        + '<h3>' + card.title + '</h3><p class="article-card__excerpt">' + card.excerpt + '</p><span class="article-card__cta">Read article</span></div></a>';
                     articleDiscoveryGrid.appendChild(cardArticle);
 
                     var articleNode = document.getElementById(card.id);
@@ -448,7 +460,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (!nodeCard) {
                         return;
                     }
-                    articleNode.hidden = !(activeTopic === 'all' || nodeCard.topic.toLowerCase() === activeTopic);
+                    var searchableText = [nodeCard.title, nodeCard.topic, nodeCard.excerpt].join(' ').toLowerCase();
+                    var matchesSearch = !searchTerm || searchableText.indexOf(searchTerm) !== -1;
+                    articleNode.hidden = !(activeArticleTopic === 'all' || nodeCard.topic.toLowerCase() === activeArticleTopic) || !matchesSearch;
                 });
             };
 
@@ -476,6 +490,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                     });
                     renderDiscoveryCards(activeTopic);
+                });
+            }
+
+            if (articleSearchInput) {
+                articleSearchInput.addEventListener('input', function () {
+                    renderDiscoveryCards(activeArticleTopic);
                 });
             }
         }
