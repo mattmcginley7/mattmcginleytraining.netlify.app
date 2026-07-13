@@ -16,13 +16,13 @@
             --nutrition-bg: #05070b;
             --nutrition-panel: rgba(18, 23, 34, 0.86);
             --nutrition-panel-strong: rgba(10, 14, 22, 0.94);
-            --nutrition-border: rgba(0, 87, 255, 0.22);
-            --nutrition-border-bright: rgba(73, 126, 255, 0.5);
-            --nutrition-text: #f5f7fa;
-            --nutrition-muted: #aab6c8;
-            --nutrition-blue: #0057ff;
-            --nutrition-blue-light: #5f8eff;
-            --nutrition-green: #19c37d;
+            --nutrition-border: rgba(240, 173, 56, 0.32);
+            --nutrition-border-bright: rgba(240, 173, 56, 0.62);
+            --nutrition-text: #f7f2ea;
+            --nutrition-muted: rgba(247, 242, 234, 0.82);
+            --nutrition-blue: #f0ad38;
+            --nutrition-blue-light: #ffd36a;
+            --nutrition-green: #f7bd4b;
             --nutrition-gold: #f0ad38;
             --nutrition-radius: 28px;
             --nutrition-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
@@ -46,7 +46,7 @@
             margin: 0 0 2.5rem;
             padding: clamp(2.5rem, 4vw, 4rem) 1.5rem;
             overflow: hidden;
-            border-bottom: 1px solid rgba(0, 87, 255, 0.12);
+            border-bottom: 1px solid rgba(240, 173, 56, 0.18);
             background: transparent;
             box-shadow: none;
         }
@@ -64,7 +64,7 @@
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            background: rgba(0, 87, 255, 0.16);
+            background: rgba(240, 173, 56, 0.16);
             filter: blur(12px);
             opacity: 0.45;
             pointer-events: none;
@@ -142,7 +142,7 @@
             color: #fff;
             font-weight: 900;
             text-decoration: none;
-            box-shadow: 0 16px 34px rgba(0, 87, 255, 0.28);
+            box-shadow: 0 16px 34px rgba(240, 173, 56, 0.28);
             cursor: pointer;
         }
 
@@ -152,7 +152,7 @@
 
         .nutrition-button--ghost {
             background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(148, 163, 184, 0.28);
+            border-color: rgba(240, 173, 56, 0.32);
             color: var(--nutrition-text);
             box-shadow: none;
         }
@@ -174,9 +174,9 @@
             align-items: center;
             padding: 0.65rem 0.9rem;
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.26);
-            background: rgba(255, 255, 255, 0.045);
-            color: #dce6f5;
+            border: 1px solid rgba(240, 173, 56, 0.25);
+            background: rgba(255, 255, 255, 0.035);
+            color: #fffaf2;
             font-size: 0.92rem;
             font-weight: 700;
         }
@@ -196,7 +196,7 @@
         }
 
         .nutrition-card {
-            border: 1px solid rgba(121, 152, 255, 0.24);
+            border: 1px solid rgba(240, 173, 56, 0.22);
             border-radius: 22px;
             background: var(--surface-muted);
             box-shadow: none;
@@ -226,7 +226,7 @@
             display: block;
             margin-top: 1rem;
             padding: 1rem;
-            border: 1px solid rgba(95, 142, 255, 0.35);
+            border: 1px solid rgba(240, 173, 56, 0.35);
             border-radius: 18px;
             background: rgba(3, 7, 18, 0.58);
             color: #ffffff;
@@ -263,7 +263,7 @@
             width: 100%;
             min-height: 52px;
             padding: 0 0.95rem;
-            border: 1px solid rgba(148, 163, 184, 0.35);
+            border: 1px solid rgba(240, 173, 56, 0.25);
             border-radius: 16px;
             background: rgba(5, 7, 11, 0.72);
             color: var(--nutrition-text);
@@ -274,7 +274,7 @@
         .field input:focus,
         .field select:focus {
             border-color: var(--nutrition-border-bright);
-            box-shadow: 0 0 0 4px rgba(0, 87, 255, 0.18);
+            box-shadow: 0 0 0 4px rgba(240, 173, 56, 0.18);
         }
 
         .field small {
@@ -308,7 +308,7 @@
         .unit-toggle button.is-active {
             background: var(--nutrition-blue);
             color: #ffffff;
-            box-shadow: 0 12px 24px rgba(0, 87, 255, 0.28);
+            box-shadow: 0 12px 24px rgba(240, 173, 56, 0.28);
         }
 
         .results-card {
@@ -324,8 +324,8 @@
             margin-bottom: 1rem;
             padding: 1.15rem;
             border-radius: 22px;
-            background: rgba(0, 87, 255, 0.16);
-            border: 1px solid rgba(121, 152, 255, 0.24);
+            background: rgba(240, 173, 56, 0.16);
+            border: 1px solid rgba(240, 173, 56, 0.22);
         }
 
         .result-hero span {
@@ -352,7 +352,7 @@
             padding: 1rem;
             border: 1px solid rgba(148, 163, 184, 0.18);
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.045);
+            background: rgba(255, 255, 255, 0.035);
         }
 
         .kpi-tile span {
@@ -386,7 +386,7 @@
             display: flex;
             justify-content: space-between;
             gap: 1rem;
-            color: #dce6f5;
+            color: #fffaf2;
             font-weight: 800;
         }
 
@@ -401,7 +401,7 @@
             display: block;
             height: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, var(--nutrition-blue), var(--nutrition-blue-light));
+            background: linear-gradient(90deg, #f7bd4b, #e9a42d);
         }
 
         .macro-bar--fat span {
@@ -409,7 +409,7 @@
         }
 
         .macro-bar--carbs span {
-            background: linear-gradient(90deg, var(--nutrition-green), #7ee7b7);
+            background: linear-gradient(90deg, #d9962d, #ffd36a);
         }
 
         .insight-list {
@@ -425,7 +425,7 @@
             border: 1px solid rgba(148, 163, 184, 0.18);
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.04);
-            color: #dce6f5;
+            color: #fffaf2;
         }
 
         .method-grid {
@@ -454,7 +454,7 @@
             height: 36px;
             margin-bottom: 0.8rem;
             border-radius: 50%;
-            background: rgba(0, 87, 255, 0.18);
+            background: rgba(240, 173, 56, 0.18);
             color: var(--nutrition-blue-light);
             font-weight: 900;
         }
@@ -502,6 +502,148 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Match the compact black/gold home page system. */
+        .nutrition-page,
+        .nutrition-hero,
+        .nutrition-layout,
+        .nutrition-wide-card,
+        .nutrition-footer {
+            max-width: 760px;
+        }
+
+        .nutrition-page {
+            margin: 0 auto;
+            background: #070a0c;
+        }
+
+        .nutrition-hero {
+            display: block;
+            padding: 1.15rem 1.25rem 1rem;
+            background: #070a0c !important;
+            border: 0 !important;
+            border-bottom: 1px solid rgba(240, 173, 56, 0.18) !important;
+        }
+
+        .nutrition-hero::before,
+        .nutrition-hero::after {
+            display: none;
+        }
+
+        .nutrition-hero__content {
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .nutrition-hero h1 {
+            max-width: 13ch;
+            font-size: clamp(2.1rem, 8.8vw, 4.15rem);
+            color: #fffaf2;
+        }
+
+        .nutrition-hero p {
+            max-width: 36rem;
+            margin: 0.55rem 0;
+            font-size: 1rem;
+            line-height: 1.45;
+        }
+
+        .nutrition-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.55rem;
+            margin: 0.85rem 0;
+        }
+
+        .nutrition-button {
+            width: 100%;
+            min-height: 2.7rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 6px !important;
+            background: linear-gradient(180deg, #f7bd4b, #e9a42d) !important;
+            color: #070a0c !important;
+            font-size: 0.82rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            box-shadow: none;
+        }
+
+        .nutrition-button::after {
+            content: "→";
+            margin-left: auto;
+            font-size: 1.1rem;
+        }
+
+        .nutrition-button--ghost {
+            background: transparent !important;
+            color: #fffaf2 !important;
+        }
+
+        .nutrition-pills {
+            justify-content: flex-start;
+        }
+
+        .nutrition-pill,
+        .nutrition-card,
+        .kpi-tile,
+        .insight-list li,
+        .method-step {
+            background: #101519 !important;
+            border: 1px solid rgba(240, 173, 56, 0.22) !important;
+            border-radius: 9px !important;
+            box-shadow: none !important;
+        }
+
+        .nutrition-layout {
+            width: 100%;
+            grid-template-columns: 1fr;
+            padding: 1rem 1.25rem 0;
+        }
+
+        .nutrition-wide-card,
+        .nutrition-footer {
+            width: auto;
+            margin: 1rem 1.25rem 0;
+        }
+
+        .nutrition-card__inner {
+            padding: 0.9rem;
+        }
+
+        .result-hero {
+            background: rgba(240, 173, 56, 0.1);
+            border-color: rgba(240, 173, 56, 0.22);
+        }
+
+        .unit-toggle button.is-active {
+            background: linear-gradient(180deg, #f7bd4b, #e9a42d) !important;
+            color: #070a0c !important;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            box-shadow: 0 0 0 3px rgba(240, 173, 56, 0.16);
+        }
+
+        .method-step span {
+            background: rgba(240, 173, 56, 0.18);
+            color: #ffd36a;
+        }
+
+        @media (min-width: 560px) {
+            .nutrition-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 980px) {
+            .nutrition-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 
