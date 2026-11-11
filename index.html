@@ -23,44 +23,24 @@
     <meta name="twitter:image" content="https://mattmcginleytraining.netlify.app/IMG_3785.jpeg">
     <title>Matt McGinley Personal Training</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/refinement.css">
 </head>
 
-<body>
-    <nav class="site-nav">
-        <a class="site-brand" href="index.html" aria-label="Matt McGinley Personal Training home">
-            <span class="site-brand__mark" aria-hidden="true"><span>MM</span></span>
-            <span class="site-brand__text">
-                <span class="site-brand__name">Matt McGinley</span>
-                <span class="site-brand__subtitle">Training</span>
-            </span>
-        </a>
-        <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open navigation menu">
-            <span class="site-nav__hamburger" aria-hidden="true"></span>
-        </button>
-        <ul id="site-menu" class="site-nav__menu">
-                <li><a href="index.html" aria-current="page"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5.25V14h-4.5v7H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg></span><span>Home</span></a></li>
-                <li><a href="about.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.75 0-6.75 1.88-6.75 4.2V21h13.5v-2.55c0-2.32-3-4.2-6.75-4.2z"/></svg></span><span>About</span></a></li>
-                <li><a href="services.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.75h15v3h-15zm0 5.25h15v3h-15zm0 5.25h15v3h-15z"/></svg></span><span>Services</span></a></li>
-                <li><a href="resources.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 4.5h13.5A1.5 1.5 0 0 1 20.25 6v12a1.5 1.5 0 0 1-1.5 1.5H8.25l-4.5-4.5V6a1.5 1.5 0 0 1 1.5-1.5zm3 13.5v-3h-3z"/></svg></span><span>Resources</span></a></li>
-                <li><a href="articles.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 4.5h13.5v15h-13.5zm3 3v1.5h7.5V7.5zm0 3.75v1.5h7.5v-1.5zm0 3.75v1.5h5.25V15z"/></svg></span><span>Articles</span></a></li>
-                <li><a href="calculators.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75h12A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75zm1.5 3v3h9v-3zm0 4.5v1.5H9v-1.5zm3 0v1.5h1.5v-1.5zm3 0v1.5H15v-1.5zm-6 3v1.5H9v-1.5zm3 0v1.5h1.5v-1.5zm3 0v1.5H15v-1.5z"/></svg></span><span>Calculators</span></a></li>
-                <li><a href="workout-generator.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.25 9h3v6h-3zm16.5 0h3v6h-3zM6 10.5h12v3H6zm1.5-3h2.25v9H7.5zm6.75 0h2.25v9h-2.25z"/></svg></span><span>Workout Generator</span></a></li>
-                <li><a href="nutrition-calculator.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3.75a3.75 3.75 0 0 1 3.75 3.75c0 1.6-1.01 3.05-2.45 3.57l.95 8.68H6.3l.95-8.68A3.75 3.75 0 0 1 7.5 3.75zm8.25 0c.41 0 .75.34.75.75v15.75h-1.5V12h-2.25V4.5c0-.41.34-.75.75-.75z"/></svg></span><span>Nutrition Calculator</span></a></li>
-                <li><a href="begin.html"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.25 5.25 9 6.75-9 6.75z"/></svg></span><span>Begin</span></a></li>
-        </ul>
-    </nav>
+<body class="home-page">
+    <a class="skip-link" href="#main-content">Skip to content</a><nav class="site-nav" aria-label="Main navigation"><a class="site-brand" href="index.html" aria-label="Matt McGinley Training home"><span class="site-brand__mark" aria-hidden="true"><span>MM</span></span><span class="site-brand__text"><span class="site-brand__name">Matt McGinley</span><span class="site-brand__subtitle">Personal Training</span></span></a><button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open navigation menu"><span class="site-nav__hamburger" aria-hidden="true"></span></button><ul id="site-menu" class="site-nav__menu"><li><a href="about.html" class="">About</a></li><li><a href="services.html" class="">Coaching</a></li><li><a href="articles.html" class="">Articles</a></li><li class="tools-menu"><details><summary>Free tools <span aria-hidden="true">⌄</span></summary><div class="tools-dropdown"><a href="workout-generator.html" class="">Workout generator</a><a href="nutrition-calculator.html" class="">Nutrition calculator</a><a href="calculators.html" class="">Strength calculators</a><a href="resources.html" class="">Resources</a></div></details></li><li><a href="begin.html" class="nav-cta">Work with me</a></li></ul></nav><main id="main-content">
 
     <header class="hero">
         <div class="hero__content">
             <div class="hero__copy">
                 <p class="hero__eyebrow">Online strength + body composition coaching</p>
-                <h1>You deserve to be in your best shape</h1>
-                <p class="tagline">I know how to get you there. Let me help you!</p>
+                <h1>Your best shape.<br><span>A plan to get there.</span></h1>
+                <p class="tagline">Personal training built around your goals and your real life. Get stronger, build muscle, and lose fat—with me in your corner.</p>
                 <div class="hero-actions">
-                    <a class="cta-button" href="begin.html">Start Here</a>
-                    <a class="secondary-button" href="services.html#pricing">View Coaching Packages</a>
+                    <a class="cta-button" href="begin.html">Find your starting point</a>
+                    <a class="secondary-button" href="services.html#pricing">Explore coaching</a>
                 </div>
-                <p><strong class="coaching-note"><span class="contact-icon" aria-hidden="true">🏋️</span>Coaching packages start at $149/month.</strong></p>
+                <p><strong class="coaching-note">Personal coaching from <span>$149/month</span></strong></p>
                 <aside class="contact-strip">
                     <a class="emailIG contact-item" href="mailto:matthewmcginley@live.com"><span class="contact-icon" aria-hidden="true">✉</span>matthewmcginley@live.com</a>
                     <span class="contact-divider" aria-hidden="true">|</span>
@@ -69,9 +49,9 @@
             </div>
             <div class="hero__visual">
                 <div class="hero-card">
-                    <img src="IMG_3785.jpeg" alt="Matt McGinley showing the physique built through consistent training">
+                    <img src="IMG_3785.jpeg" width="1320" height="995" fetchpriority="high" alt="Matt McGinley, your online strength coach">
                     <div class="hero-card__body">
-                        <p class="hero-card__label">What you get</p>
+                        <p class="hero-card__label">Your goals. My commitment.</p>
                         <ul class="hero-card__list">
                             <li>Personalized workout program</li>
                             <li>Simple nutrition guidance</li>
@@ -85,27 +65,27 @@
 
     <section class="info-section">
         <p class="section-label">Coaching packages</p>
-        <h2>Everything you need for <a href="services.html#pricing">$149/month</a></h2>
+        <h2>A clear plan.<br>Support every step of the way.</h2>
         <div class="info-grid">
             <article class="info-card">
-                <h3>Custom training plan</h3>
+                <span class="card-number">01 / TRAIN</span><h3>A plan that fits you</h3>
                 <p>Built around your goals, schedule, and equipment so you always know exactly what to do.</p>
             </article>
             <article class="info-card">
-                <h3>Nutrition strategy</h3>
+                <span class="card-number">02 / FUEL</span><h3>Keep nutrition simple</h3>
                 <p>A realistic plan focused on consistency, not extremes, so results are easier to maintain.</p>
             </article>
             <article class="info-card">
-                <h3>Weekly coaching support</h3>
+                <span class="card-number">03 / PROGRESS</span><h3>You’re not doing it alone</h3>
                 <p>Check-ins, form feedback, and fast adjustments to keep progress moving every week.</p>
             </article>
         </div>
     </section>
 
-    <section class="intro-section">
+    <section class="intro-section audience-section">
         <div class="intro-section__content">
             <p class="section-label">Who this is for</p>
-            <h2>Not just for strong athletes</h2>
+            <h2>You don’t need to be fit to start.</h2>
             <p>If you're busy, out of shape, starting over, or just want clear guidance to feel better and look better, this is for you. We'll keep it practical, focused, and sustainable.</p>
             <ul class="checklist">
                 <li>Lose fat while keeping strength</li>
@@ -117,25 +97,14 @@
     </section>
 
 
-    <section class="intro-section">
-        <div class="intro-section__content">
-            <p class="section-label">Free tool</p>
-            <h2>Try the Free Workout Generator</h2>
-            <p>Answer a few questions and get a structured 6-week plan based on your goal, schedule, equipment, and strength level.</p>
-            <div class="hero-actions">
-                <a class="cta-button" href="workout-generator.html">Build My Plan</a>
-            </div>
-            <p>This gives you something interactive to test before you apply for coaching.</p>
-        </div>
-    </section>
-
-    <section class="story-section">
+    <section class="free-tools-section"><div><p class="section-label">A stronger start · Free tools</p><h2>Put your next step<br>into action.</h2><p>Explore practical tools to help you plan your training and nutrition.</p></div><div class="tool-links"><a href="workout-generator.html"><span><small>TRAINING</small><strong>Build your workout plan</strong><span>A structured 6-week plan for your goals.</span></span><b aria-hidden="true">↗</b></a><a href="nutrition-calculator.html"><span><small>NUTRITION</small><strong>Find your nutrition targets</strong><span>Get a starting point for calories and macros.</span></span><b aria-hidden="true">↗</b></a><a href="calculators.html"><span><small>STRENGTH</small><strong>Plan your progress</strong><span>Explore lifting calculators and programs.</span></span><b aria-hidden="true">↗</b></a></div></section>
+    <section class="story-section"><div class="story-heading">
         <p class="section-label">Why me</p>
-        <h2>I've lived the transformation</h2>
+        <h2>I’ve lived<br>the transformation.</h2></div>
         <figure class="story-photo">
             <img src="IMG_3785.jpeg" alt="Matt McGinley showing the physique built through consistent training">
         </figure>
-        <p>My life has always revolved around health and fitness. I grew up loving sports, and then it was taken away from me when I was in high school due to an extreme case of Osgood-Schlatter's disease. My knee was effectively shattered into many pieces and I spent 3 years on and off in a full leg cast all throughout high school.</p>
+<div class="story-copy"><p class="story-lead">From struggling to walk up stairs to building a life around strength.</p><p>My journey started with a knee condition that kept me in and out of a full leg cast throughout high school. Learning to train and eat well changed my life. Now I help other people build that same confidence, one step at a time.</p><details class="story-details"><summary>Read my full story <span aria-hidden="true">+</span></summary>        <p>My life has always revolved around health and fitness. I grew up loving sports, and then it was taken away from me when I was in high school due to an extreme case of Osgood-Schlatter's disease. My knee was effectively shattered into many pieces and I spent 3 years on and off in a full leg cast all throughout high school.</p>
         <p>I didn't understand health or nutrition, so I became out of shape. I couldn't exercise and I didn't understand how to eat right. It wasn't something I was ever taught.</p>
         <p>Eventually, my doctor told me that my knee can't get any worse, so it's either I figure out a way to deal with the pain and fix it or get a screw placed in my knee through surgery. That moment I committed to doing whatever it took to get better.</p>
         <p>I learned for every pound I lose, that's about 3 pounds of pressure off my knees. So in 2 months I lost 25 pounds and went from not being able to run at all to running 5 minute miles.</p>
@@ -143,18 +112,18 @@
         <p>Since starting lifting, I've went from benching 100lbs to benching 365lbs. From 0 pull ups to one of the strongest in the world at them. From trouble walking up stairs to squatting nearly 500lbs and pistol squats with 100lbs on my back with 0 pain. To nearly a 600lb deadlift. These are good numbers for a 300lbs NFL offensive lineman. I'm 190lbs.</p>
         <p>I have no special genetics. I was not gifted at strength or have some special unique ability to put on muscle and to lose fat. My real gift is I love taking care of myself, I love learning about health and fitness and every day I love to work out.</p>
         <p>I am the physical manifestation of my inner most beliefs and actions. My body is a reflection of them, they are my greatest credentials. If you're looking for a trainer that has been through it all that understands what it takes, that can motivate and guide you every step of the way, and will always show up and be there for you, I am that person.</p>
-    </section>
+</details></div>    </section>
 
     <section class="cta-section">
-        <h2>Start coaching for $149/month</h2>
-        <p>Get a direct plan, weekly support, and a clear path to lose fat, build muscle, and get healthier.</p>
+        <p class="section-label">Your next chapter starts here</p><h2>Let’s build your strongest self.</h2>
+        <p>Personalized training, practical nutrition, and support from me. Coaching packages start at $149/month.</p>
         <div class="hero-actions">
             <a class="cta-button" href="begin.html">Apply to Work Together</a>
             <a class="secondary-button" href="services.html#pricing">See Full Package Details</a>
         </div>
     </section>
 
-    <script type="text/javascript" src="js/main.js"></script>
+    </main><footer class="site-footer"><div><a class="footer-brand" href="index.html">Matt McGinley<span>Personal Training</span></a><p>Build strength. Build confidence.<br>Build a routine that lasts.</p></div><div><p class="section-label">Let's talk</p><a href="mailto:matthewmcginley@live.com">matthewmcginley@live.com</a><a href="https://www.instagram.com/mattmcginley7">Instagram ↗</a></div><div><p class="section-label">Explore</p><a href="services.html">Online coaching</a><a href="workout-generator.html">Free workout generator</a><a href="articles.html">Training articles</a></div></footer><script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>

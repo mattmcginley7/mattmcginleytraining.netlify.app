@@ -529,3 +529,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Navigation remains usable with keyboard, touch, and browser resizing.
+document.addEventListener('DOMContentLoaded', function () {
+    var nav = document.querySelector('.site-nav');
+    if (!nav) return;
+    var toggle = nav.querySelector('.site-nav__toggle');
+    var toolsMenu = nav.querySelector('details');
+    function closeNavigation(restoreFocus) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        if (toolsMenu) toolsMenu.open = false;
+        if (restoreFocus) toggle.focus();
+    }
+    toggle.addEventListener('click', function () {
+        toggle.setAttribute('aria-label', nav.classList.contains('is-open') ? 'Close navigation menu' : 'Open navigation menu');
+    });
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            if (nav.classList.contains('is-open')) closeNavigation(true);
+            else if (toolsMenu && toolsMenu.open) { toolsMenu.open = false; toolsMenu.querySelector('summary').focus(); }
+        }
+    });
+    document.addEventListener('click', function (event) {
+        if (!nav.contains(event.target)) closeNavigation(false);
+    });
+    nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { closeNavigation(false); });
+    });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', function () { closeNavigation(false); });
+});
